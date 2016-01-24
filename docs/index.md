@@ -341,7 +341,7 @@ The `insertBefore` method uses a handle on the parent node to attach the new Nod
 
 ```js
 var addSkillButton = document.querySelector('.add-skill')
-var skillTemplate = document.querySelector('.skills')
+var skillTemplate = document.querySelector('.skills').cloneNode(true)
 
 var addSkillHandler = function(evt) {
   var submitNode = document.querySelector('.submit')
@@ -392,12 +392,50 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 If you head over to the browser, it should work! Sweet DOM manipulation.
 
-Now you're ready to remove some skills!
+Did you try to click the second plus button like a smarty pants? Then you realize that it didn't work, right?
+
+Fix it by attaching the handler to the new element as well.
+
+
+```js
+var addSkillButton = document.querySelector('.add-skill')
+var skillTemplate = document.querySelector('.skills')
+
+var addSkillHandler = function(evt) {
+  var prevSkill = last('.skill')
+  var newSkill = skillTemplate.cloneNode(true)
+  var submitNode = document.querySelector('.submit')
+  var parentNode = submitNode.parentNode
+
+  prevSkill.querySelector('.add-skill').classList.add('hidden')
+  prevSkill.querySelector('.remove-skill').classList.remove('hidden')
+  newAddSkill.querySelector('.add-skill').addEventListener('click', addSkillHandler)
+
+  parentNode.insertBefore(newSkill, submitNode)
+}
+addSkillButton.addEventListener('click', addSkillHandler)
+```
+
+Great, now you're ready to remove some skills!
 
 ### Removing a skill
 
 Much like we created an event handler for adding a skill, we will now just create one to remove a skill.
 
+```js
+var removeSkillHandler = function(evt) {}
+```
+
+When the minus button is clicked, you'll remember from the event section that the minus button element becomes the `currentTarget` on the event object passed in as the first argument to our handler.
+
+If we have a handle on the minus button, then we can select the `parentNode` to get the group of elements that makes up a single skill. And if we can do that, then we can just call [`remove()`][remove-node] do remove the Node from the DOM.
+
+```js
+var removeSkillHandler = function(evt) {
+  var skill = evt.currentTarget.parentNode
+  skill.remove()
+}
+```
 
 ## Add submit event
 
@@ -989,3 +1027,4 @@ Read [Getting Started with Node.js on Heroku][node-heroku] for more information.
 [node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
 [insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
 [class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+[remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove

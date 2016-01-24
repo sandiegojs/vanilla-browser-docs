@@ -468,7 +468,9 @@ var submitHandler = function(evt) {
 
 In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in the event we want to listen for (submit) as well as the custom handler we just wrote.
 
-`form.addEventListener('submit', submitHandler)`
+```js
+form.addEventListener('submit', submitHandler)
+```
 
 Now if you refresh the page you should be able to submit the form after filling out the two required fields, but instead of the page refreshing and losing everything you've entered the page will show you an alert and you won't lose any of the information you typed.
 

@@ -478,7 +478,7 @@ Our event handler is now working!
 
 ## Serialize the form data
 
-Before we can begin to asseble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with [`rails-api`][rails-api] which will be expecting a JSON API object on the request.
+Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with [`rails-api`][rails-api] which will be expecting a JSON API object on the request.
 
 We need to take the form data and convert it to an object that looks like this
 
@@ -605,7 +605,7 @@ Now that we have our data we need to send it to the server using an XHR or [`XML
 var xhr = function(method, path, data, callback) {}
 ```
 
-First we create a new instance of XHR.
+First, we create a new instance of XHR.
 
 ```js
 var xhr = function(method, path, data, callback) {
@@ -615,9 +615,9 @@ var xhr = function(method, path, data, callback) {
 
 Next we'll use `open(method, path, async)` to initialize the request.
 
- - `method` a string of an HTTP method to use, such as 'GET', 'POST', 'PUT', 'DELETE'. This will match the Verb on the API table up top.
- - `path` a string of the full path to send the request to. This will include the API endpoint URL as well as the path.
- - `async` a boolean flag that dictates whether the script should run asynchronously.
+- `method` a string of an HTTP method to use, such as 'GET', 'POST', 'PUT', 'DELETE'. This will match the Verb on the API table up top.
+- `path` a string of the full path to send the request to. This will include the API endpoint URL as well as the path.
+- `async` a boolean flag that dictates whether the script should run asynchronously.
 
 **ProTip™:** `async` should always be `true` to prevent blocking. Stopping JavaScript execution especially hurts time sensitive things like rendering or event listening/handling.
 
@@ -628,63 +628,74 @@ var xhr = function(method, path, data, callback) {
 }
 ```
 
+Because we'll be using a REST endpoint any requests we make to it should contain a `Content-Type` header.
+
+```js
+var xhr = function(method, path, data, callback) {
+  var request = new XMLHttpRequest()
+  request.open(method, path, true)
+  request.setRequestHeader('Content-Type', 'application/json')
+}
+```
+
 XHR only has one event we care to listen to and that's [onreadystatechange][onreadystatechange].
 
 The ready state of the XHR will change a few times, but we are looking for the last state of `4` which is triggered when the request operation is complete.
 
-We'll also check to make sure we got a good server respose, then send the data back though a callback.
+We'll also check to make sure we got a good server response. If it passes those checks, we'll parse the response JSON, then send the object back though a callback.
 
 ```js
 var xhr = function(method, path, data, callback) {
   var request = new XMLHttpRequest()
   request.open(method, path, true)
+  request.setRequestHeader('Content-Type', 'application/json')
   request.onreadystatechange = function() {
     // ignore anything that isn't the last state
     if (request.readyState !== 4) { return }
 
-    // if we didn't get a 200 OK status send back an error
-    if (request.readyState === 4 && request.status !== 200) {
+    // if we didn't get a "good" status such as 200 OK or 201 Created send back an error
+    if (request.readyState === 4 && (request.status !== 200 && request.status !== 201)) {
       callback(new Error('XHR Failed: ' + path), null)
     }
 
     // return our server data
-    callback(null, request.responseText)
+    callback(null, JSON.parse(request.responseText))
   }
 }
 ```
 
-
 Lastly just close and send the request with our data using the `send` function.
+
 ```js
 var xhr = function(method, path, data, callback) {
   var request = new XMLHttpRequest()
   request.open(method, path, true)
+  request.setRequestHeader('Content-Type', 'application/json')
   request.onreadystatechange = function() {
     // ignore anything that isn't the last state
     if (request.readyState !== 4) { return }
 
-    // if we didn't get a 200 OK status send back an error
-    if (request.readyState === 4 && request.status !== 200) {
+    // if we didn't get a "good" status such as 200 OK or 201 Created send back an error
+    if (request.readyState === 4 && (request.status !== 200 && request.status !== 201)) {
       callback(new Error('XHR Failed: ' + path), null)
     }
 
     // return our server data
-    callback(null, request.responseText)
+    callback(null, JSON.parse(request.responseText))
   }
   request.send(data)
 }
 ```
 
-Now we're ready to use it!
-
-We can put now use the `xhr` method we wrote inside of our `submitHandler`. We can call it with the 'POST' method and pass it the form data.
+Now we're ready to use it inside of our `submitHandler`. We can call it with the 'POST' method and pass it the form data.
 
 ```js
 var apiURL = '//sandiegojs-vanilla-workshop.herokuapp.com'
 
-function submitHandler(evt) {
+var submitHandler = function (evt) {
+  evt.preventDefault();
   var path = apiURL + '/forms'
-  xhr('POST', path, null, function(err, data) {
+  xhr('POST', path, serializeArray('form'), function(err, data) {
     if (err) { throw err }
     console.log(data)
   })
@@ -693,7 +704,179 @@ function submitHandler(evt) {
 
 ## Handle request
 
-## Dom creation to rendered returned info
+Now that we are able to submit the form to the REST endpoint let's do something with the response. We're going to write errors any errors from our xhr request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
+
+Some of the methods we'll be using are:
+
+- [`Document.createElement`][mdn-createelement] this method creates a DOM element of the type specified in the first parameter. For example, we can pass in **div**, **p**, **ul**, etc.
+- [`Document.createTextNode`][mdn-createtextnode] this method creates a text node that can be placed in the document. We'll use this to hold content we author.
+- [`Node.appendChild`][mdn-appendchild] this method can be called on any element created using createElement. As you can guess from the name it adds the node passed in to the end of node you call appendChild on.
+
+Let's create a small helper function. It creates a DOM node and adds some text to it. We're going to be making a lot calls to this.
+
+```js
+var createElementWithTextNode = function (tagName, tagContent) {}
+```
+
+Right inside of that function declaration we should add a call to `document.createElement`. 
+
+```js
+var createElementWithTextNode = function (tagName, tagContent) {
+  var node = document.createElement(tagName);
+}
+```
+
+Next up we will create a text node that will hold whatever is inside of the tagContent variable.
+
+```js
+var createElementWithTextNode = function (tagName, tagContent) {
+  var node = document.createElement(tagName);
+  var textNode = document.createTextNode(tagContent)
+}
+```
+
+Then we combine the two freshly created nodes. You can add other HTML nodes or text nodes to a node even if the HTML node would usually have children, such as `<br>`.
+
+```js
+var createElementWithTextNode = function (tagName, tagContent) {
+  var node = document.createElement(tagName);
+  var textNode = document.createTextNode(tagContent)
+  node.appendChild(textNode)
+}
+```
+
+And lastly we will return the node we created with a child text node.
+
+```js
+var createElementWithTextNode = function (tagName, tagContent) {
+  var node = document.createElement(tagName);
+  var textNode = document.createTextNode(tagContent)
+  node.appendChild(textNode)
+  return node
+}
+```
+
+Now that we have that built, we can start to output some content. First create the renderError function
+
+```js
+var renderError = function (error) {}
+```
+
+The error render will be very simple. We are going to get a reference to the response container, create a node with our helper function, add a custom class to it, and append it to the document.
+
+```js
+var renderError = function (error) {
+  var responseNode = document.querySelector('.response-wrapper')
+  var errorNode = createElementWithTextNode('div', error.toString())
+  errorNode.className = 'error'
+  responseNode.appendChild(errorNode)
+}
+```
+
+Now it's time to create the renderFormData function. This function is going to create many DOM nodes and append them to the response container.
+
+```js
+var renderFormData = function(data) {}
+```
+
+The first thing we want to do inside of the renderFormData function is get a reference to the response container just like in our **renderError** function
+
+# UNFINISHED
+
+```js
+var renderFormData = function (data) {
+  var responseNode = document.querySelector('.response-wrapper')
+
+  //generic success message
+  var successNode = createElementWithTextNode('div', 'You\'ve add a new card')
+  successNode.className = 'success'
+  responseNode.appendChild(successNode)
+
+  var dictionaryNode = document.createElement('dl')
+  var keys = ['name', 'email', 'github', 'twitter'], node;
+  keys.forEach(function (key) {
+    //create a dom node with the name of a value
+    node = createElementWithTextNode('dt', key)
+    dictionaryNode.appendChild(node)
+
+    //create another dom node with the value
+    node = createElementWithTextNode('dd', data[key])
+    dictionaryNode.appendChild(node)
+  })
+
+  //create a dom node with the name of a value
+  node = createElementWithTextNode('dt', 'location')
+  dictionaryNode.appendChild(node)
+
+  //create another dom node with the value
+  node = createElementWithTextNode('dd', data['city'] + ', ' + data['state'])
+  dictionaryNode.appendChild(node)
+
+  //create a dom node with the name of a value
+  node = createElementWithTextNode('dt', 'bio')
+  dictionaryNode.appendChild(node)
+
+  //create another dom node with the value
+  node = createElementWithTextNode('dd', data['bio'])
+  dictionaryNode.appendChild(node)
+
+  dictionaryNode.className = 'response'
+  responseNode.appendChild(dictionaryNode)
+}
+```
+
+Finally, we just call renderError & renderFormData in the appropriate places in the original submitHandler.
+
+```js
+var submitHandler = function (evt) {
+  evt.preventDefault();
+  var path = apiURL + '/forms'
+  xhr('POST', path, serializeArray('form'), function(err, data) {
+    if (err) {
+      renderError(err)
+      throw err
+      }
+    console.log(data)
+    renderFormData(data)
+  })
+}
+```
+
+
+If you fill out the form, you should see a response similar to what was described in the **Serialize the form data** section. For example:
+
+```json
+{
+  "id": 1,
+  "name": "Testy McTesterson",
+  "email": "test@sandiegojs.org",
+  "city": "San Diego",
+  "state": "CA",
+  "github": "testdev",
+  "twitter": "testtwitter",
+  "bio": "Lorem Ipsum...",
+  "created_at": "2016-01-21T07:09:01.640Z",
+  "updated_at": "2016-01-21T07:09:01.640Z"
+}
+```
+
+Sometimes, something will go wrong with a request and instead of receiving a new record from the backend we'll get an error of some kind! We already built our xhr function to let us know when something goes wrong during the AJAX request, but now we need to do something to let the user know that there was a problem.
+
+Update the xhr callback inside of the submitHandler function to show the user a generic error message in an alert when the callback receives an error.
+
+```js
+  ...
+  xhr('POST', path, serializeArray('form'), function(err, data) {
+    if (err) {
+      alert('Oh no! We\'re sorry, but something went wrong! \nCheck the console for more details.')
+      throw err
+    }
+    console.log(data)
+  })
+  ...
+```
+
+## Render the response
 
 ## Add JS Validation
 Earlier you added form validation using attributes. This is a quick and easy way to perform validation, but it does have limits. For example, you can't add custom error messages or styling. To get more flexibility and control, use JavaScript.
@@ -1030,3 +1213,6 @@ Read [Getting Started with Node.js on Heroku][node-heroku] for more information.
 [insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
 [class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
 [remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
+[mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
+[mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+[mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild

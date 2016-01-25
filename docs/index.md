@@ -628,7 +628,7 @@ var xhr = function(method, path, data, callback) {
 }
 ```
 
-Because we'll be using a REST endpoint any requests we make to it should contain a `Content-Type` header.
+Because we'll be using a JSON endpoint any requests we make to it should contain a `Content-Type` header.
 
 ```js
 var xhr = function(method, path, data, callback) {
@@ -702,13 +702,13 @@ var submitHandler = function (evt) {
 }
 ```
 
-## Handle request
+## Handle server response
 
-Now that we are able to submit the form to the REST endpoint let's do something with the response. We're going to write errors any errors from our xhr request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
+Now that we are able to submit the form to the server let's do something with the response. We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
 
 Some of the methods we'll be using are:
 
-- [`Document.createElement`][mdn-createelement] this method creates a DOM element of the type specified in the first parameter. For example, we can pass in **div**, **p**, **ul**, etc.
+- [`Document.createElement`][mdn-createelement] this method creates a DOM element of the type specified in the first parameter. For example, we can pass in `div`, `p`, `ul`, etc.
 - [`Document.createTextNode`][mdn-createtextnode] this method creates a text node that can be placed in the document. We'll use this to hold content we author.
 - [`Node.appendChild`][mdn-appendchild] this method can be called on any element created using createElement. As you can guess from the name it adds the node passed in to the end of node you call appendChild on.
 
@@ -779,7 +779,7 @@ Now it's time to create the renderFormData function. This function is going to c
 var renderFormData = function(data) {}
 ```
 
-The first thing we want to do inside of the renderFormData function is get a reference to the response container just like in our **renderError** function
+The first thing we want to do inside of the renderFormData function is get a reference to the response container just like in our `renderError` function
 
 # UNFINISHED
 
@@ -835,7 +835,7 @@ var submitHandler = function (evt) {
     if (err) {
       renderError(err)
       throw err
-      }
+    }
     console.log(data)
     renderFormData(data)
   })

@@ -561,7 +561,7 @@ var serializeArray = function(selector) {
 
 When you reload the page and submit the form again, you should see something similar to this outputted in the console.
 
-![build the form JSON](https://s3.amazonaws.com/f.cl.ly/items/3t1c0A0r3s1g1X3x0F2h/H4S7wE1TeY.gif?v=8d848baa)
+![build the form JSON](https://s3.amazonaws.com/f.cl.ly/items/3V3p121o1C093I0B0F1s/6aUSiYmFDT.gif?v=bb86545c)
 
 Well that looks _nearly_ correct. Can you spot the problems?
 
@@ -591,7 +591,7 @@ var serializeArray = function(selector) {
 
 Ok, let's try this again!
 
-![build the form JSON part 2](https://s3.amazonaws.com/f.cl.ly/items/1s1h3l1Q1i0p2w2m420h/Y4DiNdRhjA.gif?v=42961ab1)
+![build the form JSON part 2](https://s3.amazonaws.com/f.cl.ly/items/2N0C470x010K2k302e3Q/RRBJpcGUMt.gif?v=94639764)
 
 Something is still off. Did you spot it?
 

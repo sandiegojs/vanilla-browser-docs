@@ -695,7 +695,7 @@ Now we're ready to use it inside of our `submitHandler`. We can call it with the
 var apiURL = '//sandiegojs-vanilla-workshop.herokuapp.com'
 
 var submitHandler = function (evt) {
-  evt.preventDefault();
+  evt.preventDefault()
   var path = apiURL + '/forms'
   xhr('POST', path, serializeArray('form'), function(err, data) {
     if (err) { throw err }
@@ -728,7 +728,7 @@ var createElementWithTextNode = function (tagName, tagContent) {
 }
 ```
 
-Next up we will create a text node that will hold whatever is inside of the tagContent variable.
+Next up we will create a text node that will hold whatever is inside of the tagContent variable. 
 
 ```js
 var createElementWithTextNode = function (tagName, tagContent) {
@@ -747,13 +747,27 @@ var createElementWithTextNode = function (tagName, tagContent) {
 }
 ```
 
+There is a possibility that when we call this function we won't have any textContent, and calling `document.createTextNode` without textContent will cause an error. To avoid this kind of error wrap the creation and insertion of the textNode in a conditional test for textContent.
+
+```js
+var createElementWithTextNode = function (tagName, tagContent) {
+  var node = document.createElement(tagName);
+  if (tagContent) {
+    var textNode = document.createTextNode(tagContent)
+    node.appendChild(textNode)
+  }
+}
+```
+
 And lastly we will return the node we created with a child text node.
 
 ```js
 var createElementWithTextNode = function (tagName, tagContent) {
   var node = document.createElement(tagName);
-  var textNode = document.createTextNode(tagContent)
-  node.appendChild(textNode)
+  if (tagContent) {
+    var textNode = document.createTextNode(tagContent)
+    node.appendChild(textNode)
+  }
   return node
 }
 ```
@@ -781,9 +795,81 @@ Now it's time to create the renderFormData function. This function is going to c
 var renderFormData = function(data) {}
 ```
 
-The first thing we want to do inside of the renderFormData function is get a reference to the response container just like in our `renderError` function
+The first thing we want to do inside of the renderFormData function is get a reference to the response container just like in our `renderError` function.
 
-# UNFINISHED
+```js
+var renderFormData = function (data) {
+  var responseNode = document.querySelector('.response-wrapper')
+}
+```
+
+Now, let's create a generic success message so we can see on screen when the form was submitted and the backend saved it.
+
+```js
+var renderFormData = function (data) {
+  var responseNode = document.querySelector('.response-wrapper')
+
+  //generic success message
+  var successNode = createElementWithTextNode('div', 'You\'ve add a new card')
+  successNode.className = 'success'
+  responseNode.appendChild(successNode)
+}
+```
+
+Great, now we give some kind of feedback to the user whether the form is successfully processed by backend or not. Let's improve upon this though. Let's show the information we entered when we submitted so we can verify it saved properly.
+
+To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request. 
+
+Let's use the `document.createElement` method to create a DL node that will hold all those terms and definitions. Append this to the `renderFormData` function.
+
+```js
+var dictionaryNode = document.createElement('dl')
+```
+
+The next step is to add some terms and definitions. Let's use the `createElementWithTextNode` helper function to streamline the process of printing out the name. Add the next couple of lines after the `dictionaryNode` variable declaration and assignment.
+
+```js
+//create a dom node with the name of a value
+var termNode = createElementWithTextNode('dt', 'name')
+dictionaryNode.appendChild(termNode)
+
+//create another dom node with the value
+var definitionNode = createElementWithTextNode('dd', data.name)
+dictionaryNode.appendChild(definitionNode)
+```
+
+Now, after the success message we're printing out the name we entered on the form. This response would be more useful if we showed more information. It would be good to show the name, email, and some other attributes. The simplest way to do this is to just copy and paste the code we just wrote and swap out name for email, github, etc.
+
+But, there's a better way. If we create a list of keys we'd like to show on screen, we can loop through them with the native [`forEach`][mdn-foreach] method of an array. This method will iterate over an array and call a passed in callback function for each item in the array. The first parameter of the callback will be the current item that forEach is iterating through.
+
+Create an array called keys. Place it just after the insertion of the success message, but keep it before the last set of statements we wrote.
+
+```js
+var keys = ['name', 'email', 'github', 'twitter', 'city', 'state', 'bio']
+```
+
+Next call the `forEach` method on it and pass in an **anonymous function** with a single parameter of `key`. 
+
+```js
+keys.forEach(function (key) {})
+```
+
+Move the name definition and insertion we wrote earlier into the callback. Change the text passed into `createElementWithTextNode`. For the first call replace the string literal, `'name'` with the variable `key`, and for the second call replace `data.name` with `data[key]`. This will allow each iteration to print the current key, such as name or email, as the dictionary term and the actual value, such as "John Doe", will be the dictionary definition.
+
+```js
+keys.forEach(function (key) {
+  //create a dom node with the name of a value
+  var termNode = createElementWithTextNode('dt', key)
+  dictionaryNode.appendChild(termNode)
+  
+  //create another dom node with the value
+  var definitionNode = createElementWithTextNode('dd', data[key])
+  dictionaryNode.appendChild(definitionNode)
+})
+```
+
+
+The last steps are to add a custom class of `response` and append the dictionaryNode we've been populating to the responseNode from the beginning of the function. Here is the entire `renderFormData` function:
 
 ```js
 var renderFormData = function (data) {
@@ -795,43 +881,27 @@ var renderFormData = function (data) {
   responseNode.appendChild(successNode)
 
   var dictionaryNode = document.createElement('dl')
-  var keys = ['name', 'email', 'github', 'twitter'], node;
+  var keys = ['name', 'email', 'github', 'twitter', 'city', 'state', 'bio']
   keys.forEach(function (key) {
     //create a dom node with the name of a value
-    node = createElementWithTextNode('dt', key)
-    dictionaryNode.appendChild(node)
+    var termNode = createElementWithTextNode('dt', key)
+    dictionaryNode.appendChild(termNode)
 
     //create another dom node with the value
-    node = createElementWithTextNode('dd', data[key])
-    dictionaryNode.appendChild(node)
+    var definitionNode = createElementWithTextNode('dd', data[key])
+    dictionaryNode.appendChild(definitionNode)
   })
-
-  //create a dom node with the name of a value
-  node = createElementWithTextNode('dt', 'location')
-  dictionaryNode.appendChild(node)
-
-  //create another dom node with the value
-  node = createElementWithTextNode('dd', data['city'] + ', ' + data['state'])
-  dictionaryNode.appendChild(node)
-
-  //create a dom node with the name of a value
-  node = createElementWithTextNode('dt', 'bio')
-  dictionaryNode.appendChild(node)
-
-  //create another dom node with the value
-  node = createElementWithTextNode('dd', data['bio'])
-  dictionaryNode.appendChild(node)
 
   dictionaryNode.className = 'response'
   responseNode.appendChild(dictionaryNode)
 }
 ```
 
-Finally, we just call renderError & renderFormData in the appropriate places in the original submitHandler.
+We've finished creating all the functions we need to process the response from our backend. Let's add renderError & renderFormData in the appropriate places in the original submitHandler. In addition, let's reset the form after we know it worked.
 
 ```js
 var submitHandler = function (evt) {
-  evt.preventDefault();
+  evt.preventDefault()
   var path = apiURL + '/forms'
   xhr('POST', path, serializeArray('form'), function(err, data) {
     if (err) {
@@ -840,10 +910,10 @@ var submitHandler = function (evt) {
     }
     console.log(data)
     renderFormData(data)
+    document.querySelector('form').reset()
   })
 }
 ```
-
 
 If you fill out the form, you should see a response similar to what was described in the **Serialize the form data** section. For example:
 
@@ -862,23 +932,7 @@ If you fill out the form, you should see a response similar to what was describe
 }
 ```
 
-Sometimes, something will go wrong with a request and instead of receiving a new record from the backend we'll get an error of some kind! We already built our xhr function to let us know when something goes wrong during the AJAX request, but now we need to do something to let the user know that there was a problem.
-
-Update the xhr callback inside of the submitHandler function to show the user a generic error message in an alert when the callback receives an error.
-
-```js
-  ...
-  xhr('POST', path, serializeArray('form'), function(err, data) {
-    if (err) {
-      alert('Oh no! We\'re sorry, but something went wrong! \nCheck the console for more details.')
-      throw err
-    }
-    console.log(data)
-  })
-  ...
-```
-
-## Render the response
+Congratulations! Now we have a fully submitting form that we can use to save people's information.
 
 ## Add JS Validation
 Earlier you added form validation using attributes. This is a quick and easy way to perform validation, but it does have limits. For example, you can't add custom error messages or styling. To get more flexibility and control, use JavaScript.
@@ -1218,3 +1272,4 @@ Read [Getting Started with Node.js on Heroku][node-heroku] for more information.
 [mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
 [mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
 [mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+[mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach

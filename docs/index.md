@@ -156,7 +156,7 @@ We should know what kind of document we are working with before we move forward.
 
 You should see that the styles are included in the header from `public/index.css` and the script for our JavaScript is included at the top of the body from `public/index.js`.
 
-**ProTip™:** When the browser encounters a `<script>` tag, it is blocking - meaning the browser will immediately download and execute it. To load the `<script>` asynchronously and not block the browser's parsing of the document, set `async='true'` on the tag.
+**ProTip™:** When the browser encounters a `<script>` tag, it is blocking - meaning the browser will immediately download and execute it. To load the `<script>` asynchronously and not block the browser's parsing of the document, set the attribute `async='true'` on the tag.
 
 Within the `public/index.html` you should see a basic form with labels and inputs. Familiarize yourself with the different fields.
 
@@ -718,7 +718,7 @@ Let's create a small helper function. It creates a DOM node and adds some text t
 var createElementWithTextNode = function (tagName, tagContent) {}
 ```
 
-Right inside of that function declaration we should add a call to `document.createElement`. 
+Right inside of that function declaration we should add a call to `document.createElement`.
 
 ```js
 var createElementWithTextNode = function (tagName, tagContent) {

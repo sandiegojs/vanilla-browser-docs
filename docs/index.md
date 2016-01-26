@@ -247,7 +247,7 @@ Whenever dealing with a DOM node it's important to understand what type of eleme
 
 ## Event handling
 
-When users interact with the web page the DOM publishes these interactions as events, for example; `click`, `scroll`, `keypress`, and [more][mdn-events].
+When users interact with the web page the DOM publishes these interactions as events, for example `click`, `scroll`, `keypress`, and [more][mdn-events].
 
 After selecting an element from the DOM, we can call it's [`addEventListener`][event-listener] method which will execute a callback function we provide any time that event occurs. Lets start by listening for a `click` on the `document` and trigger an `alert` whenever that event occurs.
 
@@ -468,7 +468,7 @@ var submitHandler = function(evt) {
 }
 ```
 
-In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in the event we want to listen for (submit) as well as the custom handler we just wrote.
+In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in the event we want to listen for `submit` as well as the custom handler we just wrote.
 
 ```js
 form.addEventListener('submit', submitHandler)
@@ -524,7 +524,7 @@ var serializeArray = function(selector) {
   var form = document.querySelector(selector)
   var formInputs = form.querySelectorAll('input,textarea')
 
-  for (var i = 0; i < formInputs.length; i++) {
+  for (var i = 0 i < formInputs.length i++) {
     var item = formInputs[i]
   }
 }
@@ -551,7 +551,7 @@ var serializeArray = function(selector) {
   // Empty object for us to set key values of inputs
   var data = {}
 
-  for (var i = 0; i < formInputs.length; i++) {
+  for (var i = 0 i < formInputs.length i++) {
     var item = formInputs[i]
     data[item.name] = item.value
   }
@@ -581,7 +581,7 @@ var serializeArray = function(selector) {
   // Empty object for us to set key values of inputs
   var data = {}
 
-  for (var i = 0; i < formInputs.length; i++) {
+  for (var i = 0 i < formInputs.length i++) {
     var item = formInputs[i]
     data[item.name] = item.value
   }
@@ -724,7 +724,7 @@ Right inside of that function declaration we should add a call to `document.crea
 
 ```js
 var createElementWithTextNode = function(tagName, tagContent) {
-  var node = document.createElement(tagName);
+  var node = document.createElement(tagName)
 }
 ```
 
@@ -732,7 +732,7 @@ Next up we will create a text node that will hold whatever is inside of the tagC
 
 ```js
 var createElementWithTextNode = function(tagName, tagContent) {
-  var node = document.createElement(tagName);
+  var node = document.createElement(tagName)
   var textNode = document.createTextNode(tagContent)
 }
 ```
@@ -741,7 +741,7 @@ Then we combine the two freshly created nodes. You can add other HTML nodes or t
 
 ```js
 var createElementWithTextNode = function(tagName, tagContent) {
-  var node = document.createElement(tagName);
+  var node = document.createElement(tagName)
   var textNode = document.createTextNode(tagContent)
   node.appendChild(textNode)
 }
@@ -751,7 +751,7 @@ There is a possibility that when we call this function we won't have any textCon
 
 ```js
 var createElementWithTextNode = function(tagName, tagContent) {
-  var node = document.createElement(tagName);
+  var node = document.createElement(tagName)
   if (tagContent) {
     var textNode = document.createTextNode(tagContent)
     node.appendChild(textNode)
@@ -763,7 +763,7 @@ And lastly we will return the node we created with a child text node.
 
 ```js
 var createElementWithTextNode = function(tagName, tagContent) {
-  var node = document.createElement(tagName);
+  var node = document.createElement(tagName)
   if (tagContent) {
     var textNode = document.createTextNode(tagContent)
     node.appendChild(textNode)
@@ -980,9 +980,9 @@ if (email.validity.typeMismatch) {
 
 ```
 if (email.validity.typeMismatch) {
-  email.setCustomValidity('Oops, can't send email to that.');
+  email.setCustomValidity('Oops, can't send email to that.')
 } else {
-  email.setCustomValidity('');
+  email.setCustomValidity('')
 }
 ```
 
@@ -991,19 +991,19 @@ If you pass `''` to `setCustomValidity` the field will be considered valid.
 The complete event handler should look like this:
 
 ```
-var email = document.querySelector('input[name="email"]');
+var email = document.querySelector('input[name="email"]')
 
 // Check for valid email while the user types
 email.addEventListener('keyup', function(event) {
   // see https://developer.mozilla.org/en-US/docs/Web/API/ValidityState for
   // other validity states
   if (email.validity.typeMismatch) {
-    email.setCustomValidity('Oops, try a real email address.');
+    email.setCustomValidity('Oops, try a real email address.')
   } else {
-    email.setCustomValidity('');
+    email.setCustomValidity('')
   }
-  setError(email);
-}, false);
+  setError(email)
+}, false)
 ```
 
 Try the new logic. Go to your form, add a name, but leave the email blank. Click Submit. Start typing your name in the Email field. Notice that now you see your custom message. Now type a valid email address. The message goes away as soon as the address is valid.
@@ -1015,7 +1015,7 @@ You can use the technique above to handle each validated field, but you are stil
 0. Get a reference to the form element. Hint: Use the tag name.
 0. Prevent the automatic validation behavior.
 
-`form.noValidate = true;`
+`form.noValidate = true`
 
 Pro Tip: You can achieve the same thing by adding a `novalidate` attribute to the form.
 
@@ -1024,13 +1024,13 @@ Pro Tip: You can achieve the same thing by adding a `novalidate` attribute to th
 You should have the following:
 
 ```
-var form = document.getElementsByTagName('form')[0];
+var form = document.getElementsByTagName('form')[0]
 
 ...
 
-form.noValidate = true;
+form.noValidate = true
 
-form.addEventListener('submit', validationForm, false);
+form.addEventListener('submit', validationForm, false)
 
 function validateForm(event) {
 
@@ -1046,7 +1046,7 @@ Now that you turned off the automatic validation, the form will always submit! Y
 0. Have the form check if it is valid.
 
 ```
-var form = event.target;
+var form = event.target
 if (!form.checkValidity()) {
   // form is invalid
 }
@@ -1055,10 +1055,10 @@ if (!form.checkValidity()) {
 0. Now prevent the submission if there is a problem.
 
 ```
-var form = event.target;
+var form = event.target
 if (!form.checkValidity()) {
   // form is invalid
-  event.preventDefault();
+  event.preventDefault()
 }
 ```
 
@@ -1071,15 +1071,15 @@ Every form has an elements array. You can use that loop through the fields.
 0. Create the loop above the form validity check.
 
 ```
-var form = event.target;
-var f;
-for (f = 0; f < form.elements.length; f++) {
+var form = event.target
+var f
+for (f = 0 f < form.elements.length f++) {
 
 }
 
 if (!form.checkValidity()) {
   // form is invalid
-  event.preventDefault();
+  event.preventDefault()
 }
 ```
 
@@ -1087,20 +1087,20 @@ if (!form.checkValidity()) {
 
 ```
 function validateForm(event) {
-  var form = event.target;
-  var f;
-  var field;
+  var form = event.target
+  var f
+  var field
 
-  for (f = 0; f < form.elements.length; f++) {
+  for (f = 0 f < form.elements.length f++) {
 
     // get field
-    field = form.elements[f];
+    field = form.elements[f]
 
   }
 
   if (!form.checkValidity()) {
     // form is invalid
-    event.preventDefault();
+    event.preventDefault()
   }
 }
 ```
@@ -1116,7 +1116,7 @@ You know you will have custom logic for validating the state field, so use a fun
 
 ```
 function isValid(field) {
-  return field.checkValidity();
+  return field.checkValidity()
 }
 ```
 
@@ -1124,9 +1124,9 @@ function isValid(field) {
 
 ```
 ...
-  for (f = 0; f < form.elements.length; f++) {
+  for (f = 0 f < form.elements.length f++) {
     // get field
-    field = form.elements[f];
+    field = form.elements[f]
 
     if(isValid(field)) {
       // remove error styles and messages
@@ -1147,8 +1147,8 @@ Now that you are looping through each field and checking its validity, you can u
 
 ```
 function setError(field) {
-  var error = field.nextElementSibling;
-  if (error) error.innerHTML = field.validationMessage;
+  var error = field.nextElementSibling
+  if (error) error.innerHTML = field.validationMessage
 }
 ```
 
@@ -1158,8 +1158,8 @@ function setError(field) {
 
 ```
 function clearError(field) {
-  var error = field.nextElementSibling;
-  if (error) error.innerHTML = '';
+  var error = field.nextElementSibling
+  if (error) error.innerHTML = ''
 }
 ```
 
@@ -1169,10 +1169,10 @@ function clearError(field) {
 ...
     if (isValid(field)) {
       // remove error styles and messages
-      clearError(field);
+      clearError(field)
     } else {
       // style field, show error, etc.
-      setError(field);
+      setError(field)
     }
 ...
 ```
@@ -1183,7 +1183,7 @@ As you type in the email field, does the message change? No? What is missing fro
 
 ### Add custom validation logic to the state field
 
-Time for the bonus round! Custom validation logic could involve evaluating multiple fields on the form, making a call to the server, or performing some calculation in a worker thread. While those are beyond the time you have for this workshop, this section will walk you through creating a some custom logic. Keep in mind that there are better ways to enforce the logic presented in the here, but hey, use your imagination. ;-)
+Time for the bonus round! Custom validation logic could involve evaluating multiple fields on the form, making a call to the server, or performing some calculation in a worker thread. While those are beyond the time you have for this workshop, this section will walk you through creating a some custom logic. Keep in mind that there are better ways to enforce the logic presented in the here, but hey, use your imagination. -)
 
 You will add this logic to the top of the `isValid` function you created earlier.
 
@@ -1194,14 +1194,14 @@ You will add this logic to the top of the `isValid` function you created earlier
 function isValid(field) {
   // custom logic for state
   if (field.name === 'state') {
-    var validStates = ['CA', 'TX', 'NY'];
+    var validStates = ['CA', 'TX', 'NY']
     if (validStates.indexOf(field.value) === -1) {
       // invalid state
     } else {
       // valid state
     }
   }
-  return field.checkValidity();
+  return field.checkValidity()
 }
 ```
 
@@ -1211,10 +1211,10 @@ function isValid(field) {
     ...
     if (validStates.indexOf(field.value) === -1) {
       // invalid state
-      field.setCustomValidity('Use CA, TX, or NY');
+      field.setCustomValidity('Use CA, TX, or NY')
     } else {
       // valid state
-      field.setCustomValidity('');
+      field.setCustomValidity('')
     }
     ...
 ```

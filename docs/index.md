@@ -694,7 +694,7 @@ Now we're ready to use it inside of our `submitHandler`. We can call it with the
 ```js
 var apiURL = '//sandiegojs-vanilla-workshop.herokuapp.com'
 
-var submitHandler = function (evt) {
+var submitHandler = function(evt) {
   evt.preventDefault()
   var path = apiURL + '/forms'
   xhr('POST', path, serializeArray('form'), function(err, data) {
@@ -717,13 +717,13 @@ Some of the methods we'll be using are:
 Let's create a small helper function. It creates a DOM node and adds some text to it. We're going to be making a lot calls to this.
 
 ```js
-var createElementWithTextNode = function (tagName, tagContent) {}
+var createElementWithTextNode = function(tagName, tagContent) {}
 ```
 
 Right inside of that function declaration we should add a call to `document.createElement`.
 
 ```js
-var createElementWithTextNode = function (tagName, tagContent) {
+var createElementWithTextNode = function(tagName, tagContent) {
   var node = document.createElement(tagName);
 }
 ```
@@ -731,7 +731,7 @@ var createElementWithTextNode = function (tagName, tagContent) {
 Next up we will create a text node that will hold whatever is inside of the tagContent variable. 
 
 ```js
-var createElementWithTextNode = function (tagName, tagContent) {
+var createElementWithTextNode = function(tagName, tagContent) {
   var node = document.createElement(tagName);
   var textNode = document.createTextNode(tagContent)
 }
@@ -740,7 +740,7 @@ var createElementWithTextNode = function (tagName, tagContent) {
 Then we combine the two freshly created nodes. You can add other HTML nodes or text nodes to a node even if the HTML node would usually have children, such as `<br>`.
 
 ```js
-var createElementWithTextNode = function (tagName, tagContent) {
+var createElementWithTextNode = function(tagName, tagContent) {
   var node = document.createElement(tagName);
   var textNode = document.createTextNode(tagContent)
   node.appendChild(textNode)
@@ -750,7 +750,7 @@ var createElementWithTextNode = function (tagName, tagContent) {
 There is a possibility that when we call this function we won't have any textContent, and calling `document.createTextNode` without textContent will cause an error. To avoid this kind of error wrap the creation and insertion of the textNode in a conditional test for textContent.
 
 ```js
-var createElementWithTextNode = function (tagName, tagContent) {
+var createElementWithTextNode = function(tagName, tagContent) {
   var node = document.createElement(tagName);
   if (tagContent) {
     var textNode = document.createTextNode(tagContent)
@@ -762,7 +762,7 @@ var createElementWithTextNode = function (tagName, tagContent) {
 And lastly we will return the node we created with a child text node.
 
 ```js
-var createElementWithTextNode = function (tagName, tagContent) {
+var createElementWithTextNode = function(tagName, tagContent) {
   var node = document.createElement(tagName);
   if (tagContent) {
     var textNode = document.createTextNode(tagContent)
@@ -775,13 +775,13 @@ var createElementWithTextNode = function (tagName, tagContent) {
 Now that we have that built, we can start to output some content. First create the renderError function
 
 ```js
-var renderError = function (error) {}
+var renderError = function(error) {}
 ```
 
 The error render will be very simple. We are going to get a reference to the response container, create a node with our helper function, add a custom class to it, and append it to the document.
 
 ```js
-var renderError = function (error) {
+var renderError = function(error) {
   var responseNode = document.querySelector('.response-wrapper')
   var errorNode = createElementWithTextNode('div', error.toString())
   errorNode.className = 'error'
@@ -798,7 +798,7 @@ var renderFormData = function(data) {}
 The first thing we want to do inside of the renderFormData function is get a reference to the response container just like in our `renderError` function.
 
 ```js
-var renderFormData = function (data) {
+var renderFormData = function(data) {
   var responseNode = document.querySelector('.response-wrapper')
 }
 ```
@@ -806,7 +806,7 @@ var renderFormData = function (data) {
 Now, let's create a generic success message so we can see on screen when the form was submitted and the backend saved it.
 
 ```js
-var renderFormData = function (data) {
+var renderFormData = function(data) {
   var responseNode = document.querySelector('.response-wrapper')
 
   //generic success message
@@ -851,13 +851,13 @@ var keys = ['name', 'email', 'github', 'twitter', 'city', 'state', 'bio']
 Next call the `forEach` method on it and pass in an **anonymous function** with a single parameter of `key`. 
 
 ```js
-keys.forEach(function (key) {})
+keys.forEach(function(key) {})
 ```
 
 Move the name definition and insertion we wrote earlier into the callback. Change the text passed into `createElementWithTextNode`. For the first call replace the string literal, `'name'` with the variable `key`, and for the second call replace `data.name` with `data[key]`. This will allow each iteration to print the current key, such as name or email, as the dictionary term and the actual value, such as "John Doe", will be the dictionary definition.
 
 ```js
-keys.forEach(function (key) {
+keys.forEach(function(key) {
   //create a dom node with the name of a value
   var termNode = createElementWithTextNode('dt', key)
   dictionaryNode.appendChild(termNode)
@@ -872,7 +872,7 @@ keys.forEach(function (key) {
 The last steps are to add a custom class of `response` and append the dictionaryNode we've been populating to the responseNode from the beginning of the function. Here is the entire `renderFormData` function:
 
 ```js
-var renderFormData = function (data) {
+var renderFormData = function(data) {
   var responseNode = document.querySelector('.response-wrapper')
 
   //generic success message
@@ -882,7 +882,7 @@ var renderFormData = function (data) {
 
   var dictionaryNode = document.createElement('dl')
   var keys = ['name', 'email', 'github', 'twitter', 'city', 'state', 'bio']
-  keys.forEach(function (key) {
+  keys.forEach(function(key) {
     //create a dom node with the name of a value
     var termNode = createElementWithTextNode('dt', key)
     dictionaryNode.appendChild(termNode)
@@ -900,7 +900,7 @@ var renderFormData = function (data) {
 We've finished creating all the functions we need to process the response from our backend. Let's add renderError & renderFormData in the appropriate places in the original submitHandler. In addition, let's reset the form after we know it worked.
 
 ```js
-var submitHandler = function (evt) {
+var submitHandler = function(evt) {
   evt.preventDefault()
   var path = apiURL + '/forms'
   xhr('POST', path, serializeArray('form'), function(err, data) {

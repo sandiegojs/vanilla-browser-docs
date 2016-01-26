@@ -229,7 +229,7 @@ There are several functions we can use to get a reference to a DOM node. Overtim
 
 For now, we are going to focus on `querySelector`. This function behaves similar to jQuery in that it allows you to specify a [css selector][css-selector] that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the `document` as well as `element`. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.
 
-For now, let's just open up the dev console and mess around. We can begin by selecting the input with a name attribute of `name`.
+For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut `Command + Option + j` and `Control + Shift + j` on Windows. We can begin by selecting the input with a name attribute of `name`.
 
 ```js
 var inputName = document.querySelector('input[name="name"]')
@@ -718,7 +718,7 @@ Let's create a small helper function. It creates a DOM node and adds some text t
 var createElementWithTextNode = function (tagName, tagContent) {}
 ```
 
-Right inside of that function declaration we should add a call to `document.createElement`. 
+Right inside of that function declaration we should add a call to `document.createElement`.
 
 ```js
 var createElementWithTextNode = function (tagName, tagContent) {

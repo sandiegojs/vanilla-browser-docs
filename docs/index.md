@@ -311,7 +311,11 @@ Although important, we won't dive into the distinction between these two just ye
 
 ## Add and remove skills
 
-Now that we know how to add event listeners, let's add some additional functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.
+Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app. 
+
+You might remember that our build tool, Gulp, will compile any `.js` files that we put in the `app` directory and make sure they are available. Let's begin by creating a new file `app.js` inside of the app directory.
+
+With that in place, we can now begin to add more functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.
 
 ### Adding a skill
 
@@ -440,8 +444,6 @@ var removeSkillHandler = function(evt) {
 ## Add submit event
 
 Now that we've covered the basics of getting a DOM element and hooking into it's events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.
-
-To start create a new file called `main.js` in the app directory.
 
 Our first step in this new file is to get a reference to the form element. Create a variable named `form`, and assign the form DOM element on the page to it.
 

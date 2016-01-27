@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>The DOM - Vanilla JavaScript in the Browser</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "The DOM";
+    var mkdocs_page_input_path = "dom.md";
+    var mkdocs_page_url = "/dom/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Vanilla JavaScript in the Browser</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">The DOM</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#the-dom">The DOM</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-html">The HTML</a></li>
+                
+                    <li><a class="toctree-l4" href="#html-field-validation">HTML field validation</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-dom_1">The DOM</a></li>
+                
+                    <li><a class="toctree-l4" href="#dom-selection">DOM selection</a></li>
+                
+                    <li><a class="toctree-l4" href="#event-handling">Event handling</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../manipulate/">Manipulating the DOM</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ajax/">AJAX Form Submission</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../polish/">Polish</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bonus/">Bonus</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../about/">About</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Vanilla JavaScript in the Browser</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>The DOM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="the-dom">The DOM</h1>
+<h2 id="the-html">The HTML</h2>
+<p>We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the <code>public/index.html</code> file and take a look.</p>
+<p>You should see that the styles are included in the header from <code>public/index.css</code> and the script for our JavaScript is included at the top of the body from <code>public/index.js</code>.</p>
+<p><strong>ProTip™:</strong> When the browser encounters a <code>&lt;script&gt;</code> tag, it is blocking - meaning the browser will immediately download and execute it. To load the <code>&lt;script&gt;</code> asynchronously and not block the browser's parsing of the document, set the attribute <code>async='true'</code> on the tag.</p>
+<p>Within the <code>public/index.html</code> you should see a basic form with labels and inputs. Familiarize yourself with the different fields.</p>
+<p>Are you ready to get coding, yet?</p>
+<h2 id="html-field-validation">HTML field validation</h2>
+<p>Have you ever used a form where you didn't realize you missed a required field until after clicking the submit button, waiting for the page to send data off to the server, waiting for the page to reload, and then finally to get the perplexing red error message at the top? What a pain!</p>
+<p>Let's save our users the hassle and let them know right away that they are required to fill in certain fields <em>before</em> sending anything off to the server.</p>
+<p>There are a few different ways to do this, and we will elaborate on this later, but the most basic way to get going with form validation is using the built-in HTML field validations.</p>
+<h3 id="required-fields">Required fields</h3>
+<p>We really only need the <code>name</code> and <code>email</code> field to be required. In order to make these inputs required, all we have to do is add the word <code>required</code> as an attribute on the <code>&lt;input&gt;</code> tag.</p>
+<p>For example:</p>
+<p><code>&lt;input type='text' placeholder='Name' required&gt;</code></p>
+<p>Go ahead and update the <code>name</code> and <code>email</code> inputs to include this special attribute.</p>
+<p><em>After making any changes to this project, be sure to save the file and reload your browser!</em></p>
+<p>Let's head over to <a href="http://localhost:3000">localhost:3000</a> again and try it out.</p>
+<p>If you hit the submit button now, you should immediately see a pop-up message near the first missing input telling you the field is required like below.</p>
+<p><img alt="required error box" src="https://s3.amazonaws.com/f.cl.ly/items/172n3w0f0h0f2d0y0i01/Screen%20Shot%202016-01-17%20at%204.43.54%20PM.png?v=b83630c4" /></p>
+<p>Neato! This is all taken care of for you by the browser out-of-the-box!</p>
+<h3 id="native-validations">Native validations</h3>
+<p>Some <code>&lt;input&gt;</code> types have intrinsic constraints, such as <code>type='email'</code>. If you look at the <code>public/index.html</code> you will see that our email field is currently setup as a <code>type='text'</code>. Go ahead and change it.</p>
+<p>Once you have, we can test it out. Head over to the browser, type in a <code>Name</code> value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.</p>
+<p><img alt="email error message" src="https://s3.amazonaws.com/f.cl.ly/items/3y1l2h0R2x1Q0S1r351B/Screen%20Shot%202016-01-17%20at%204.52.45%20PM.png?v=e72c1557" /></p>
+<p>If you want to learn more about validations that are available for inputs, <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation">MDN has a great article covering the details</a>.</p>
+<h2 id="the-dom_1">The DOM</h2>
+<p>The Document Object Model(DOM) is how we are able to interact with our page via JavaScript. The DOM is a representation of what is on the page, including the elements and styles.</p>
+<blockquote>
+<p>The Document Object Model (DOM) is a programming interface for HTML, XML and SVG documents. It provides a structured representation of the document (a tree) and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Nodes can also have event handlers attached to them, and once that event is triggered the event handlers get executed. Essentially, it connects web pages to scripts or programming languages. -<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">MDN</a></p>
+</blockquote>
+<p>One of the trickest things about the DOM is that it's up to the browser vendor to implement it and therefore every implementation is a little different. This is why we get browser compatability issues.</p>
+<p>But as you will see there is a large API exposed by the DOM which allows us to craft powerful user experiences. An easy way to think of the DOM is a tree of nested nodes and each node is an element from our HTML document, e.g. a <code>div</code>, <code>p</code>, <code>button</code>, etc...</p>
+<p>To visualize this all you need to do is open your web inspector and look at the <code>Elements</code> tab to see this structure realized. Each one of those nodes (elements) has many properties and functions you can take advantage off.</p>
+<p><img alt="element inspector" src="https://s3.amazonaws.com/f.cl.ly/items/2o2Y3L1w433t2p1c2M38/kfm9fl7Prq.gif?v=8c898ff8" /></p>
+<h2 id="dom-selection">DOM selection</h2>
+<p>In order to interact with the DOM within JavaScript, the first thing you will need to understand is element selection. If you're familiar with a library such as <a href="https://jquery.com/">jQuery</a> or <a href="http://zeptojs.com/">Zepto</a> than you'll be used to doing this by way of the <code>$()</code> selector. By selecting an element (DOM node) we get a reference to that element which allows us to take actions on it.</p>
+<p>There are several functions we can use to get a reference to a DOM node. Overtime these functions have been introduced to solve different needs. As such, the browser support for them can vary. You should always research browser compatability to ensure they will work for your user base.</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">querySelector</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">querySelectorAll</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">getElementById</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName">getElementsByClassName</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByName">getElementsByName</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">getElementsByTagName</a></li>
+</ul>
+<p>For now, we are going to focus on <code>querySelector</code>. This function behaves similar to jQuery in that it allows you to specify a <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors">css selector</a> that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the <code>document</code> as well as <code>element</code>. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.</p>
+<p>For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut <code>Command + Option + j</code> and <code>Control + Shift + j</code> on Windows. We can begin by selecting the input with a name attribute of <code>name</code>.</p>
+<pre><code class="js">var inputName = document.querySelector('input[name=&quot;name&quot;]')
+</code></pre>
+
+<p>This returns us an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement"><code>HTMLInputElement</code></a> which has a <code>value</code> property available. Go ahead and set the value property to see an example of how you can change the DOM.</p>
+<pre><code class="js">inputName.value = 'My new value!'
+</code></pre>
+
+<p>You should see the value you set reflected in the form's input.</p>
+<p>Whenever dealing with a DOM node it's important to understand what type of element you have and what are it's parents. That will determine the properties and functions available to you.</p>
+<h2 id="event-handling">Event handling</h2>
+<p>When users interact with the web page the DOM publishes these interactions as events, for example <code>click</code>, <code>scroll</code>, <code>keypress</code>, and <a href="https://developer.mozilla.org/en-US/docs/Web/Events">more</a>.</p>
+<p>After selecting an element from the DOM, we can call it's <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener</code></a> method which will execute a callback function we provide any time that event occurs. Lets start by listening for a <code>click</code> on the <code>document</code> and trigger an <code>alert</code> whenever that event occurs.</p>
+<pre><code class="js">var handler = function() {
+  alert('user clicked on the page')
+}
+
+document.addEventListener('click', handler)
+</code></pre>
+
+<p>Now if you click on the page you should receive an alert with your message. Alerting users every time they click the page can get annoying so lets remove that event listener.</p>
+<pre><code class="js">document.removeEventListener('click', handler)
+</code></pre>
+
+<p>It's important to note that in order for us to be able to remove an event listener we need to name our functions so we can specify what to remove for that event.</p>
+<p>Using this simple API we can trigger the complex logic we will be writing shortly.</p>
+<h3 id="multiple-event-listeners">Multiple event listeners</h3>
+<p>One of the great things about event listeners is that we can attach multiple listeners per event. For example:</p>
+<pre><code class="js">var handlerOne = function() {
+  // Do some logic
+}
+
+var handlerTwo = function() {
+  // Do some logic
+}
+
+document.addEventListener('click', handlerOne)
+document.addEventListener('click', handlerTwo)
+</code></pre>
+
+<p>Now both of these functions will be executed whenever someone clicks the page.</p>
+<h3 id="event-listener-parameter">Event listener parameter</h3>
+<p>When we attach callback functions to events these functions are passed as an event argument. The type of event given will change depending on the type input device which triggered it. Since we are listening for a <code>click</code> event we will receive a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent"><code>MouseEvent</code></a>.</p>
+<pre><code class="js">var logEvent = function(evt) {
+  console.log(evt)
+}
+
+document.addEventListener('click', logEvent)
+</code></pre>
+
+<p>If you inspect this event in the console you will see there are quite a few properties available to us. The ones most commonly used are <code>target</code> and <code>currentTarget</code>.</p>
+<p><code>target</code> is the element who dispatched the event.</p>
+<p><code>currentTarget</code> is the element who handled the event during the event capture (a.k.a bubbling) phase.</p>
+<p>Although important, we won't dive into the distinction between these two just yet. For our purposes we are going to use the <code>currentTarget</code> event to always get a reference to the element who has the event listener listening for the event.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../manipulate/" class="btn btn-neutral float-right" title="Manipulating the DOM">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../manipulate/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

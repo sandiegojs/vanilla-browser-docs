@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Polish - Vanilla JavaScript in the Browser</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Polish";
+    var mkdocs_page_input_path = "polish.md";
+    var mkdocs_page_url = "/polish/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Vanilla JavaScript in the Browser</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../dom/">The DOM</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../manipulate/">Manipulating the DOM</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ajax/">AJAX Form Submission</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Polish</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#add-js-validation">Add JS Validation</a></li>
+                
+                    <li><a class="toctree-l4" href="#handle-keyup-event-for-email-field">Handle keyup event for email field</a></li>
+                
+                    <li><a class="toctree-l4" href="#add-validateform-function-to-handle-validation-logic">Add validateForm function to handle validation logic</a></li>
+                
+                    <li><a class="toctree-l4" href="#modify-the-submit-event-listener">Modify the submit event listener</a></li>
+                
+                    <li><a class="toctree-l4" href="#loop-through-the-fields">Loop through the fields</a></li>
+                
+                    <li><a class="toctree-l4" href="#check-the-field-validity">Check the field validity</a></li>
+                
+                    <li><a class="toctree-l4" href="#set-and-clear-error-messages">Set and clear error messages</a></li>
+                
+                    <li><a class="toctree-l4" href="#add-custom-validation-logic-to-the-state-field">Add custom validation logic to the state field</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#adding-classes-to-style-error-message-or-boxes">Adding classes to style error message or boxes</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#welcome-text-with-cookies">Welcome text with cookies</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bonus/">Bonus</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../about/">About</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Vanilla JavaScript in the Browser</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Polish</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="add-js-validation">Add JS Validation</h2>
+<p>Earlier you added form validation using attributes. This is a quick and easy way to perform validation, but it does have limits. For example, you can't add custom error messages or styling. To get more flexibility and control, use JavaScript.</p>
+<p>In this section, you will be playing with the HTML5 constraint validation API to check and customize the state of a form element. You have several goals:</p>
+<ul>
+<li>Provide a custom validation message when the Email the user types is invalid</li>
+<li>Hide that custom validation message as soon as the email is valid</li>
+<li>Add custom validation logic to the State field without using an attribute</li>
+<li>Apply custom styling to the validation error messages</li>
+<li>Prevent form submission if there are validation errors.</li>
+</ul>
+<p>To achieve these goals you will:</p>
+<ol>
+<li>Add a keyup event listener to the email field to present a custom message</li>
+<li>Add <code>validateForm</code> function to handle validation logic</li>
+<li>Modify the form submit event listener to validate the form</li>
+<li>Loop through the form elements</li>
+<li>Check the validity of each field</li>
+<li>Set or clear the validation error messages</li>
+<li>Add custom validation logic to the state field</li>
+</ol>
+<h3 id="handle-keyup-event-for-email-field">Handle <code>keyup</code> event for email field</h3>
+<ol>
+<li>Get a reference to email field. Hint: Use a query selector you learned about earlier.</li>
+<li>Add a <code>keyup</code> event listener attached to the email field.</li>
+<li>Inside the event listener function, you will check the <code>email.validity.typeMismatch</code> property to determine if the email the user has typed is valid.</li>
+</ol>
+<pre><code class="js">if (email.validity.typeMismatch) {
+
+} else {
+
+}
+</code></pre>
+
+<p>If there is a problem <code>typeMatch</code> will be <code>true</code>. This is your opportunity to set a custom error message using the <code>setCustomValidity</code> function.</p>
+<pre><code class="js">if (email.validity.typeMismatch) {
+  email.setCustomValidity('Oops, try a real email address.');
+} else {
+  email.setCustomValidity('');
+}
+</code></pre>
+
+<p>If you pass <code>''</code> to <code>setCustomValidity</code> the field will be considered valid.</p>
+<p>The complete event handler should look like this:</p>
+<pre><code class="js">var email = document.querySelector('input[name=&quot;email&quot;]');
+
+// Check for valid email while the user types
+email.addEventListener('keyup', function(event) {
+  // see https://developer.mozilla.org/en-US/docs/Web/API/ValidityState for
+  // other validity states
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity('Oops, try a real email address.');
+  } else {
+    email.setCustomValidity('');
+  }
+}, false);
+</code></pre>
+
+<p>Try the new logic. Go to your form, add a name, but leave the email blank. Click Submit. Start typing your name in the Email field. Notice that now you see your custom message. Now type a valid email address. The message goes away as soon as the address is valid.</p>
+<h3 id="add-validateform-function-to-handle-validation-logic">Add <code>validateForm</code> function to handle validation logic</h3>
+<p>You can use the technique above to handle each validated field, but you are still stuck with the standard formatting for the messages. To get more control, you need to turn off the automatic validation and handle the submission event yourself. </p>
+<p>Add a line to prevent the automatic validation behavior.</p>
+<p><code>form.noValidate = true;</code></p>
+<p>ProTip: You can achieve the same thing by adding a <code>novalidate</code> attribute to the form.</p>
+<p>With the automatic validation turned off, you have more control over when the validation check is done. </p>
+<p>Add a new function, <code>validateForm</code>, to handle the validation check. This function, after you implement it fully, will determine any field errors and allow the form to determine if it valid. </p>
+<pre><code class="js">function validateForm(form){
+
+}
+</code></pre>
+
+<h3 id="modify-the-submit-event-listener">Modify the <code>submit</code> event listener</h3>
+<p>Back in the "Add submit event" section, you added a <code>submit</code> event handler. You will modify that to call the validation logic. Inside the <code>submitHandler</code> function, you will call <code>validateForm</code>.</p>
+<pre><code class="js">
+function submitHandler(evt) {
+  evt.preventDefault();
+
+  var form = evt.target;
+  validateForm(form);
+
+  // remaining submit handler logic goes here
+
+}
+</code></pre>
+
+<p>Now you need to have the form check if it is valid before submitting data to the server. The <code>form</code> element has a convenient <code>checkValidity</code> function to do just that. </p>
+<pre><code class="js">
+function submitHandler(evt) {
+  evt.preventDefault();
+
+  var form = evt.target;
+  validateForm(form);
+
+  if (form.checkValidity()) { // if no error, go ahead and submit
+    // remaining submit handler logic goes here
+  }
+}
+</code></pre>
+
+<p>In the next few steps, you will implement the validation logic for the fields.</p>
+<h3 id="loop-through-the-fields">Loop through the fields</h3>
+<p>Every form has an elements array. You can use that to loop through the fields.</p>
+<p>In the <code>validateForm</code> function, create the loop.</p>
+<pre><code class="js">function validateForm(form) {
+  var f;
+  for (f = 0; f &lt; form.elements.length; f++) {
+
+  }
+}
+</code></pre>
+
+<p>Within the loop, get a reference to the current field. <code>validateForm</code> should now look like:</p>
+<pre><code class="js">function validateForm(form) {
+  var f;
+  var field;
+
+  for (f = 0; f &lt; form.elements.length; f++) {
+    field = form.elements[f];
+  }
+}
+</code></pre>
+
+<p>The behavior of the form hasn't changed so charge on to the next section.</p>
+<h3 id="check-the-field-validity">Check the field validity</h3>
+<p>Use a function to encapsulate all of the field validation logic. Start with using the standard validation logic.</p>
+<p>Create a new function <code>isValid</code> that takes a field as a parameter.</p>
+<p>Like the form, fields have a <code>checkValidity</code> method. Use this method to determine the return value for the function. Here's how it should look:</p>
+<pre><code>function isValid(field) {
+  return field.checkValidity();
+}
+</code></pre>
+
+<p>Call this function from the loop inside the <code>validateForm</code> function.</p>
+<pre><code class="js">function validateForm(form) {
+  var f;
+  var field;
+
+  for (f = 0; f &lt; form.elements.length; f++) {
+    field = form.elements[f];
+    if(isValid(field)) {
+      // remove error styles and messages
+    } else {
+      // style field, show error, etc.
+    }
+  }
+}
+</code></pre>
+
+<h3 id="set-and-clear-error-messages">Set and clear error messages</h3>
+<p>Now that you are looping through each field and checking its validity, you can use the information to format the feedback to the user. In the HTML, you may have noticed that below the fields that have validation, there is a <code>span</code> element. You will use this element to display feedback to the user.</p>
+<p>Create a <code>setError</code> function that takes a field as a parameter.</p>
+<p>Inside the function, get a reference to the <code>span</code> you will use to show the error. To do that, use the handy <code>nextElementSibling</code>.</p>
+<p>Using the reference to the element, set its <code>innerHTML</code> to the field's <code>validationMessage</code>. The <code>validationMessage</code> is either the default message from the browser or a custom message you set. The finished function should loop like:</p>
+<pre><code class="js">function setError(field) {
+  var error = field.nextElementSibling;
+  if (error) error.innerHTML = field.validationMessage;
+}
+</code></pre>
+
+<p>Set up a similar function to clear the error text. Copy and paste the <code>setError</code> function.</p>
+<p>Change the function name to <code>clearError</code>.</p>
+<p>Instead of <code>field.validationMessage</code>, set the <code>innerHTML</code> to <code>''</code>. The complete function is:</p>
+<pre><code class="js">function clearError(field) {
+  var error = field.nextElementSibling;
+  if (error) error.innerHTML = '';
+}
+</code></pre>
+
+<p>ProTip: This is just one way of handling error messages. For example, you could use css to show and hide error messages or put all validation errors in a central location on the page. </p>
+<p>Finish the logic by calling these function from <code>validateForm</code>. If the field is valid, call <code>clearError</code> and if not call <code>setError</code>.</p>
+<pre><code class="js">function validateForm(form) {
+  var f;
+  var field;
+
+  for (f = 0; f &lt; form.elements.length; f++) {
+    field = form.elements[f];
+    if(isValid(field)) {
+      // remove error styles and messages
+      clearError(field);
+    } else {
+      // style field, show error, etc.
+      setError(field);
+    }
+  }
+}
+</code></pre>
+
+<p>Try it out. Click Submit. Do you see the error messages? Do the error messages disappear when you enter valid data?</p>
+<p>As you type in the email field, does the message change? No? What is missing from the <code>keyup</code> event listener?</p>
+<h3 id="add-custom-validation-logic-to-the-state-field">Add custom validation logic to the state field</h3>
+<p>Time for the bonus round! Custom validation logic could involve evaluating multiple fields on the form, making a call to the server, or performing some calculation in a worker thread. While those are beyond the time you have for this workshop, this section will walk you through creating a some custom logic. Keep in mind that there are better ways to enforce the logic presented in the here, but hey, use your imagination. ;-)</p>
+<p>You will add this logic to the top of the <code>isValid</code> function you created earlier.</p>
+<p>First, check if the field passed to the function is named <code>state</code>.</p>
+<p>If so, check if the state is in the list of valid states. Valid states include: CA, TX, NY.</p>
+<pre><code class="js">function isValid(field) {
+  // custom logic for state
+  if (field.name === 'state') {
+    var validStates = ['CA', 'TX', 'NY'];
+    if (validStates.indexOf(field.value) === -1) {
+      // invalid state
+    } else {
+      // valid state
+    }
+  }
+  return field.checkValidity();
+}
+</code></pre>
+
+<p>When the state is invalid, set a custom validity message. When it is not, set an empty string.</p>
+<pre><code class="js">    ...
+    if (validStates.indexOf(field.value) === -1) {
+      // invalid state
+      field.setCustomValidity('Use CA, TX, or NY');
+    } else {
+      // valid state
+      field.setCustomValidity('');
+    }
+    ...
+</code></pre>
+
+<p>Now when you try to submit without a state or an invalid state, you will get an error message just like with name and email.</p>
+<p>That's it for validation! You may now add "HTML5 constraint validation API" to your resume.</p>
+<h2 id="adding-classes-to-style-error-message-or-boxes">Adding classes to style error message or boxes</h2>
+<h2 id="welcome-text-with-cookies">Welcome text with cookies</h2>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../bonus/" class="btn btn-neutral float-right" title="Bonus">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ajax/" class="btn btn-neutral" title="AJAX Form Submission"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ajax/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../bonus/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

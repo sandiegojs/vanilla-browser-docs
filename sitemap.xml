@@ -4,7 +4,55 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-01-25</lastmod>
+     <lastmod>2016-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/dom/</loc>
+     <lastmod>2016-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/manipulate/</loc>
+     <lastmod>2016-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/ajax/</loc>
+     <lastmod>2016-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/polish/</loc>
+     <lastmod>2016-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/bonus/</loc>
+     <lastmod>2016-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/about/</loc>
+     <lastmod>2016-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

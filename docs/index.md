@@ -94,21 +94,6 @@ Our API is setup at [//sandiegojs-vanilla-workshop.herokuapp.com][sdjs-app] and 
     <tr>
       <td>DELETE</td><td>/forms/:id</td><td>Delete a form</td>
     </tr>
-    <tr>
-      <td>GET</td><td>/skills</td><td>List of skills</td>
-    </tr>
-    <tr>
-      <td>POST</td><td>/skills</td><td>Create a new skill</td>
-    </tr>
-    <tr>
-      <td>GET</td><td>/skills/:id</td><td>Retrieve a skill</td>
-    </tr>
-    <tr>
-      <td>PUT</td><td>/skills/:id</td><td>Update a skill</td>
-    </tr>
-    <tr>
-      <td>DELETE</td><td>/skills/:id</td><td>Delete a skill</td>
-    </tr>
   </tbody>
 </table>
 
@@ -1231,6 +1216,7 @@ That's it for validation! You may now add "HTML5 constraint validation API" to y
 
 Read [Getting Started with Node.js on Heroku][node-heroku] for more information.
 
+[class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
 [cookies]: https://devdocs.io/dom/document/cookie
 [css-selector]: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
 [devdocs]: http://devdocs.io
@@ -1243,27 +1229,26 @@ Read [Getting Started with Node.js on Heroku][node-heroku] for more information.
 [heroku-node]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
 [heroku-toolbelt]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
 [html-input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
+[insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
+[jquery]: https://jquery.com/
 [localhost]: http://localhost:3000
 [mdn]: https://developer.mozilla.org/en-US/
+[mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+[mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+[mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
 [mdn-events]: https://developer.mozilla.org/en-US/docs/Web/Events
+[mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 [mdn-validations]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
 [mocha]: https://devdocs.io/mocha/
 [mouse-event]: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 [node-install]: https://nodejs.org/download/
-[npm-g-without-sudo]: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-[san diego js]: http://sandiegojs.org/
-[xhr]: https://devdocs.io/dom/xmlhttprequest
-[zepto]: http://zeptojs.com/
-[jquery]: https://jquery.com/
-[xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
-[sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
-[rails-api]: https://github.com/rails-api/rails-api
 [node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-[insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-[class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+[npm-g-without-sudo]: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
+[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
+[rails-api]: https://github.com/rails-api/rails-api
 [remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-[mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
-[mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
-[mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-[mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+[san diego js]: http://sandiegojs.org/
+[sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
+[xhr]: https://devdocs.io/dom/xmlhttprequest
+[xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[zepto]: http://zeptojs.com/

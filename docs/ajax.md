@@ -213,7 +213,7 @@ var serializeArray = function(selector) {
 
 # Build XHR and submit
 
-Now that we have our data we need to send it to the server using an XHR or [`XMLHttpRequest`][xhr-mdn]. This allows us to communicate with the server without changing pages then do some action based on the data we get back. We are going to create a function that we can put in our event handlers that will do this.
+Now that we have our data we need to send it to the server using an XHR or [XMLHttpRequest][xhr-mdn]. This allows us to communicate with the server without changing pages, and then do some action based on the data we get back. We are going to create a function that we can put in our event handlers that will do this.
 
 ```js
 var xhr = function(method, path, data, callback) {}
@@ -229,9 +229,9 @@ var xhr = function(method, path, data, callback) {
 
 Next we'll use `open(method, path, async)` to initialize the request.
 
-- `method` a string of an HTTP method to use, such as 'GET', 'POST', 'PUT', 'DELETE'. This will match the Verb on the API table up top.
-- `path` a string of the full path to send the request to. This will include the API endpoint URL as well as the path.
-- `async` a boolean flag that dictates whether the script should run asynchronously.
+- **method:** a string of an HTTP method to use, such as 'GET', 'POST', 'PUT', 'DELETE'. This will match the Verb on the API table up top.
+- **path:** a string of the full path to send the request to. This will include the API endpoint URL as well as the path.
+- **async:** a boolean flag that dictates whether the script should run asynchronously.
 
 **ProTip™:** `async` should always be `true` to prevent blocking. Stopping JavaScript execution especially hurts time sensitive things like rendering or event listening/handling.
 
@@ -318,13 +318,15 @@ var submitHandler = function(evt) {
 
 # Handle server response
 
-Now that we are able to submit the form to the server let's do something with the response. We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
+Congratulations! We can now submit the form to the server and get a response. Now let's do something with the response. 
+
+We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
 
 Some of the methods we'll be using are:
 
-- [`Document.createElement`][mdn-createelement] this method creates a DOM element of the type specified in the first parameter. For example, we can pass in `div`, `p`, `ul`, etc.
-- [`Document.createTextNode`][mdn-createtextnode] this method creates a text node that can be placed in the document. We'll use this to hold content we author.
-- [`Node.appendChild`][mdn-appendchild] this method can be called on any element created using createElement. As you can guess from the name it adds the node passed in to the end of node you call appendChild on.
+- [Document.createElement][mdn-createelement] this method creates a DOM element of the type specified in the first parameter. For example, we can pass in `div`, `p`, `ul`, etc.
+- [Document.createTextNode][mdn-createtextnode] this method creates a text node that can be placed in the document. We'll use this to hold content we author.
+- [Node.appendChild][mdn-appendchild] this method can be called on any element created using createElement. As you can guess from the name it adds the node passed in to the end of node you call appendChild on.
 
 Let's create a small helper function. It creates a DOM node and adds some text to it. We're going to be making a lot calls to this.
 
@@ -428,7 +430,7 @@ var renderFormData = function(data) {
 }
 ```
 
-Great, now we give some kind of feedback to the user whether the form is successfully processed by backend or not. Let's improve upon this though. Let's show the information we entered when we submitted so we can verify it saved properly.
+Great, now we can give some kind of feedback to the user when the form is successfully processed by backend or not. Let's improve upon this, though. Let's show the information we entered when we submitted so we can verify it saved properly.
 
 To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request. 
 

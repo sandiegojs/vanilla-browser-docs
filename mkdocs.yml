@@ -2,5 +2,9 @@ site_name: Vanilla JavaScript in the Browser
 theme: readthedocs
 pages:
 - Home: index.md
+- The DOM: dom.md
+- Manipulating the DOM: manipulate.md
+- AJAX Form Submission: ajax.md
+- Polish: polish.md
 - Bonus: bonus.md
 - About: about.md

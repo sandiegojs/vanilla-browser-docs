@@ -4,6 +4,16 @@ So you've finished the workshop before everyone else, or you're looking for some
 
 The following are some sections that will provide the beginnings to some self-guided learning experiences that build on the skills we've learned in this workshop.
 
+## Test with Mocha
+
+## Heroku to Publish
+
+[Heroku][heroku] is a web hosting platform that allows developers to go from code to running apps in minutes. It has a free tier, as well as a super fast workflow. To try it out create a free account on Heroku, and then use the button below to automatically deploy this app directly from GitHub to a running Heroku instance.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/sandiegojs/vanilla-browser-workshop)
+
+Read [Getting Started with Node.js on Heroku][node-heroku] for more information.
+
 ## ES2015
 
 You'll probably remember that the boilerplate for this workshop was setup with [Gulp][gulp]. If you take a peak at the `tasks/` directory at the `scripts` task and see how the scripts are being built you will notice the use of [Browserify][browserify] and the 'babelify' tranform which uses [Babel][babel].
@@ -33,6 +43,7 @@ The API for this project was build using [Rails-API][rail-api] and is publicly a
 [babel-es2015]: https://babeljs.io/docs/plugins/preset-es2015/
 [browserify]: http://browserify.org/
 [gulp]: http://gulpjs.com/
+[heroku]: http://heroku.com
 [json-api]: http://jsonapi.org/
 [rails-api]: https://github.com/rails-api/rails-api
 [sdjs-api]: http://github.com/sandiegojs/sandiegojs-vanilla-workshop

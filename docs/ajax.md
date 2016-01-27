@@ -252,7 +252,7 @@ var xhr = function(method, path, data, callback) {
 }
 ```
 
-XHR only has one event we care to listen to and that's [onreadystatechange][onreadystatechange].
+XHR only has one event we care to listen to and that's [onreadystatechange][mdn-onreadystatechange].
 
 The ready state of the XHR will change a few times, but we are looking for the last state of `4` which is triggered when the request operation is complete.
 
@@ -482,6 +482,34 @@ keys.forEach(function(key) {
 })
 ```
 
+If you review the array of keys we're looping through, you'll notice we didn't include `skills_attributes` like we did when we posted the data. That's because the content of that property is more complex than the simple strings of the other properties. If we want to print them out we'll have to write some custom logic.
+
+Create a new dictionary term node like we do in the `forEach` callback, but set the text content to "skills".
+
+```js
+var skillsTermNode = createElementWithTextNode('dt', 'skills')
+dictionaryNode.appendChild(skillsTermNode)
+```
+
+Let's add the dictionary definition, now. We'll add the actual skills information in the next step. We'll show all the skills as a list, so let's also add a **UL** node as well and store a reference to it in a variable so we can add **LI** elements to it later.
+
+```js
+var skillsDefinitionNode = document.createElement('dd')
+var skillsList = document.createElement('ul')
+skillsDefinitionNode.appendChild(skillsList)
+dictionaryNode.appendChild(skillsDefinitionNode)
+```
+
+Now that that's out of the way, let's loop through each skill we received, if any, and combine them into one dictionary definition. To accomplish this we'll test to see if there is any value stored in `skills_attributes`. If there is then we can loop through all the skills by using the `forEach` method to loop through each complex element in the array and append a simpler set of information to the dictionary. In our case, we'll append only the description of each skill wrapped in a **LI** tag.
+
+```js
+if (data.skills_attributes) {
+  data.skills_attributes.forEach(function (skill) {
+    var skillNode = createElementWithTextNode('li', skill.description)
+    skillsList.appendChild(skillNode)
+  })
+}
+``` 
 
 The last steps are to add a custom class of `response` and append the dictionaryNode we've been populating to the responseNode from the beginning of the function. Here is the entire `renderFormData` function:
 
@@ -505,7 +533,22 @@ var renderFormData = function(data) {
     var definitionNode = createElementWithTextNode('dd', data[key])
     dictionaryNode.appendChild(definitionNode)
   })
-
+  
+  var skillsTermNode = createElementWithTextNode('dt', 'skills')
+  dictionaryNode.appendChild(skillsTermNode)
+  
+  var skillsDefinitionNode = document.createElement('dd')
+  var skillsList = document.createElement('ul')
+  skillsDefinitionNode.appendChild(skillsList)
+  dictionaryNode.appendChild(skillsDefinitionNode)
+  
+  if (data.skills_attributes) {
+    data.skills_attributes.forEach(function (skill) {
+      var skillNode = createElementWithTextNode('li', skill.description)
+      skillsList.appendChild(skillNode)
+    })
+  }
+  
   dictionaryNode.className = 'response'
   responseNode.appendChild(dictionaryNode)
 }
@@ -529,7 +572,7 @@ var submitHandler = function(evt) {
 }
 ```
 
-If you fill out the form, you should see a response similar to what was described in the **Serialize the form data** section. For example:
+If you fill out the form, you should see a response similar to what was described in the **Serialize the form data** section in your console. For example:
 
 ```json
 {
@@ -541,10 +584,30 @@ If you fill out the form, you should see a response similar to what was describe
   "github": "testdev",
   "twitter": "testtwitter",
   "bio": "Lorem Ipsum...",
+  "skills_attributes": [
+    {
+      "id": 1,
+      "description": "cooking",
+      "form_id": 1,
+      "created_at": "2016-01-21T07:09:01.640Z",
+      "updated_at": "2016-01-21T07:09:01.640Z"
+    },
+    {
+      "id": 2,
+      "description": "cleaning",
+      "form_id": 1,
+      "created_at": "2016-01-21T07:09:01.640Z",
+      "updated_at": "2016-01-21T07:09:01.640Z"
+    }
+  ],
   "created_at": "2016-01-21T07:09:01.640Z",
   "updated_at": "2016-01-21T07:09:01.640Z"
 }
 ```
+
+On screen you should see the this:
+
+**@TODO: Add screenshot of success**
 
 Congratulations! Now we have a fully submitting form that we can use to save people's information.
 
@@ -552,7 +615,7 @@ Congratulations! Now we have a fully submitting form that we can use to save peo
 [mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
 [mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
 [mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+[mdn-onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
 [node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
 [rails-api]: https://github.com/rails-api/rails-api
 [xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange

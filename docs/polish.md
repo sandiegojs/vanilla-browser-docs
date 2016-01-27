@@ -290,7 +290,7 @@ Cookies are a classic way to provide a unique visitor experience based on previo
 
 Here are the basics.   Cookies are stored as key value pairs as a strings.  The DOM API allows you to set cookies by assigning a value to document.cookie.  It must have a name, should have a value, and may have an expiration date for example:
 ```js
-document.cookie = "returning=true; expires=Mon, 1 Feb 2016 12:00:UTC;"
+document.cookie = 'returning=true; expires=Mon, 1 Feb 2016 12:00:UTC;'
 ```
 This would set a cookie with the key = 'returning' and value = 'true', as well as an expiration date.  This is when the cookie will go bye bye.
 

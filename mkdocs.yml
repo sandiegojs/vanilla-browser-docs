@@ -1,2 +1,6 @@
 site_name: Vanilla JavaScript in the Browser
 theme: readthedocs
+pages:
+- Home: index.md
+- Bonus: bonus.md
+- About: about.md

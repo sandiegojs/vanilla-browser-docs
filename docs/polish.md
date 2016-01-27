@@ -1,4 +1,5 @@
-## Add JS Validation
+# Add JS Validation
+
 Earlier you added form validation using attributes. This is a quick and easy way to perform validation, but it does have limits. For example, you can't add custom error messages or styling. To get more flexibility and control, use JavaScript.
 
 In this section, you will be playing with the HTML5 constraint validation API to check and customize the state of a form element. You have several goals:
@@ -20,7 +21,7 @@ To achieve these goals you will:
 0. Add custom validation logic to the state field
 
 
-### Handle `keyup` event for email field
+## Handle `keyup` event for email field
 
 0. Get a reference to email field. Hint: Use a query selector you learned about earlier.
 0. Add a `keyup` event listener attached to the email field.
@@ -65,7 +66,7 @@ email.addEventListener('keyup', function(event) {
 
 Try the new logic. Go to your form, add a name, but leave the email blank. Click Submit. Start typing your name in the Email field. Notice that now you see your custom message. Now type a valid email address. The message goes away as soon as the address is valid.
 
-### Add `validateForm` function to handle validation logic
+## Add `validateForm` function to handle validation logic
 
 You can use the technique above to handle each validated field, but you are still stuck with the standard formatting for the messages. To get more control, you need to turn off the automatic validation and handle the submission event yourself. 
 
@@ -85,7 +86,7 @@ function validateForm(form){
 }
 ```
 
-### Modify the `submit` event listener
+## Modify the `submit` event listener
 
 Back in the "Add submit event" section, you added a `submit` event handler. You will modify that to call the validation logic. Inside the `submitHandler` function, you will call `validateForm`.
 
@@ -120,7 +121,7 @@ function submitHandler(evt) {
 
 In the next few steps, you will implement the validation logic for the fields.
 
-### Loop through the fields
+## Loop through the fields
 
 Every form has an elements array. You can use that to loop through the fields.
 
@@ -150,7 +151,7 @@ function validateForm(form) {
 
 The behavior of the form hasn't changed so charge on to the next section.
 
-### Check the field validity
+## Check the field validity
 
 Use a function to encapsulate all of the field validation logic. Start with using the standard validation logic.
 
@@ -182,7 +183,7 @@ function validateForm(form) {
 }
 ```
 
-### Set and clear error messages
+## Set and clear error messages
 
 Now that you are looping through each field and checking its validity, you can use the information to format the feedback to the user. In the HTML, you may have noticed that below the fields that have validation, there is a `span` element. You will use this element to display feedback to the user.
 
@@ -238,7 +239,7 @@ Try it out. Click Submit. Do you see the error messages? Do the error messages d
 
 As you type in the email field, does the message change? No? What is missing from the `keyup` event listener?
 
-### Add custom validation logic to the state field
+## Add custom validation logic to the state field
 
 Time for the bonus round! Custom validation logic could involve evaluating multiple fields on the form, making a call to the server, or performing some calculation in a worker thread. While those are beyond the time you have for this workshop, this section will walk you through creating a some custom logic. Keep in mind that there are better ways to enforce the logic presented in the here, but hey, use your imagination. ;-)
 
@@ -281,43 +282,6 @@ Now when you try to submit without a state or an invalid state, you will get an 
 
 That's it for validation! You may now add "HTML5 constraint validation API" to your resume.
 
-## Adding classes to style error message or boxes
+# Adding classes to style error message or boxes
 
-## Welcome text with cookies
-
-
-[class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
-[cookies]: https://devdocs.io/dom/document/cookie
-[css-selector]: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
-[devdocs]: http://devdocs.io
-[dom]: https://devdocs.io/dom/
-[event-listener]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-[events]: https://devdocs.io/dom_events
-[git-scm]: http://git-scm.com/downloads
-[gulp]: http://gulpjs.com/
-[heroku-node]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
-[heroku-toolbelt]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
-[html-input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
-[insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-[jquery]: https://jquery.com/
-[localhost]: http://localhost:3000
-[mdn]: https://developer.mozilla.org/en-US/
-[mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-[mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
-[mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
-[mdn-events]: https://developer.mozilla.org/en-US/docs/Web/Events
-[mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-[mdn-validations]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
-[mocha]: https://devdocs.io/mocha/
-[mouse-event]: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-[node-install]: https://nodejs.org/download/
-[node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-[npm-g-without-sudo]: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
-[rails-api]: https://github.com/rails-api/rails-api
-[remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-[san diego js]: http://sandiegojs.org/
-[sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
-[xhr]: https://devdocs.io/dom/xmlhttprequest
-[xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[zepto]: http://zeptojs.com/
+# Welcome text with cookies

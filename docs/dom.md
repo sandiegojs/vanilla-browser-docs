@@ -1,6 +1,4 @@
-# The DOM
-
-## The HTML
+# The HTML
 
 We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the `public/index.html` file and take a look.
 
@@ -12,7 +10,7 @@ Within the `public/index.html` you should see a basic form with labels and input
 
 Are you ready to get coding, yet?
 
-## HTML field validation
+# HTML field validation
 
 Have you ever used a form where you didn't realize you missed a required field until after clicking the submit button, waiting for the page to send data off to the server, waiting for the page to reload, and then finally to get the perplexing red error message at the top? What a pain!
 
@@ -20,7 +18,7 @@ Let's save our users the hassle and let them know right away that they are requi
 
 There are a few different ways to do this, and we will elaborate on this later, but the most basic way to get going with form validation is using the built-in HTML field validations.
 
-### Required fields
+## Required fields
 
 We really only need the `name` and `email` field to be required. In order to make these inputs required, all we have to do is add the word `required` as an attribute on the `<input>` tag.
 
@@ -40,7 +38,7 @@ If you hit the submit button now, you should immediately see a pop-up message ne
 
 Neato! This is all taken care of for you by the browser out-of-the-box!
 
-### Native validations
+## Native validations
 
 Some `<input>` types have intrinsic constraints, such as `type='email'`. If you look at the `public/index.html` you will see that our email field is currently setup as a `type='text'`. Go ahead and change it.
 
@@ -50,11 +48,11 @@ Once you have, we can test it out. Head over to the browser, type in a `Name` va
 
 If you want to learn more about validations that are available for inputs, [MDN has a great article covering the details][mdn-validations].
 
-## The DOM
+# The DOM
 
 The Document Object Model(DOM) is how we are able to interact with our page via JavaScript. The DOM is a representation of what is on the page, including the elements and styles.
 
-> The Document Object Model (DOM) is a programming interface for HTML, XML and SVG documents. It provides a structured representation of the document (a tree) and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Nodes can also have event handlers attached to them, and once that event is triggered the event handlers get executed. Essentially, it connects web pages to scripts or programming languages. -[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+> The Document Object Model (DOM) is a programming interface for HTML, XML and SVG documents. It provides a structured representation of the document (a tree) and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Nodes can also have event handlers attached to them, and once that event is triggered the event handlers get executed. Essentially, it connects web pages to scripts or programming languages. -[MDN][mdn-dom]
 
 One of the trickest things about the DOM is that it's up to the browser vendor to implement it and therefore every implementation is a little different. This is why we get browser compatability issues.
 
@@ -64,7 +62,7 @@ To visualize this all you need to do is open your web inspector and look at the 
 
 ![element inspector](https://s3.amazonaws.com/f.cl.ly/items/2o2Y3L1w433t2p1c2M38/kfm9fl7Prq.gif?v=8c898ff8)
 
-## DOM selection
+# DOM selection
 
 In order to interact with the DOM within JavaScript, the first thing you will need to understand is element selection. If you're familiar with a library such as [jQuery][jquery] or [Zepto][zepto] than you'll be used to doing this by way of the `$()` selector. By selecting an element (DOM node) we get a reference to that element which allows us to take actions on it.
 
@@ -95,7 +93,7 @@ You should see the value you set reflected in the form's input.
 
 Whenever dealing with a DOM node it's important to understand what type of element you have and what are it's parents. That will determine the properties and functions available to you.
 
-## Event handling
+# Event handling
 
 When users interact with the web page the DOM publishes these interactions as events, for example `click`, `scroll`, `keypress`, and [more][mdn-events].
 
@@ -120,7 +118,7 @@ It's important to note that in order for us to be able to remove an event listen
 Using this simple API we can trigger the complex logic we will be writing shortly.
 
 
-### Multiple event listeners
+## Multiple event listeners
 
 One of the great things about event listeners is that we can attach multiple listeners per event. For example:
 
@@ -139,7 +137,7 @@ document.addEventListener('click', handlerTwo)
 
 Now both of these functions will be executed whenever someone clicks the page.
 
-### Event listener parameter
+## Event listener parameter
 
 When we attach callback functions to events these functions are passed as an event argument. The type of event given will change depending on the type input device which triggered it. Since we are listening for a `click` event we will receive a [`MouseEvent`][mouse-event].
 
@@ -159,38 +157,13 @@ If you inspect this event in the console you will see there are quite a few prop
 
 Although important, we won't dive into the distinction between these two just yet. For our purposes we are going to use the `currentTarget` event to always get a reference to the element who has the event listener listening for the event.
 
-[class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
-[cookies]: https://devdocs.io/dom/document/cookie
 [css-selector]: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
-[devdocs]: http://devdocs.io
-[dom]: https://devdocs.io/dom/
 [event-listener]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-[events]: https://devdocs.io/dom_events
-[git-scm]: http://git-scm.com/downloads
-[gulp]: http://gulpjs.com/
-[heroku-node]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
-[heroku-toolbelt]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
 [html-input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
-[insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
 [jquery]: https://jquery.com/
 [localhost]: http://localhost:3000
-[mdn]: https://developer.mozilla.org/en-US/
-[mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-[mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
-[mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
+[mdn-dom]: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 [mdn-events]: https://developer.mozilla.org/en-US/docs/Web/Events
-[mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 [mdn-validations]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
-[mocha]: https://devdocs.io/mocha/
 [mouse-event]: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-[node-install]: https://nodejs.org/download/
-[node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-[npm-g-without-sudo]: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
-[rails-api]: https://github.com/rails-api/rails-api
-[remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-[san diego js]: http://sandiegojs.org/
-[sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
-[xhr]: https://devdocs.io/dom/xmlhttprequest
-[xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [zepto]: http://zeptojs.com/

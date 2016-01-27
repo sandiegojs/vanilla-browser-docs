@@ -1,4 +1,4 @@
-## Add and remove skills
+# Add and remove skills
 
 Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app. 
 
@@ -6,7 +6,7 @@ You might remember that our build tool, Gulp, will compile any `.js` files that 
 
 With that in place, we can now begin to add more functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.
 
-### Adding a skill
+## Adding a skill
 
 You probably noticed the nice `+` button next to the `skills` input. Right now it doesn't do anything. We need to add a `click` handler in order to bring it to life.
 
@@ -111,7 +111,7 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 Great, now you're ready to remove some skills!
 
-### Removing a skill
+## Removing a skill
 
 Much like we created an event handler for adding a skill, we will now just create one to remove a skill.
 
@@ -131,37 +131,5 @@ var removeSkillHandler = function(evt) {
 ```
 
 [class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
-[cookies]: https://devdocs.io/dom/document/cookie
-[css-selector]: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
-[devdocs]: http://devdocs.io
-[dom]: https://devdocs.io/dom/
-[event-listener]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-[events]: https://devdocs.io/dom_events
-[git-scm]: http://git-scm.com/downloads
-[gulp]: http://gulpjs.com/
-[heroku-node]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
-[heroku-toolbelt]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
-[html-input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
 [insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-[jquery]: https://jquery.com/
-[localhost]: http://localhost:3000
-[mdn]: https://developer.mozilla.org/en-US/
-[mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-[mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
-[mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
-[mdn-events]: https://developer.mozilla.org/en-US/docs/Web/Events
-[mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-[mdn-validations]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
-[mocha]: https://devdocs.io/mocha/
-[mouse-event]: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-[node-install]: https://nodejs.org/download/
-[node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-[npm-g-without-sudo]: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
-[rails-api]: https://github.com/rails-api/rails-api
 [remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-[san diego js]: http://sandiegojs.org/
-[sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
-[xhr]: https://devdocs.io/dom/xmlhttprequest
-[xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[zepto]: http://zeptojs.com/

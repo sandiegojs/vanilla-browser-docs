@@ -1,4 +1,4 @@
-## Add submit event
+# Add submit event
 
 Now that we've covered the basics of getting a DOM element and hooking into it's events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.
 
@@ -35,7 +35,7 @@ Now if you refresh the page you should be able to submit the form after filling 
 
 Our event handler is now working!
 
-## Serialize the form data
+# Serialize the form data
 
 Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with [`rails-api`][rails-api] which will be expecting a JSON API object on the request.
 
@@ -156,7 +156,7 @@ Something is still off. Did you spot it?
 
 We need our `skills_attributes` key to have an array value.
 
-## Build XHR and submit
+# Build XHR and submit
 
 Now that we have our data we need to send it to the server using an XHR or [`XMLHttpRequest`][xhr-mdn]. This allows us to communicate with the server without changing pages then do some action based on the data we get back. We are going to create a function that we can put in our event handlers that will do this.
 
@@ -261,7 +261,7 @@ var submitHandler = function(evt) {
 }
 ```
 
-## Handle server response
+# Handle server response
 
 Now that we are able to submit the form to the server let's do something with the response. We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
 
@@ -491,38 +491,11 @@ If you fill out the form, you should see a response similar to what was describe
 
 Congratulations! Now we have a fully submitting form that we can use to save people's information.
 
-[class-list]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
-[cookies]: https://devdocs.io/dom/document/cookie
-[css-selector]: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
-[devdocs]: http://devdocs.io
-[dom]: https://devdocs.io/dom/
-[event-listener]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-[events]: https://devdocs.io/dom_events
-[git-scm]: http://git-scm.com/downloads
-[gulp]: http://gulpjs.com/
-[heroku-node]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
-[heroku-toolbelt]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
-[html-input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
-[insert-before]: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-[jquery]: https://jquery.com/
-[localhost]: http://localhost:3000
-[mdn]: https://developer.mozilla.org/en-US/
 [mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
 [mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
 [mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
-[mdn-events]: https://developer.mozilla.org/en-US/docs/Web/Events
 [mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-[mdn-validations]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
-[mocha]: https://devdocs.io/mocha/
-[mouse-event]: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-[node-install]: https://nodejs.org/download/
 [node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-[npm-g-without-sudo]: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
 [rails-api]: https://github.com/rails-api/rails-api
-[remove-node]: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-[san diego js]: http://sandiegojs.org/
-[sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
-[xhr]: https://devdocs.io/dom/xmlhttprequest
 [xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[zepto]: http://zeptojs.com/
+[onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange

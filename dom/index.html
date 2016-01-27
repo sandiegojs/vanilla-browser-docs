@@ -67,17 +67,27 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#the-html">The HTML</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#html-field-validation">HTML field validation</a></li>
+                
+                    <li><a class="toctree-l4" href="#required-fields">Required fields</a></li>
+                
+                    <li><a class="toctree-l4" href="#native-validations">Native validations</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#the-dom">The DOM</a></li>
                 
-                    <li><a class="toctree-l4" href="#the-html">The HTML</a></li>
+            
+                <li class="toctree-l3"><a href="#dom-selection">DOM selection</a></li>
                 
-                    <li><a class="toctree-l4" href="#html-field-validation">HTML field validation</a></li>
+            
+                <li class="toctree-l3"><a href="#event-handling">Event handling</a></li>
                 
-                    <li><a class="toctree-l4" href="#the-dom_1">The DOM</a></li>
+                    <li><a class="toctree-l4" href="#multiple-event-listeners">Multiple event listeners</a></li>
                 
-                    <li><a class="toctree-l4" href="#dom-selection">DOM selection</a></li>
-                
-                    <li><a class="toctree-l4" href="#event-handling">Event handling</a></li>
+                    <li><a class="toctree-l4" href="#event-listener-parameter">Event listener parameter</a></li>
                 
             
             </ul>
@@ -152,18 +162,17 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="the-dom">The DOM</h1>
-<h2 id="the-html">The HTML</h2>
+                <h1 id="the-html">The HTML</h1>
 <p>We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the <code>public/index.html</code> file and take a look.</p>
 <p>You should see that the styles are included in the header from <code>public/index.css</code> and the script for our JavaScript is included at the top of the body from <code>public/index.js</code>.</p>
 <p><strong>ProTip™:</strong> When the browser encounters a <code>&lt;script&gt;</code> tag, it is blocking - meaning the browser will immediately download and execute it. To load the <code>&lt;script&gt;</code> asynchronously and not block the browser's parsing of the document, set the attribute <code>async='true'</code> on the tag.</p>
 <p>Within the <code>public/index.html</code> you should see a basic form with labels and inputs. Familiarize yourself with the different fields.</p>
 <p>Are you ready to get coding, yet?</p>
-<h2 id="html-field-validation">HTML field validation</h2>
+<h1 id="html-field-validation">HTML field validation</h1>
 <p>Have you ever used a form where you didn't realize you missed a required field until after clicking the submit button, waiting for the page to send data off to the server, waiting for the page to reload, and then finally to get the perplexing red error message at the top? What a pain!</p>
 <p>Let's save our users the hassle and let them know right away that they are required to fill in certain fields <em>before</em> sending anything off to the server.</p>
 <p>There are a few different ways to do this, and we will elaborate on this later, but the most basic way to get going with form validation is using the built-in HTML field validations.</p>
-<h3 id="required-fields">Required fields</h3>
+<h2 id="required-fields">Required fields</h2>
 <p>We really only need the <code>name</code> and <code>email</code> field to be required. In order to make these inputs required, all we have to do is add the word <code>required</code> as an attribute on the <code>&lt;input&gt;</code> tag.</p>
 <p>For example:</p>
 <p><code>&lt;input type='text' placeholder='Name' required&gt;</code></p>
@@ -173,12 +182,12 @@
 <p>If you hit the submit button now, you should immediately see a pop-up message near the first missing input telling you the field is required like below.</p>
 <p><img alt="required error box" src="https://s3.amazonaws.com/f.cl.ly/items/172n3w0f0h0f2d0y0i01/Screen%20Shot%202016-01-17%20at%204.43.54%20PM.png?v=b83630c4" /></p>
 <p>Neato! This is all taken care of for you by the browser out-of-the-box!</p>
-<h3 id="native-validations">Native validations</h3>
+<h2 id="native-validations">Native validations</h2>
 <p>Some <code>&lt;input&gt;</code> types have intrinsic constraints, such as <code>type='email'</code>. If you look at the <code>public/index.html</code> you will see that our email field is currently setup as a <code>type='text'</code>. Go ahead and change it.</p>
 <p>Once you have, we can test it out. Head over to the browser, type in a <code>Name</code> value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.</p>
 <p><img alt="email error message" src="https://s3.amazonaws.com/f.cl.ly/items/3y1l2h0R2x1Q0S1r351B/Screen%20Shot%202016-01-17%20at%204.52.45%20PM.png?v=e72c1557" /></p>
 <p>If you want to learn more about validations that are available for inputs, <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation">MDN has a great article covering the details</a>.</p>
-<h2 id="the-dom_1">The DOM</h2>
+<h1 id="the-dom">The DOM</h1>
 <p>The Document Object Model(DOM) is how we are able to interact with our page via JavaScript. The DOM is a representation of what is on the page, including the elements and styles.</p>
 <blockquote>
 <p>The Document Object Model (DOM) is a programming interface for HTML, XML and SVG documents. It provides a structured representation of the document (a tree) and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Nodes can also have event handlers attached to them, and once that event is triggered the event handlers get executed. Essentially, it connects web pages to scripts or programming languages. -<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">MDN</a></p>
@@ -187,7 +196,7 @@
 <p>But as you will see there is a large API exposed by the DOM which allows us to craft powerful user experiences. An easy way to think of the DOM is a tree of nested nodes and each node is an element from our HTML document, e.g. a <code>div</code>, <code>p</code>, <code>button</code>, etc...</p>
 <p>To visualize this all you need to do is open your web inspector and look at the <code>Elements</code> tab to see this structure realized. Each one of those nodes (elements) has many properties and functions you can take advantage off.</p>
 <p><img alt="element inspector" src="https://s3.amazonaws.com/f.cl.ly/items/2o2Y3L1w433t2p1c2M38/kfm9fl7Prq.gif?v=8c898ff8" /></p>
-<h2 id="dom-selection">DOM selection</h2>
+<h1 id="dom-selection">DOM selection</h1>
 <p>In order to interact with the DOM within JavaScript, the first thing you will need to understand is element selection. If you're familiar with a library such as <a href="https://jquery.com/">jQuery</a> or <a href="http://zeptojs.com/">Zepto</a> than you'll be used to doing this by way of the <code>$()</code> selector. By selecting an element (DOM node) we get a reference to that element which allows us to take actions on it.</p>
 <p>There are several functions we can use to get a reference to a DOM node. Overtime these functions have been introduced to solve different needs. As such, the browser support for them can vary. You should always research browser compatability to ensure they will work for your user base.</p>
 <ul>
@@ -209,7 +218,7 @@
 
 <p>You should see the value you set reflected in the form's input.</p>
 <p>Whenever dealing with a DOM node it's important to understand what type of element you have and what are it's parents. That will determine the properties and functions available to you.</p>
-<h2 id="event-handling">Event handling</h2>
+<h1 id="event-handling">Event handling</h1>
 <p>When users interact with the web page the DOM publishes these interactions as events, for example <code>click</code>, <code>scroll</code>, <code>keypress</code>, and <a href="https://developer.mozilla.org/en-US/docs/Web/Events">more</a>.</p>
 <p>After selecting an element from the DOM, we can call it's <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener</code></a> method which will execute a callback function we provide any time that event occurs. Lets start by listening for a <code>click</code> on the <code>document</code> and trigger an <code>alert</code> whenever that event occurs.</p>
 <pre><code class="js">var handler = function() {
@@ -225,7 +234,7 @@ document.addEventListener('click', handler)
 
 <p>It's important to note that in order for us to be able to remove an event listener we need to name our functions so we can specify what to remove for that event.</p>
 <p>Using this simple API we can trigger the complex logic we will be writing shortly.</p>
-<h3 id="multiple-event-listeners">Multiple event listeners</h3>
+<h2 id="multiple-event-listeners">Multiple event listeners</h2>
 <p>One of the great things about event listeners is that we can attach multiple listeners per event. For example:</p>
 <pre><code class="js">var handlerOne = function() {
   // Do some logic
@@ -240,7 +249,7 @@ document.addEventListener('click', handlerTwo)
 </code></pre>
 
 <p>Now both of these functions will be executed whenever someone clicks the page.</p>
-<h3 id="event-listener-parameter">Event listener parameter</h3>
+<h2 id="event-listener-parameter">Event listener parameter</h2>
 <p>When we attach callback functions to events these functions are passed as an event argument. The type of event given will change depending on the type input device which triggered it. Since we are listening for a <code>click</code> event we will receive a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent"><code>MouseEvent</code></a>.</p>
 <pre><code class="js">var logEvent = function(evt) {
   console.log(evt)

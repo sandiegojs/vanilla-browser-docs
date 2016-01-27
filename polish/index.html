@@ -162,7 +162,7 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="add-js-validation">Add JS Validation</h2>
+                <h1 id="add-js-validation">Add JS Validation</h1>
 <p>Earlier you added form validation using attributes. This is a quick and easy way to perform validation, but it does have limits. For example, you can't add custom error messages or styling. To get more flexibility and control, use JavaScript.</p>
 <p>In this section, you will be playing with the HTML5 constraint validation API to check and customize the state of a form element. You have several goals:</p>
 <ul>
@@ -182,7 +182,7 @@
 <li>Set or clear the validation error messages</li>
 <li>Add custom validation logic to the state field</li>
 </ol>
-<h3 id="handle-keyup-event-for-email-field">Handle <code>keyup</code> event for email field</h3>
+<h2 id="handle-keyup-event-for-email-field">Handle <code>keyup</code> event for email field</h2>
 <ol>
 <li>Get a reference to email field. Hint: Use a query selector you learned about earlier.</li>
 <li>Add a <code>keyup</code> event listener attached to the email field.</li>
@@ -220,7 +220,7 @@ email.addEventListener('keyup', function(event) {
 </code></pre>
 
 <p>Try the new logic. Go to your form, add a name, but leave the email blank. Click Submit. Start typing your name in the Email field. Notice that now you see your custom message. Now type a valid email address. The message goes away as soon as the address is valid.</p>
-<h3 id="add-validateform-function-to-handle-validation-logic">Add <code>validateForm</code> function to handle validation logic</h3>
+<h2 id="add-validateform-function-to-handle-validation-logic">Add <code>validateForm</code> function to handle validation logic</h2>
 <p>You can use the technique above to handle each validated field, but you are still stuck with the standard formatting for the messages. To get more control, you need to turn off the automatic validation and handle the submission event yourself. </p>
 <p>Add a line to prevent the automatic validation behavior.</p>
 <p><code>form.noValidate = true;</code></p>
@@ -232,7 +232,7 @@ email.addEventListener('keyup', function(event) {
 }
 </code></pre>
 
-<h3 id="modify-the-submit-event-listener">Modify the <code>submit</code> event listener</h3>
+<h2 id="modify-the-submit-event-listener">Modify the <code>submit</code> event listener</h2>
 <p>Back in the "Add submit event" section, you added a <code>submit</code> event handler. You will modify that to call the validation logic. Inside the <code>submitHandler</code> function, you will call <code>validateForm</code>.</p>
 <pre><code class="js">
 function submitHandler(evt) {
@@ -261,7 +261,7 @@ function submitHandler(evt) {
 </code></pre>
 
 <p>In the next few steps, you will implement the validation logic for the fields.</p>
-<h3 id="loop-through-the-fields">Loop through the fields</h3>
+<h2 id="loop-through-the-fields">Loop through the fields</h2>
 <p>Every form has an elements array. You can use that to loop through the fields.</p>
 <p>In the <code>validateForm</code> function, create the loop.</p>
 <pre><code class="js">function validateForm(form) {
@@ -284,7 +284,7 @@ function submitHandler(evt) {
 </code></pre>
 
 <p>The behavior of the form hasn't changed so charge on to the next section.</p>
-<h3 id="check-the-field-validity">Check the field validity</h3>
+<h2 id="check-the-field-validity">Check the field validity</h2>
 <p>Use a function to encapsulate all of the field validation logic. Start with using the standard validation logic.</p>
 <p>Create a new function <code>isValid</code> that takes a field as a parameter.</p>
 <p>Like the form, fields have a <code>checkValidity</code> method. Use this method to determine the return value for the function. Here's how it should look:</p>
@@ -309,7 +309,7 @@ function submitHandler(evt) {
 }
 </code></pre>
 
-<h3 id="set-and-clear-error-messages">Set and clear error messages</h3>
+<h2 id="set-and-clear-error-messages">Set and clear error messages</h2>
 <p>Now that you are looping through each field and checking its validity, you can use the information to format the feedback to the user. In the HTML, you may have noticed that below the fields that have validation, there is a <code>span</code> element. You will use this element to display feedback to the user.</p>
 <p>Create a <code>setError</code> function that takes a field as a parameter.</p>
 <p>Inside the function, get a reference to the <code>span</code> you will use to show the error. To do that, use the handy <code>nextElementSibling</code>.</p>
@@ -350,7 +350,7 @@ function submitHandler(evt) {
 
 <p>Try it out. Click Submit. Do you see the error messages? Do the error messages disappear when you enter valid data?</p>
 <p>As you type in the email field, does the message change? No? What is missing from the <code>keyup</code> event listener?</p>
-<h3 id="add-custom-validation-logic-to-the-state-field">Add custom validation logic to the state field</h3>
+<h2 id="add-custom-validation-logic-to-the-state-field">Add custom validation logic to the state field</h2>
 <p>Time for the bonus round! Custom validation logic could involve evaluating multiple fields on the form, making a call to the server, or performing some calculation in a worker thread. While those are beyond the time you have for this workshop, this section will walk you through creating a some custom logic. Keep in mind that there are better ways to enforce the logic presented in the here, but hey, use your imagination. ;-)</p>
 <p>You will add this logic to the top of the <code>isValid</code> function you created earlier.</p>
 <p>First, check if the field passed to the function is named <code>state</code>.</p>
@@ -383,8 +383,8 @@ function submitHandler(evt) {
 
 <p>Now when you try to submit without a state or an invalid state, you will get an error message just like with name and email.</p>
 <p>That's it for validation! You may now add "HTML5 constraint validation API" to your resume.</p>
-<h2 id="adding-classes-to-style-error-message-or-boxes">Adding classes to style error message or boxes</h2>
-<h2 id="welcome-text-with-cookies">Welcome text with cookies</h2>
+<h1 id="adding-classes-to-style-error-message-or-boxes">Adding classes to style error message or boxes</h1>
+<h1 id="welcome-text-with-cookies">Welcome text with cookies</h1>
               
             </div>
           </div>

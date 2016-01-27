@@ -146,11 +146,11 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="add-and-remove-skills">Add and remove skills</h2>
+                <h1 id="add-and-remove-skills">Add and remove skills</h1>
 <p>Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app. </p>
 <p>You might remember that our build tool, Gulp, will compile any <code>.js</code> files that we put in the <code>app</code> directory and make sure they are available. Let's begin by creating a new file <code>app.js</code> inside of the app directory.</p>
 <p>With that in place, we can now begin to add more functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.</p>
-<h3 id="adding-a-skill">Adding a skill</h3>
+<h2 id="adding-a-skill">Adding a skill</h2>
 <p>You probably noticed the nice <code>+</code> button next to the <code>skills</code> input. Right now it doesn't do anything. We need to add a <code>click</code> handler in order to bring it to life.</p>
 <p>In order to do that, we need to first select the <code>.add-skill</code> button which we will attach the handler to and then we need to also have a "blueprint" of the original div containing the skill elements so that we can copy it when we add another one.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
@@ -230,7 +230,7 @@ addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
 
 <p>Great, now you're ready to remove some skills!</p>
-<h3 id="removing-a-skill">Removing a skill</h3>
+<h2 id="removing-a-skill">Removing a skill</h2>
 <p>Much like we created an event handler for adding a skill, we will now just create one to remove a skill.</p>
 <pre><code class="js">var removeSkillHandler = function(evt) {}
 </code></pre>

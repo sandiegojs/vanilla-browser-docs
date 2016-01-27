@@ -151,7 +151,7 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="add-submit-event">Add submit event</h2>
+                <h1 id="add-submit-event">Add submit event</h1>
 <p>Now that we've covered the basics of getting a DOM element and hooking into it's events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.</p>
 <p>Our first step in this new file is to get a reference to the form element. Create a variable named <code>form</code>, and assign the form DOM element on the page to it.</p>
 <pre><code class="js">var form = document.querySelector('form')
@@ -175,7 +175,7 @@
 
 <p>Now if you refresh the page you should be able to submit the form after filling out the two required fields, but instead of the page refreshing and losing everything you've entered the page will show you an alert and you won't lose any of the information you typed.</p>
 <p>Our event handler is now working!</p>
-<h2 id="serialize-the-form-data">Serialize the form data</h2>
+<h1 id="serialize-the-form-data">Serialize the form data</h1>
 <p>Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with <a href="https://github.com/rails-api/rails-api"><code>rails-api</code></a> which will be expecting a JSON API object on the request.</p>
 <p>We need to take the form data and convert it to an object that looks like this</p>
 <pre><code class="json">{
@@ -209,7 +209,7 @@
   var form = document.querySelector(selector)
   var formInputs = form.querySelectorAll('input,textarea')
 
-  for (var i = 0 i &lt; formInputs.length i++) {
+  for (var i = 0; i &lt; formInputs.length; i++) {
     var item = formInputs[i]
   }
 }
@@ -231,7 +231,7 @@
   // Empty object for us to set key values of inputs
   var data = {}
 
-  for (var i = 0 i &lt; formInputs.length i++) {
+  for (var i = 0; i &lt; formInputs.length; i++) {
     var item = formInputs[i]
     data[item.name] = item.value
   }
@@ -254,7 +254,7 @@
   // Empty object for us to set key values of inputs
   var data = {}
 
-  for (var i = 0 i &lt; formInputs.length i++) {
+  for (var i = 0; i &lt; formInputs.length; i++) {
     var item = formInputs[i]
     data[item.name] = item.value
   }
@@ -267,9 +267,61 @@
 <p>Ok, let's try this again!</p>
 <p><img alt="build the form JSON part 2" src="https://s3.amazonaws.com/f.cl.ly/items/2N0C470x010K2k302e3Q/RRBJpcGUMt.gif?v=94639764" /></p>
 <p>Something is still off. Did you spot it?</p>
-<p>We need our <code>skills_attributes</code> key to have an array value.</p>
-<h2 id="build-xhr-and-submit">Build XHR and submit</h2>
-<p>Now that we have our data we need to send it to the server using an XHR or <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a>. This allows us to communicate with the server without changing pages then do some action based on the data we get back. We are going to create a function that we can put in our event handlers that will do this.</p>
+<p>We need our <code>skills_attributes</code> key to have an array value since we have multiple skills. Right now, only the very last skill is being saved. We want to catch this special case inside of our <code>for</code> loop. If we haven't created this new <code>skills_attributes</code> array, do so and append the current skill, and if we have then just append the current skill.</p>
+<pre><code class="js">var serializeArray = function(selector) {
+  var form = document.querySelector(selector)
+  var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
+
+  // Empty object for us to set key values of inputs
+  var data = {}
+
+  for (var i = 0; i &lt; formInputs.length; i++) {
+    var item = formInputs[i]
+
+    if (item.name === 'skills_attributes') {
+      if (!!data[item.name]) {
+        data[item.name].push(item.value)
+      } else {
+        data[item.name] = [item.value]
+      }
+    } else {
+      data[item.name] = item.value
+    }
+  }
+
+  // Log out our final object so we can inspect it
+  console.log(data)
+}
+</code></pre>
+
+<p>Head back over to the console, and you'll see our data now looks correct! We can now replace the <code>console.log</code> with a <code>return</code> statement.</p>
+<pre><code class="js">var serializeArray = function(selector) {
+  var form = document.querySelector(selector)
+  var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
+
+  // Empty object for us to set key values of inputs
+  var data = {}
+
+  for (var i = 0; i &lt; formInputs.length; i++) {
+    var item = formInputs[i]
+
+    if (item.name === 'skills_attributes') {
+      if (!!data[item.name]) {
+        data[item.name].push(item.value)
+      } else {
+        data[item.name] = [item.value]
+      }
+    } else {
+      data[item.name] = item.value
+    }
+  }
+
+  return data
+}
+</code></pre>
+
+<h1 id="build-xhr-and-submit">Build XHR and submit</h1>
+<p>Now that we have our data we need to send it to the server using an XHR or <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a>. This allows us to communicate with the server without changing pages, and then do some action based on the data we get back. We are going to create a function that we can put in our event handlers that will do this.</p>
 <pre><code class="js">var xhr = function(method, path, data, callback) {}
 </code></pre>
 
@@ -281,9 +333,9 @@
 
 <p>Next we'll use <code>open(method, path, async)</code> to initialize the request.</p>
 <ul>
-<li><code>method</code> a string of an HTTP method to use, such as 'GET', 'POST', 'PUT', 'DELETE'. This will match the Verb on the API table up top.</li>
-<li><code>path</code> a string of the full path to send the request to. This will include the API endpoint URL as well as the path.</li>
-<li><code>async</code> a boolean flag that dictates whether the script should run asynchronously.</li>
+<li><strong>method:</strong> a string of an HTTP method to use, such as 'GET', 'POST', 'PUT', 'DELETE'. This will match the Verb on the API table up top.</li>
+<li><strong>path:</strong> a string of the full path to send the request to. This will include the API endpoint URL as well as the path.</li>
+<li><strong>async:</strong> a boolean flag that dictates whether the script should run asynchronously.</li>
 </ul>
 <p><strong>ProTip™:</strong> <code>async</code> should always be <code>true</code> to prevent blocking. Stopping JavaScript execution especially hurts time sensitive things like rendering or event listening/handling.</p>
 <pre><code class="js">var xhr = function(method, path, data, callback) {
@@ -356,13 +408,14 @@ var submitHandler = function(evt) {
 }
 </code></pre>
 
-<h2 id="handle-server-response">Handle server response</h2>
-<p>Now that we are able to submit the form to the server let's do something with the response. We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.</p>
+<h1 id="handle-server-response">Handle server response</h1>
+<p>Congratulations! We can now submit the form to the server and get a response. Now let's do something with the response. </p>
+<p>We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.</p>
 <p>Some of the methods we'll be using are:</p>
 <ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"><code>Document.createElement</code></a> this method creates a DOM element of the type specified in the first parameter. For example, we can pass in <code>div</code>, <code>p</code>, <code>ul</code>, etc.</li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode"><code>Document.createTextNode</code></a> this method creates a text node that can be placed in the document. We'll use this to hold content we author.</li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild"><code>Node.appendChild</code></a> this method can be called on any element created using createElement. As you can guess from the name it adds the node passed in to the end of node you call appendChild on.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">Document.createElement</a> this method creates a DOM element of the type specified in the first parameter. For example, we can pass in <code>div</code>, <code>p</code>, <code>ul</code>, etc.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode">Document.createTextNode</a> this method creates a text node that can be placed in the document. We'll use this to hold content we author.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild">Node.appendChild</a> this method can be called on any element created using createElement. As you can guess from the name it adds the node passed in to the end of node you call appendChild on.</li>
 </ul>
 <p>Let's create a small helper function. It creates a DOM node and adds some text to it. We're going to be making a lot calls to this.</p>
 <pre><code class="js">var createElementWithTextNode = function(tagName, tagContent) {}
@@ -444,7 +497,7 @@ var submitHandler = function(evt) {
 }
 </code></pre>
 
-<p>Great, now we give some kind of feedback to the user whether the form is successfully processed by backend or not. Let's improve upon this though. Let's show the information we entered when we submitted so we can verify it saved properly.</p>
+<p>Great, now we can give some kind of feedback to the user when the form is successfully processed by backend or not. Let's improve upon this, though. Let's show the information we entered when we submitted so we can verify it saved properly.</p>
 <p>To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request. </p>
 <p>Let's use the <code>document.createElement</code> method to create a DL node that will hold all those terms and definitions. Append this to the <code>renderFormData</code> function.</p>
 <pre><code class="js">var dictionaryNode = document.createElement('dl')
@@ -482,6 +535,28 @@ dictionaryNode.appendChild(definitionNode)
 })
 </code></pre>
 
+<p>If you review the array of keys we're looping through, you'll notice we didn't include <code>skills_attributes</code> like we did when we posted the data. That's because the content of that property is more complex than the simple strings of the other properties. If we want to print them out we'll have to write some custom logic.</p>
+<p>Create a new dictionary term node like we do in the <code>forEach</code> callback, but set the text content to "skills".</p>
+<pre><code class="js">var skillsTermNode = createElementWithTextNode('dt', 'skills')
+dictionaryNode.appendChild(skillsTermNode)
+</code></pre>
+
+<p>Let's add the dictionary definition, now. We'll add the actual skills information in the next step. We'll show all the skills as a list, so let's also add a <strong>UL</strong> node as well and store a reference to it in a variable so we can add <strong>LI</strong> elements to it later.</p>
+<pre><code class="js">var skillsDefinitionNode = document.createElement('dd')
+var skillsList = document.createElement('ul')
+skillsDefinitionNode.appendChild(skillsList)
+dictionaryNode.appendChild(skillsDefinitionNode)
+</code></pre>
+
+<p>Now that that's out of the way, let's loop through each skill we received, if any, and combine them into one dictionary definition. To accomplish this we'll test to see if there is any value stored in <code>skills_attributes</code>. If there is then we can loop through all the skills by using the <code>forEach</code> method to loop through each complex element in the array and append a simpler set of information to the dictionary. In our case, we'll append only the description of each skill wrapped in a <strong>LI</strong> tag.</p>
+<pre><code class="js">if (data.skills_attributes) {
+  data.skills_attributes.forEach(function (skill) {
+    var skillNode = createElementWithTextNode('li', skill.description)
+    skillsList.appendChild(skillNode)
+  })
+}
+</code></pre>
+
 <p>The last steps are to add a custom class of <code>response</code> and append the dictionaryNode we've been populating to the responseNode from the beginning of the function. Here is the entire <code>renderFormData</code> function:</p>
 <pre><code class="js">var renderFormData = function(data) {
   var responseNode = document.querySelector('.response-wrapper')
@@ -502,6 +577,21 @@ dictionaryNode.appendChild(definitionNode)
     var definitionNode = createElementWithTextNode('dd', data[key])
     dictionaryNode.appendChild(definitionNode)
   })
+
+  var skillsTermNode = createElementWithTextNode('dt', 'skills')
+  dictionaryNode.appendChild(skillsTermNode)
+
+  var skillsDefinitionNode = document.createElement('dd')
+  var skillsList = document.createElement('ul')
+  skillsDefinitionNode.appendChild(skillsList)
+  dictionaryNode.appendChild(skillsDefinitionNode)
+
+  if (data.skills_attributes) {
+    data.skills_attributes.forEach(function (skill) {
+      var skillNode = createElementWithTextNode('li', skill.description)
+      skillsList.appendChild(skillNode)
+    })
+  }
 
   dictionaryNode.className = 'response'
   responseNode.appendChild(dictionaryNode)
@@ -524,7 +614,7 @@ dictionaryNode.appendChild(definitionNode)
 }
 </code></pre>
 
-<p>If you fill out the form, you should see a response similar to what was described in the <strong>Serialize the form data</strong> section. For example:</p>
+<p>If you fill out the form, you should see a response similar to what was described in the <strong>Serialize the form data</strong> section in your console. For example:</p>
 <pre><code class="json">{
   &quot;id&quot;: 1,
   &quot;name&quot;: &quot;Testy McTesterson&quot;,
@@ -534,11 +624,29 @@ dictionaryNode.appendChild(definitionNode)
   &quot;github&quot;: &quot;testdev&quot;,
   &quot;twitter&quot;: &quot;testtwitter&quot;,
   &quot;bio&quot;: &quot;Lorem Ipsum...&quot;,
+  &quot;skills_attributes&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;description&quot;: &quot;cooking&quot;,
+      &quot;form_id&quot;: 1,
+      &quot;created_at&quot;: &quot;2016-01-21T07:09:01.640Z&quot;,
+      &quot;updated_at&quot;: &quot;2016-01-21T07:09:01.640Z&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;description&quot;: &quot;cleaning&quot;,
+      &quot;form_id&quot;: 1,
+      &quot;created_at&quot;: &quot;2016-01-21T07:09:01.640Z&quot;,
+      &quot;updated_at&quot;: &quot;2016-01-21T07:09:01.640Z&quot;
+    }
+  ],
   &quot;created_at&quot;: &quot;2016-01-21T07:09:01.640Z&quot;,
   &quot;updated_at&quot;: &quot;2016-01-21T07:09:01.640Z&quot;
 }
 </code></pre>
 
+<p>On screen you should see the this:</p>
+<p><strong>@TODO: Add screenshot of success</strong></p>
 <p>Congratulations! Now we have a fully submitting form that we can use to save people's information.</p>
               
             </div>

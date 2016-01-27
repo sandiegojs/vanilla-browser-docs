@@ -81,7 +81,7 @@ var serializeArray = function(selector) {
   var form = document.querySelector(selector)
   var formInputs = form.querySelectorAll('input,textarea')
 
-  for (var i = 0 i < formInputs.length i++) {
+  for (var i = 0; i < formInputs.length; i++) {
     var item = formInputs[i]
   }
 }
@@ -108,7 +108,7 @@ var serializeArray = function(selector) {
   // Empty object for us to set key values of inputs
   var data = {}
 
-  for (var i = 0 i < formInputs.length i++) {
+  for (var i = 0; i < formInputs.length; i++) {
     var item = formInputs[i]
     data[item.name] = item.value
   }
@@ -138,7 +138,7 @@ var serializeArray = function(selector) {
   // Empty object for us to set key values of inputs
   var data = {}
 
-  for (var i = 0 i < formInputs.length i++) {
+  for (var i = 0; i < formInputs.length; i++) {
     var item = formInputs[i]
     data[item.name] = item.value
   }
@@ -154,7 +154,62 @@ Ok, let's try this again!
 
 Something is still off. Did you spot it?
 
-We need our `skills_attributes` key to have an array value.
+We need our `skills_attributes` key to have an array value since we have multiple skills. Right now, only the very last skill is being saved. We want to catch this special case inside of our `for` loop. If we haven't created this new `skills_attributes` array, do so and append the current skill, and if we have then just append the current skill.
+
+```js
+var serializeArray = function(selector) {
+  var form = document.querySelector(selector)
+  var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
+
+  // Empty object for us to set key values of inputs
+  var data = {}
+
+  for (var i = 0; i < formInputs.length; i++) {
+    var item = formInputs[i]
+
+    if (item.name === 'skills_attributes') {
+      if (!!data[item.name]) {
+        data[item.name].push(item.value)
+      } else {
+        data[item.name] = [item.value]
+      }
+    } else {
+      data[item.name] = item.value
+    }
+  }
+
+  // Log out our final object so we can inspect it
+  console.log(data)
+}
+```
+
+Head back over to the console, and you'll see our data now looks correct! We can now replace the `console.log` with a `return` statement.
+
+```js
+var serializeArray = function(selector) {
+  var form = document.querySelector(selector)
+  var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
+
+  // Empty object for us to set key values of inputs
+  var data = {}
+
+  for (var i = 0; i < formInputs.length; i++) {
+    var item = formInputs[i]
+
+    if (item.name === 'skills_attributes') {
+      if (!!data[item.name]) {
+        data[item.name].push(item.value)
+      } else {
+        data[item.name] = [item.value]
+      }
+    } else {
+      data[item.name] = item.value
+    }
+  }
+
+  return data
+}
+```
 
 # Build XHR and submit
 

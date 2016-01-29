@@ -183,7 +183,7 @@ var serializeArray = function(selector) {
 }
 ```
 
-Head back over to the console, and you'll see our data now looks correct! We can now replace the `console.log` with a `return` statement.
+Head back over to the console, and you'll see our data now looks correct! Our last step is to remove the `console.log` and replace it with a return statement that returns an object with a `form` property set to our data, since this is the structure our API endpoint is expecting.
 
 ```js
 var serializeArray = function(selector) {
@@ -207,7 +207,9 @@ var serializeArray = function(selector) {
     }
   }
 
-  return data
+  return {
+    "form": data
+  }
 }
 ```
 
@@ -278,7 +280,7 @@ var xhr = function(method, path, data, callback) {
 }
 ```
 
-Lastly just close and send the request with our data using the `send` function.
+Lastly we will use `JSON.stringify` to convert our object to a JSON string and send the request with our data using the `send` function.
 
 ```js
 var xhr = function(method, path, data, callback) {
@@ -297,7 +299,7 @@ var xhr = function(method, path, data, callback) {
     // return our server data
     callback(null, JSON.parse(request.responseText))
   }
-  request.send(data)
+  request.send(JSON.stringify(data))
 }
 ```
 
@@ -318,7 +320,7 @@ var submitHandler = function(evt) {
 
 # Handle server response
 
-Congratulations! We can now submit the form to the server and get a response. Now let's do something with the response. 
+Congratulations! We can now submit the form to the server and get a response. Now let's do something with the response.
 
 We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.
 
@@ -342,7 +344,7 @@ var createElementWithTextNode = function(tagName, tagContent) {
 }
 ```
 
-Next up we will create a text node that will hold whatever is inside of the tagContent variable. 
+Next up we will create a text node that will hold whatever is inside of the tagContent variable.
 
 ```js
 var createElementWithTextNode = function(tagName, tagContent) {
@@ -432,7 +434,7 @@ var renderFormData = function(data) {
 
 Great, now we can give some kind of feedback to the user when the form is successfully processed by backend or not. Let's improve upon this, though. Let's show the information we entered when we submitted so we can verify it saved properly.
 
-To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request. 
+To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request.
 
 Let's use the `document.createElement` method to create a DL node that will hold all those terms and definitions. Append this to the `renderFormData` function.
 
@@ -462,7 +464,7 @@ Create an array called keys. Place it just after the insertion of the success me
 var keys = ['name', 'email', 'github', 'twitter', 'city', 'state', 'bio']
 ```
 
-Next call the `forEach` method on it and pass in an **anonymous function** with a single parameter of `key`. 
+Next call the `forEach` method on it and pass in an **anonymous function** with a single parameter of `key`.
 
 ```js
 keys.forEach(function(key) {})
@@ -475,7 +477,7 @@ keys.forEach(function(key) {
   //create a dom node with the name of a value
   var termNode = createElementWithTextNode('dt', key)
   dictionaryNode.appendChild(termNode)
-  
+
   //create another dom node with the value
   var definitionNode = createElementWithTextNode('dd', data[key])
   dictionaryNode.appendChild(definitionNode)
@@ -509,7 +511,7 @@ if (data.skills_attributes) {
     skillsList.appendChild(skillNode)
   })
 }
-``` 
+```
 
 The last steps are to add a custom class of `response` and append the dictionaryNode we've been populating to the responseNode from the beginning of the function. Here is the entire `renderFormData` function:
 
@@ -533,22 +535,22 @@ var renderFormData = function(data) {
     var definitionNode = createElementWithTextNode('dd', data[key])
     dictionaryNode.appendChild(definitionNode)
   })
-  
+
   var skillsTermNode = createElementWithTextNode('dt', 'skills')
   dictionaryNode.appendChild(skillsTermNode)
-  
+
   var skillsDefinitionNode = document.createElement('dd')
   var skillsList = document.createElement('ul')
   skillsDefinitionNode.appendChild(skillsList)
   dictionaryNode.appendChild(skillsDefinitionNode)
-  
+
   if (data.skills_attributes) {
     data.skills_attributes.forEach(function (skill) {
       var skillNode = createElementWithTextNode('li', skill.description)
       skillsList.appendChild(skillNode)
     })
   }
-  
+
   dictionaryNode.className = 'response'
   responseNode.appendChild(dictionaryNode)
 }

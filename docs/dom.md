@@ -83,7 +83,7 @@ For now, let's just open up the dev console and mess around. In Chrome OSX this 
 var inputName = document.querySelector('input[name="name"]')
 ```
 
-This returns us an [`HTMLInputElement`][html-input] which has a `value` property available. Go ahead and set the value property to see an example of how you can change the DOM.
+This sets the variable inputName to an [`HTMLInputElement`][html-input] which has a `value` property available. Go ahead and set the value property to see an example of how you can change the DOM.
 
 ```js
 inputName.value = 'My new value!'

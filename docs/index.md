@@ -25,7 +25,7 @@ For this workshop, we are going to build out a business card creator. There is a
 
 Workshops are fun and can be a fast way to learn while building something potentially reusable. There will come a time, however, when you'll want to reference the API and see if there are other methods or functionality that you didn't know existed.
 
-A really good open-source resource that also provides great offline functionality for you future digital nomads is [DevDocs.io][devdocs]. You can select the different APIs you want to be immediately searchable and they cover everything from the browser, to node, to rails, to elixir, and even more you never even knew about!
+A really good open-source resource that also provides great offline functionality for you future digital nomads is [DevDocs.io][devdocs]. You can select the different APIs you want to be immediately searchable and they cover everything from the browser, to Node, to Rails, to Elixir, and even more you never even knew about!
 
 For this workshop, it may be useful to reference the sections that will align with this workshop:
 
@@ -100,7 +100,7 @@ Our API is setup at [//sandiegojs-vanilla-workshop.herokuapp.com][sdjs-app] and 
 
 ## Getting started
 
-This project uses the build tool [Gulp][gulp] to automate a bunch of stuff for you. The gulp tasks are all defined in the `tasks` directory if you're the curious type. They are used to compile the sources and styles found within the `app` directory and put the final compiled source and styles into the `public` directory. The `public/index.html` will include the final styles and scripts inside of it.
+This project uses the build tool [Gulp][gulpjs.com] to automate a bunch of stuff for you. The gulp tasks are all defined in the `tasks` directory if you're the curious type. They are used to compile the sources and styles found within the `app` directory and put the final compiled source and styles into the `public` directory. The `public/index.html` will include the final styles and scripts inside of it.
 
 In order to get started, this boilerplate has been setup to show us a simple form right from the start. So let's dive in and give the gulp step a try!
 

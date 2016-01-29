@@ -294,7 +294,7 @@
 }
 </code></pre>
 
-<p>Head back over to the console, and you'll see our data now looks correct! We can now replace the <code>console.log</code> with a <code>return</code> statement.</p>
+<p>Head back over to the console, and you'll see our data now looks correct! Our last step is to remove the <code>console.log</code> and replace it with a return statement that returns an object with a <code>form</code> property set to our data, since this is the structure our API endpoint is expecting.</p>
 <pre><code class="js">var serializeArray = function(selector) {
   var form = document.querySelector(selector)
   var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
@@ -316,7 +316,9 @@
     }
   }
 
-  return data
+  return {
+    &quot;form&quot;: data
+  }
 }
 </code></pre>
 
@@ -374,7 +376,7 @@
 }
 </code></pre>
 
-<p>Lastly just close and send the request with our data using the <code>send</code> function.</p>
+<p>Lastly we will use <code>JSON.stringify</code> to convert our object to a JSON string and send the request with our data using the <code>send</code> function.</p>
 <pre><code class="js">var xhr = function(method, path, data, callback) {
   var request = new XMLHttpRequest()
   request.open(method, path, true)
@@ -391,7 +393,7 @@
     // return our server data
     callback(null, JSON.parse(request.responseText))
   }
-  request.send(data)
+  request.send(JSON.stringify(data))
 }
 </code></pre>
 
@@ -409,7 +411,7 @@ var submitHandler = function(evt) {
 </code></pre>
 
 <h1 id="handle-server-response">Handle server response</h1>
-<p>Congratulations! We can now submit the form to the server and get a response. Now let's do something with the response. </p>
+<p>Congratulations! We can now submit the form to the server and get a response. Now let's do something with the response.</p>
 <p>We're going to write any errors from our XHR request to the screen. We're also going to render the contents of the form to the screen if it was successfully submitted.</p>
 <p>Some of the methods we'll be using are:</p>
 <ul>
@@ -427,7 +429,7 @@ var submitHandler = function(evt) {
 }
 </code></pre>
 
-<p>Next up we will create a text node that will hold whatever is inside of the tagContent variable. </p>
+<p>Next up we will create a text node that will hold whatever is inside of the tagContent variable.</p>
 <pre><code class="js">var createElementWithTextNode = function(tagName, tagContent) {
   var node = document.createElement(tagName)
   var textNode = document.createTextNode(tagContent)
@@ -498,7 +500,7 @@ var submitHandler = function(evt) {
 </code></pre>
 
 <p>Great, now we can give some kind of feedback to the user when the form is successfully processed by backend or not. Let's improve upon this, though. Let's show the information we entered when we submitted so we can verify it saved properly.</p>
-<p>To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request. </p>
+<p>To do this we'll create a dictionary list, and fill it with all the some of the information that is returned by the request.</p>
 <p>Let's use the <code>document.createElement</code> method to create a DL node that will hold all those terms and definitions. Append this to the <code>renderFormData</code> function.</p>
 <pre><code class="js">var dictionaryNode = document.createElement('dl')
 </code></pre>
@@ -519,7 +521,7 @@ dictionaryNode.appendChild(definitionNode)
 <pre><code class="js">var keys = ['name', 'email', 'github', 'twitter', 'city', 'state', 'bio']
 </code></pre>
 
-<p>Next call the <code>forEach</code> method on it and pass in an <strong>anonymous function</strong> with a single parameter of <code>key</code>. </p>
+<p>Next call the <code>forEach</code> method on it and pass in an <strong>anonymous function</strong> with a single parameter of <code>key</code>.</p>
 <pre><code class="js">keys.forEach(function(key) {})
 </code></pre>
 
@@ -646,7 +648,7 @@ dictionaryNode.appendChild(skillsDefinitionNode)
 </code></pre>
 
 <p>On screen you should see the this:</p>
-<p><strong>@TODO: Add screenshot of success</strong></p>
+<p><img alt="Success screenshot" src="https://cloud.githubusercontent.com/assets/208819/12669678/48152504-c617-11e5-9f0c-48a768596811.png" /></p>
 <p>Congratulations! Now we have a fully submitting form that we can use to save people's information.</p>
               
             </div>

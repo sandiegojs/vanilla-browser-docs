@@ -147,16 +147,16 @@
             <div class="section">
               
                 <h1 id="add-and-remove-skills">Add and remove skills</h1>
-<p>Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app. </p>
+<p>Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app.</p>
 <p>You might remember that our build tool, Gulp, will compile any <code>.js</code> files that we put in the <code>app</code> directory and make sure they are available. Let's begin by creating a new file <code>app.js</code> inside of the app directory.</p>
 <p>With that in place, we can now begin to add more functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.</p>
 <h2 id="adding-a-skill">Adding a skill</h2>
 <p>You probably noticed the nice <code>+</code> button next to the <code>skills</code> input. Right now it doesn't do anything. We need to add a <code>click</code> handler in order to bring it to life.</p>
 <p>In order to do that, we need to first select the <code>.add-skill</code> button which we will attach the handler to and then we need to also have a "blueprint" of the original div containing the skill elements so that we can copy it when we add another one.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
-var skillTemplate = document.querySelector('.skills')
+var skillTemplate = document.querySelector('.skill')
 
-var addSkillHandler = function(evt) {
+function addSkillHandler(evt) {
   alert('adding skill')
 }
 addSkillButton.addEventListener('click', addSkillHandler)
@@ -168,13 +168,13 @@ addSkillButton.addEventListener('click', addSkillHandler)
 <p>Unfortunately, there is no <code>appendAfter</code> method we can use like in jQuery, but there is an <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore"><code>insertBefore</code></a> method. We can use <code>insertBefore</code> to append the new cloned Node just before the submit button.</p>
 <p>The <code>insertBefore</code> method uses a handle on the parent node to attach the new Node in the correct spot within the tree. We can use the <code>parentNode</code> accesor on any DOM Node to get it's parent, or, since we know the parent is the form we can just directly select it again.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
-var skillTemplate = document.querySelector('.skills').cloneNode(true)
+var skillTemplate = document.querySelector('.skill').cloneNode(true)
 
-var addSkillHandler = function(evt) {
+function addSkillHandler(evt) {
   var submitNode = document.querySelector('.submit')
-  var parentNode = submitNode.parentNode
+  var form = submitNode.parentNode
   var newSkill = skillTemplate.cloneNode(true)
-  parentNode.insertBefore(newSkill, submitNode)
+  form.insertBefore(newSkill, submitNode)
 }
 addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
@@ -183,7 +183,7 @@ addSkillButton.addEventListener('click', addSkillHandler)
 <p><img alt="added skill" src="https://s3.amazonaws.com/f.cl.ly/items/113x3C3q1H133y3b3C1e/Screen%20Shot%202016-01-24%20at%2010.14.00%20AM.png?v=ad58e105" /></p>
 <p>After we clone a new node, we need to change the plus sign to a minus sign on the previous one. If you look at the <code>public/index.html</code> you'll see that both the plus and minus icons already exist in the DOM, except that the minus is currently <code>hidden</code> with the class <code>hidden</code>.</p>
 <p>In jQuery, you can use the <code>.last()</code> method after selecting a group of elements to get the last one. Let's write a helper method that does just that for a given selector.</p>
-<pre><code class="js">var last = function(selector) {
+<pre><code class="js">function last(selector) {
   var all = document.querySelectorAll(selector)
   var length = all.length
   return all[length - 1]
@@ -193,17 +193,18 @@ addSkillButton.addEventListener('click', addSkillHandler)
 <p>Now let's update our <code>addSkillHandler</code> method to get a handle on the previous skill, update it to show the minus instead of the plus, and <em>then</em> add the new skill to the end of the list.</p>
 <p>When we have a handle on the DOM Node as we will with the previous skill, we can get a list of the Node's classes by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"><code>classList</code> accessor</a>. We can then use <code>.add()</code> and <code>.remove()</code> to add and remove classes from this Node.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
-var skillTemplate = document.querySelector('.skills')
+var skillTemplate = document.querySelector('.skill').cloneNode(true)
 
-var addSkillHandler = function(evt) {
+function addSkillHandler(evt) {
   var prevSkill = last('.skill')
   var newSkill = skillTemplate.cloneNode(true)
   var submitNode = document.querySelector('.submit')
-  var parentNode = submitNode.parentNode
+  var form = submitNode.parentNode
 
   prevSkill.querySelector('.add-skill').classList.add('hidden')
   prevSkill.querySelector('.remove-skill').classList.remove('hidden')
-  parentNode.insertBefore(newSkill, submitNode)
+
+  form.insertBefore(newSkill, submitNode)
 }
 addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
@@ -212,19 +213,20 @@ addSkillButton.addEventListener('click', addSkillHandler)
 <p>Did you try to click the second plus button like a smarty pants? Then you realize that it didn't work, right?</p>
 <p>Fix it by attaching the handler to the new element as well.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
-var skillTemplate = document.querySelector('.skills')
+var skillTemplate = document.querySelector('.skill').cloneNode(true)
 
-var addSkillHandler = function(evt) {
+function addSkillHandler(evt) {
   var prevSkill = last('.skill')
   var newSkill = skillTemplate.cloneNode(true)
   var submitNode = document.querySelector('.submit')
-  var parentNode = submitNode.parentNode
+  var form = submitNode.parentNode
 
   prevSkill.querySelector('.add-skill').classList.add('hidden')
   prevSkill.querySelector('.remove-skill').classList.remove('hidden')
-  newAddSkill.querySelector('.add-skill').addEventListener('click', addSkillHandler)
 
-  parentNode.insertBefore(newSkill, submitNode)
+  newSkill.querySelector('.add-skill').addEventListener('click', addSkillHandler)
+
+  form.insertBefore(newSkill, submitNode)
 }
 addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
@@ -237,10 +239,35 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 <p>When the minus button is clicked, you'll remember from the event section that the minus button element becomes the <code>currentTarget</code> on the event object passed in as the first argument to our handler.</p>
 <p>If we have a handle on the minus button, then we can select the <code>parentNode</code> to get the group of elements that makes up a single skill. And if we can do that, then we can just call <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove"><code>remove()</code></a> do remove the Node from the DOM.</p>
-<pre><code class="js">var removeSkillHandler = function(evt) {
+<pre><code class="js">var removeSkillButton = document.querySelector('.remove-skill')
+
+function removeSkillHandler(evt) {
   var skill = evt.currentTarget.parentNode
   skill.remove()
 }
+
+removeSkillButton.addEventListener('click', removeSkillHandler)
+</code></pre>
+
+<p>We will also need to bind the <code>removeSkillHandler</code> to our new <code>.remove-skill</code> elements.</p>
+<pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
+var skillTemplate = document.querySelector('.skill').cloneNode(true)
+
+function addSkillHandler(evt) {
+  var prevSkill = last('.skill')
+  var newSkill = skillTemplate.cloneNode(true)
+  var submitNode = document.querySelector('.submit')
+  var form = submitNode.parentNode
+
+  prevSkill.querySelector('.add-skill').classList.add('hidden')
+  prevSkill.querySelector('.remove-skill').classList.remove('hidden')
+
+  newSkill.querySelector('.add-skill').addEventListener('click', addSkillHandler)
+  newSkill.querySelector('.remove-skill').addEventListener('click', removeSkillHandler)
+
+  form.insertBefore(newSkill, submitNode)
+}
+addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
               
             </div>

@@ -609,7 +609,7 @@ If you fill out the form, you should see a response similar to what was describe
 
 On screen you should see the this:
 
-**@TODO: Add screenshot of success**
+![Success screenshot](https://cloud.githubusercontent.com/assets/208819/12669678/48152504-c617-11e5-9f0c-48a768596811.png)
 
 Congratulations! Now we have a fully submitting form that we can use to save people's information.
 

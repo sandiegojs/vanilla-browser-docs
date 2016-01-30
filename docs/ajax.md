@@ -556,7 +556,7 @@ var renderFormData = function(data) {
 }
 ```
 
-We've finished creating all the functions we need to process the response from our backend. Let's add renderError & renderFormData in the appropriate places in the original submitHandler. In addition, let's reset the form after we know it worked.
+We've finished creating all the functions we need to process the response from our backend. Let's add `renderError` & `renderFormData` in the appropriate places in the original submitHandler. In addition, let's reset the form after we know it worked.
 
 ```js
 var submitHandler = function(evt) {

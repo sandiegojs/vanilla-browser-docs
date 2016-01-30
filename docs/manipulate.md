@@ -86,7 +86,7 @@ function addSkillHandler(evt) {
 addSkillButton.addEventListener('click', addSkillHandler)
 ```
 
-If you head over to the browser, it should work! Sweet DOM manipulation.
+If you head over to the browser, the first + button should work! Sweet DOM manipulation.
 
 Did you try to click the second plus button like a smarty pants? It didn't work, right?
 
@@ -123,7 +123,7 @@ Much like we created an event handler for adding a skill, we will now create one
 var removeSkillHandler = function(evt) {}
 ```
 
-When the minus button is clicked, you'll remember from the event section that the minus button element becomes the `currentTarget` on the event object passed in as the first argument to our handler.
+When the minus button is clicked the minus button element becomes the `currentTarget` on the event object passed in as the first argument to our handler.
 
 If we have a handle on the minus button, then we can select the `parentNode` to get the group of elements that makes up a single skill. And if we can do that, then we can call [`remove()`][remove-node] do remove the node from the DOM.
 

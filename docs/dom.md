@@ -12,7 +12,7 @@ Are you ready to get coding?
 
 # HTML field validation
 
-Have you ever used a form where you didn't realize you missed a required field until after clicking the submit button, waiting for the page to send data off to the server, waiting for the page to reload, and then finally to get the perplexing red error message at the top? What a pain!
+Have you ever used a form where you didn't realize you missed a required field until after clicking the submit button? Waiting for the page to send data off to the server, waiting for the page to reload, and then finally to get the perplexing red error message at the top. What a pain!
 
 Let's save our users the hassle and let them know right away that they are required to fill in certain fields _before_ sending anything off to the server.
 

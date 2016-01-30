@@ -130,7 +130,7 @@ livereload[tiny-lr] listening on 35729 ...
 folder "public" serving at http://localhost:3000
 ```
 
-As you can see, the scripts and styles are compiled, and then the server get's started. Now that we have that running, let's jump over to the browser and visit [localhost:3000][localhost].
+As you can see, the scripts and styles are compiled, and then the server get's started. Now that we have that running, let's jump over to the browser and visit [localhost:3000][localhost]. Please use Firefox, Chrome or IE for this step, as Safari does not support some of the things we are going to work on in the next section.
 
 ![image of boilerplate running](https://s3.amazonaws.com/f.cl.ly/items/1R3O1Q39443m1B2d3k23/Screen%20Shot%202016-01-17%20at%204.03.41%20PM.png?v=bd9646af)
 

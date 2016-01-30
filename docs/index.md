@@ -49,8 +49,15 @@ Prior to your arrival the following should be installed on your system:
     0. NPM is the node package manager.  It will automatically be installed when you install node.
     0. NPM installs packages *locally* (within the directory it is invoked in) for per-project modules, or *globally* for packages you want accessible everywhere.
     0. However, by default NPM installs global packages in a root-restricted location, requiring SUDO to install.  This creates a **huge** headache.  As an alternative, _before_ you install any packages, follow [this guide][npm-g-without-sudo] to configure your NPM to install in your home directory without requiring sudo.
-0. Clone this repository `git clone git@github.com:sandiegojs/vanilla-browser-workshop.git`
-0. Change directories into the workshop folder: `cd vanilla-browser-workshop` and install your local dependencies with: `npm install`
+0. Clone the workshop repository:
+
+        git clone git@github.com:sandiegojs/vanilla-browser-workshop.git
+
+0. Change directories into the workshop folder and install your local dependencies with:
+
+        cd vanilla-browser-workshop
+        npm install
+
 0. Install these global dependencies using the `-g` flag (ex `npm install <package> -g`)
     * gulp
     * mocha
@@ -100,7 +107,7 @@ Our API is setup at [//sandiegojs-vanilla-workshop.herokuapp.com][sdjs-app] and 
 
 ## Getting started
 
-This project uses the build tool [Gulp][gulp] to automate a bunch of stuff for you. The gulp tasks are all defined in the `tasks` directory if you're the curious type. They are used to compile the sources and styles found within the `app` directory and put the final compiled source and styles into the `public` directory. The `public/index.html` will include the final styles and scripts inside of it.
+This project uses the build tool [Gulp][gulp] to automate a bunch of stuff for you. The gulp tasks are all defined in the `tasks` directory if you're the curious type. They are used to compile the sources and styles found within the `app` directory and put the final compiled source and styles into the `public` directory. The `public/index.html` file will include the final styles and scripts inside of it.
 
 Everything in the `public/` directory of this application is created by Gulp. Think of this as our staging area. We should never be messing with the files in this directory directly. Instead, we should be editing and changing the origin files found in the `app/` directory and running Gulp in the terminal to bundle our project.
 
@@ -130,7 +137,7 @@ livereload[tiny-lr] listening on 35729 ...
 folder "public" serving at http://localhost:3000
 ```
 
-As you can see, the scripts and styles are compiled, and then the server get's started. Now that we have that running, let's jump over to the browser and visit [localhost:3000][localhost].
+As you can see, the scripts and styles are compiled, and then the server gets started. Now that we have that running, let's jump over to the browser and visit [localhost:3000][localhost].
 
 ![image of boilerplate running](https://s3.amazonaws.com/f.cl.ly/items/1R3O1Q39443m1B2d3k23/Screen%20Shot%202016-01-17%20at%204.03.41%20PM.png?v=bd9646af)
 

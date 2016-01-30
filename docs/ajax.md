@@ -1,6 +1,6 @@
 # Add submit event
 
-Now that we've covered the basics of getting a DOM element and hooking into it's events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.
+Now that we've covered the basics of getting a DOM element and hooking into its events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.
 
 Our first step in this new file is to get a reference to the form element. Create a variable named `form`, and assign the form DOM element on the page to it.
 
@@ -25,7 +25,7 @@ var submitHandler = function(evt) {
 }
 ```
 
-In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in the event we want to listen for `submit` as well as the custom handler we just wrote.
+In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in `submit` as the event we want to listen for and pass in the custom handler we just wrote.
 
 ```js
 form.addEventListener('submit', submitHandler)

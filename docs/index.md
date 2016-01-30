@@ -102,6 +102,8 @@ Our API is setup at [//sandiegojs-vanilla-workshop.herokuapp.com][sdjs-app] and 
 
 This project uses the build tool [Gulp][gulp] to automate a bunch of stuff for you. The gulp tasks are all defined in the `tasks` directory if you're the curious type. They are used to compile the sources and styles found within the `app` directory and put the final compiled source and styles into the `public` directory. The `public/index.html` will include the final styles and scripts inside of it.
 
+Everything in the `public/` directory of this application is created by Gulp. Think of this as our staging area. We should never be messing with the files in this directory directly. Instead, we should be editing and changing the origin files found in the `app/` directory and running Gulp in the terminal to bundle our project.
+
 In order to get started, this boilerplate has been setup to show us a simple form right from the start. So let's dive in and give the gulp step a try!
 
 Type the following from the root of the project:
@@ -150,3 +152,4 @@ Cool! We have a very simple form with some basic styling already good to go for 
 [san diego js]: http://sandiegojs.org/
 [sdjs-app]: //sandiegojs-vanilla-workshop.herokuapp.com
 [xhr]: https://devdocs.io/dom/xmlhttprequest
+[gulp]: http://gulpjs.com/

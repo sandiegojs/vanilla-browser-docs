@@ -49,8 +49,15 @@ Prior to your arrival the following should be installed on your system:
     0. NPM is the node package manager.  It will automatically be installed when you install node.
     0. NPM installs packages *locally* (within the directory it is invoked in) for per-project modules, or *globally* for packages you want accessible everywhere.
     0. However, by default NPM installs global packages in a root-restricted location, requiring SUDO to install.  This creates a **huge** headache.  As an alternative, _before_ you install any packages, follow [this guide][npm-g-without-sudo] to configure your NPM to install in your home directory without requiring sudo.
-0. Clone the workshop repository: `git clone git@github.com:sandiegojs/vanilla-browser-workshop.git`
-0. Change directories into the workshop folder: `cd vanilla-browser-workshop` and install your local dependencies with: `npm install`
+0. Clone the workshop repository:
+
+        git clone git@github.com:sandiegojs/vanilla-browser-workshop.git
+
+0. Change directories into the workshop folder and install your local dependencies with:
+
+        cd vanilla-browser-workshop
+        npm install
+
 0. Install these global dependencies using the `-g` flag (ex `npm install <package> -g`)
     * gulp
     * mocha

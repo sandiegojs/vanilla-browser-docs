@@ -25,7 +25,7 @@ var submitHandler = function(evt) {
 }
 ```
 
-In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in the event we want to listen for `submit` as well as the custom handler we just wrote.
+In order to hook this handler up to our form element, we will need to use the `addEventListener` method that exists on the form node. Pass in `submit` as the event we want to listen for and pass in the custom handler we just wrote.
 
 ```js
 form.addEventListener('submit', submitHandler)

@@ -154,7 +154,7 @@ Ok, let's try this again!
 
 Something is still off. Did you spot it?
 
-We need our `skills_attributes` key to have an array value since we have multiple skills. Right now, only the very last skill is being saved. We want to catch this special case inside of our `for` loop. If we haven't created this new `skills_attributes` array, do so and append the current skill, and if we have then just append the current skill.
+We need our `skills_attributes` key to have an array value since we have multiple skills. Right now, only the very last skill is being saved. We want to catch this special case inside of our `for` loop. In the `for` loop, test if the current item is `skills_attributes` item. If it is, create an array with the current skill. If we have already created the key and value pair, then just append the current skill to the existing array.
 
 ```js
 var serializeArray = function(selector) {
@@ -169,9 +169,9 @@ var serializeArray = function(selector) {
 
     if (item.name === 'skills_attributes') {
       if (!!data[item.name]) {
-        data[item.name].push(item.value)
+        data[item.name].push({'description': item.value})
       } else {
-        data[item.name] = [item.value]
+        data[item.name] = [{'description': item.value}]
       }
     } else {
       data[item.name] = item.value
@@ -183,7 +183,11 @@ var serializeArray = function(selector) {
 }
 ```
 
-Head back over to the console, and you'll see our data now looks correct! Our last step is to remove the `console.log` and replace it with a return statement that returns an object with a `form` property set to our data, since this is the structure our API endpoint is expecting.
+Head back over to the console, and you'll see our data now looks correct! We can now replace the `console.log` with a call to `JSON.stringify` and return the output.
+
+[`JSON.stringify`][mdn-stringify] is helper method that serializes a JavaScript object into the [JSON][json] format. It's main purpose is for packaging up data to be sent in an AJAX request. In the next section we'll make the AJAX request!
+
+We also want to package up the data for the backend request. The backend expects to find all of this data we're working with in a wrapper. The wrapper has one key and value pair. We'll set the key with the form's name which we pull form from it's DOM node and set the value to the data object we've been building. Place this after the `for` loop and before the `return` statement.
 
 ```js
 var serializeArray = function(selector) {
@@ -198,18 +202,19 @@ var serializeArray = function(selector) {
 
     if (item.name === 'skills_attributes') {
       if (!!data[item.name]) {
-        data[item.name].push(item.value)
+        data[item.name].push({'description': item.value})
       } else {
-        data[item.name] = [item.value]
+        data[item.name] = [{'description': item.value}]
       }
     } else {
       data[item.name] = item.value
     }
   }
+  
+  var wrapper = {};
+  wrapper[form.name] = data;
 
-  return {
-    "form": data
-  }
+  return JSON.stringify(wrapper)
 }
 ```
 
@@ -484,7 +489,7 @@ keys.forEach(function(key) {
 })
 ```
 
-If you review the array of keys we're looping through, you'll notice we didn't include `skills_attributes` like we did when we posted the data. That's because the content of that property is more complex than the simple strings of the other properties. If we want to print them out we'll have to write some custom logic.
+If you review the array of keys we're looping through, you'll notice we didn't include `skills` like we did when we posted the data. That's because the content of that property is more complex than the simple strings of the other properties. If we want to print them out we'll have to write some custom logic.
 
 Create a new dictionary term node like we do in the `forEach` callback, but set the text content to "skills".
 
@@ -506,7 +511,7 @@ Now that that's out of the way, let's loop through each skill we received, if an
 
 ```js
 if (data.skills_attributes) {
-  data.skills_attributes.forEach(function (skill) {
+  data.skills_attributes_.forEach(function (skill) {
     var skillNode = createElementWithTextNode('li', skill.description)
     skillsList.appendChild(skillNode)
   })
@@ -613,11 +618,13 @@ On screen you should see the this:
 
 Congratulations! Now we have a fully submitting form that we can use to save people's information.
 
+[json]: http://www.json.org/
 [mdn-appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
 [mdn-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
 [mdn-createtextnode]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
 [mdn-foreach]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 [mdn-onreadystatechange]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange
+[mdn-stringify]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 [node-list]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
 [rails-api]: https://github.com/rails-api/rails-api
 [xhr-mdn]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

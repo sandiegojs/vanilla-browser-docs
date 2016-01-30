@@ -25,7 +25,7 @@ For this workshop, we are going to build out a business card creator. There is a
 
 Workshops are fun and can be a fast way to learn while building something potentially reusable. There will come a time, however, when you'll want to reference the API and see if there are other methods or functionality that you didn't know existed.
 
-A really good open-source resource that also provides great offline functionality for you future digital nomads is [DevDocs.io][devdocs]. You can select the different APIs you want to be immediately searchable and they cover everything from the browser, to node, to rails, to elixir, and even more you never even knew about!
+A really good open-source resource that also provides great offline functionality for you future digital nomads is [DevDocs.io][devdocs]. You can select the different APIs you want to be immediately searchable and they cover everything from the browser, to Node, to Rails, to Elixir, and even more you never even knew about!
 
 For this workshop, it may be useful to reference the sections that will align with this workshop:
 

@@ -24,13 +24,13 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 If you give this a try in your browser now, you'll see the alert pop up when you click on the plus.
 
-What does "add skill" really mean? We want to duplicate the skill blueprint we have, `skillTemplate` and create another Node just like it. Then, we want to append it at the end of the list of skills.
+What does "add skill" really mean? We want to duplicate the skill blueprint we have, `skillTemplate` and create another node just like it. Then, we want to append it at the end of the list of skills.
 
-We can clone any DOM Node with the `cloneNode` method. The `cloneNode` method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire `input-group` element and all of it's children Nodes, we are going to pass a `true` in.
+We can clone any DOM node with the `cloneNode` method. The `cloneNode` method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire `input-group` element and all of it's children nodes, we are going to pass a `true` in.
 
-Unfortunately, there is no `appendAfter` method we can use like in jQuery, but there is an [`insertBefore`][insert-before] method. We can use `insertBefore` to append the new cloned Node just before the submit button.
+Unfortunately, there is no `appendAfter` method we can use like in jQuery, but there is an [`insertBefore`][insert-before] method. We can use `insertBefore` to append the new cloned node just before the submit button.
 
-The `insertBefore` method uses a handle on the parent node to attach the new Node in the correct spot within the tree. We can use the `parentNode` accesor on any DOM Node to get it's parent, or, since we know the parent is the form we can just directly select it again.
+The `insertBefore` method uses a handle on the parent node to attach the new node in the correct spot within the tree. We can use the `parentNode` accesor on any DOM node to get it's parent, or, since we know the parent is the form we can just directly select it again.
 
 ```js
 var addSkillButton = document.querySelector('.add-skill')
@@ -63,7 +63,7 @@ function last(selector) {
 
 Now let's update our `addSkillHandler` method to get a handle on the previous skill, update it to show the minus instead of the plus, and _then_ add the new skill to the end of the list.
 
-When we have a handle on the DOM Node as we will with the previous skill, we can get a list of the Node's classes by using the [`classList` accessor][class-list]. We can then use `.add()` and `.remove()` to add and remove classes from this Node.
+When we have a handle on the DOM node as we will with the previous skill, we can get a list of the node's classes by using the [`classList` accessor][class-list]. We can then use `.add()` and `.remove()` to add and remove classes from this node.
 
 
 ```js
@@ -123,7 +123,7 @@ var removeSkillHandler = function(evt) {}
 
 When the minus button is clicked, you'll remember from the event section that the minus button element becomes the `currentTarget` on the event object passed in as the first argument to our handler.
 
-If we have a handle on the minus button, then we can select the `parentNode` to get the group of elements that makes up a single skill. And if we can do that, then we can just call [`remove()`][remove-node] do remove the Node from the DOM.
+If we have a handle on the minus button, then we can select the `parentNode` to get the group of elements that makes up a single skill. And if we can do that, then we can just call [`remove()`][remove-node] do remove the node from the DOM.
 
 ```js
 var removeSkillButton = document.querySelector('.remove-skill')

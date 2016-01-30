@@ -1,14 +1,14 @@
 # The HTML
 
-We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the `app/index.html` file and take a look.
+We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll need to open up the `app/index.html` file and take a look.
 
 You should see that the styles are included in the header from `app/index.css` and the script for our JavaScript is included at the top of the body from `public/index.js`. All of our JavaScript files in `app/` are compiled by Gulp into a single file, `public/index.js`
 
 **ProTip™:** When the browser encounters a `<script>` tag, it is blocking - meaning the browser will immediately download and execute it. To load the `<script>` asynchronously and not block the browser's parsing of the document, set the attribute `async='true'` on the tag.
 
-Within the `app/index.html` you should see a basic form with labels and inputs. Familiarize yourself with the different fields.
+Within the `app/index.html` you should see a form with labels and inputs. Familiarize yourself with the different fields.
 
-Are you ready to get coding, yet?
+Are you ready to get coding?
 
 # HTML field validation
 

@@ -2,7 +2,7 @@
 
 Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app.
 
-You might remember that our build tool, Gulp, will compile any `.js` files that we put in the `app` directory into a single `index.js` file and Gulp outputs this file in the `public` directory.  You should leave all the files in `public` alone and let the build tool manage creating these files.  
+You might remember that our build tool, Gulp, will compile any `.js` files that we put in the `app` directory into a single `index.js` file and Gulp outputs this file in the `public` directory.  You should leave all the files in `public` alone and let the build tool manage creating these files.
 
 There is also a script tag in the `index.html` file to load all of your scripts, our Gulp script will create a copy of the `index.html` in the public folder, which should also not be worked on directly.  You will will be updating the files in the `app` folder.  Let's begin by creating a new file `app.js` inside of the `app` directory.
 
@@ -117,7 +117,7 @@ Great, now you're ready to remove some skills!
 
 ## Removing a skill
 
-Much like we created an event handler for adding a skill, we will now just create one to remove a skill.
+Much like we created an event handler for adding a skill, we will now create one to remove a skill.
 
 ```js
 var removeSkillHandler = function(evt) {}
@@ -125,7 +125,7 @@ var removeSkillHandler = function(evt) {}
 
 When the minus button is clicked, you'll remember from the event section that the minus button element becomes the `currentTarget` on the event object passed in as the first argument to our handler.
 
-If we have a handle on the minus button, then we can select the `parentNode` to get the group of elements that makes up a single skill. And if we can do that, then we can just call [`remove()`][remove-node] do remove the node from the DOM.
+If we have a handle on the minus button, then we can select the `parentNode` to get the group of elements that makes up a single skill. And if we can do that, then we can call [`remove()`][remove-node] do remove the node from the DOM.
 
 ```js
 var removeSkillButton = document.querySelector('.remove-skill')

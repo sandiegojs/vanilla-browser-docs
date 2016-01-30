@@ -12,7 +12,7 @@ With that in place, we can now begin to add more functionality to our form. We h
 
 You probably noticed the nice `+` button next to the `skills` input. Right now it doesn't do anything. We need to add a `click` handler in order to bring it to life.
 
-In order to do that, we need to first select the `.add-skill` button which we will attach the handler to and then we need to also have a "blueprint" of the original div containing the skill elements so that we can copy it when we add another one.
+In order to do that, we need to first select the `.add-skill` button which we will attach the handler to and then we need to also have a "blueprint" of the original div containing the skill elements so that we can copy it when we add another one.  Let's add this to our `app.js` file:
 
 ```js
 var addSkillButton = document.querySelector('.add-skill')

@@ -65,7 +65,7 @@ function last(selector) {
 
 Now let's update our `addSkillHandler` method to get a handle on the previous skill, update it to show the minus instead of the plus, and _then_ add the new skill to the end of the list.
 
-When we have a handle on the DOM node as we will with the previous skill, we can get a list of the node's classes by using the [`classList` accessor][class-list]. We can then use `.add()` and `.remove()` to add and remove classes from this node.
+When we have a handle on the DOM node as we will with the previous skill, we can get a list of the node's classes by using the [`classList` accessor][class-list]. We can then use `.add()` and `.remove()` methods to add and remove classes from this node.
 
 
 ```js

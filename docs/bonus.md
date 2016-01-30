@@ -26,14 +26,11 @@ One bonus skill of this workshop is moving the functionality of this app into co
 
 Give this a try on your own!
 
-If you want to check out the finished ES2015 project, checkout the tag `es2015`.
-
 ## Fork the API and expand
 
 The API for this project was build using [Rails-API][rail-api] and is publicly available for forking and PRs at [sandiegojs/sandiegojs-vanilla-workshop][sdjs-api]. Rails-API is similar to rails, except that it is API only. It doesn't include the view layer and other pieces that are unnecessary for creating an API.
 
-[JSON:API][json-api] is a widely appreciated and used spec for creating JSON APIs and it is extremely easy to implement using omething like Rails-API.
-
+If you want to expand on this example, you can try generating additional models and controllers in the API and adding more routes to your client-side application.
 
 ## Image uploading
 

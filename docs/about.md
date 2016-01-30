@@ -2,6 +2,30 @@
 
 This workshop was put together by the time and efforts of several people, with review from many more. It would not be possible with out the organizers of the SanDiego.js Community, their sponsors, or *YOU!*
 
+## The Instructors
+
+Thank you to all the instructors who were able to come and offer their time and experience to the workshop. Many of you also took time to review our content and offer suggestions, which we very much appreciate. The attendees were able to receive a more personalized experience thanks to you.
+
+## Sponsors
+
+This event was made possible by our gracious sponsors! Huge thanks to [Zeeto][zeeto] for providing our event space and [LEARN][sd-learn] for the food and the drinks.
+
+<div style="margin-bottom:20px">
+  <img style="float:left" src="http://photos3.meetupstatic.com/photos/sponsor/d/2/3/5/iab120x90_2573813.jpeg">
+  <div style="float:left;margin-left:20px;width:80%">
+    <a href="http://www.zeeto.io/">Zeeto</a> develops technology that generates targetable, high value ad inventory.  Zeeto’s proprietary algorithms determine the right questions to ask at the right time in order to show the most relevant advertisements possible, all while maximizing user experience. This high quality inventory is then available across the Zeeto Ad Exchange.
+  </div>
+  <div style="clear:both"></div>
+</div>
+
+<div style="margin-bottom:20px">
+  <img style="float:left" src="http://photos4.meetupstatic.com/photos/sponsor/7/5/a/iab120x90_2581882.jpeg">
+  <div style="float:left;margin-left:20px;width:80%">
+    <a href="http://www.learnacademy.org/">LEARN Academy</a> is a collaborative and immersive four month full-time coding bootcamp that teaches adults the skills they need to start a career in web development. The final month of the course is an internship with a local San Diego company. Students enter the workforce with several portfolio pieces and real world experience on their resume.
+  </div>
+  <div style="clear:both"></div>
+</div>
+
 ## The Team
 
 <div style="margin-bottom:20px">
@@ -68,3 +92,5 @@ Or, if you would like something a bit more personal, please feel free to email a
 [sdjs-email]: mailto:sandiegojs@gmail.com
 [sdjs-vanilla-bp]: http://github.com/sandiegojs/vanilla-browser-workshop/issues/new
 [sdjs-vanilla-docs]: http://github.com/sandiegojs/vanilla-browser-docs/issues/new
+[sd-learn]: http://www.learnacademy.org/
+[zeeto]: http://www.zeeto.io

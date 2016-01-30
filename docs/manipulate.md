@@ -2,7 +2,9 @@
 
 Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app.
 
-You might remember that our build tool, Gulp, will compile any `.js` files that we put in the `app` directory into a single bundled JavaScript `app/index.js` and there is a script tag in the `app/index.html` file to load all of your scripts. Let's begin by creating a new file `app.js` inside of the app directory.
+You might remember that our build tool, Gulp, will compile any `.js` files that we put in the `app` directory into a single `index.js` file and Gulp outputs this file in the `public` directory.  You should leave all the files in `public` alone and let the build tool manage creating these files.  
+
+There is also a script tag in the `index.html` file to load all of your scripts, our Gulp script will create a copy of the `index.html` in the public folder, which should also not be worked on directly.  You will will be updating the files in the `app` folder.  Let's begin by creating a new file `app.js` inside of the `app` directory.
 
 With that in place, we can now begin to add more functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.
 

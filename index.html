@@ -168,7 +168,7 @@
 <p>For this workshop, we are going to build out a business card creator. There is a simple html form inside of <code>app/index.html</code> that we will build upon and add life to. We'll collect common profile information that one would normally share professionally, like contact info and skills, and then display it.</p>
 <h3 id="keep-your-resources-handy">Keep your resources handy</h3>
 <p>Workshops are fun and can be a fast way to learn while building something potentially reusable. There will come a time, however, when you'll want to reference the API and see if there are other methods or functionality that you didn't know existed.</p>
-<p>A really good open-source resource that also provides great offline functionality for you future digital nomads is <a href="http://devdocs.io">DevDocs.io</a>. You can select the different APIs you want to be immediately searchable and they cover everything from the browser, to node, to rails, to elixir, and even more you never even knew about!</p>
+<p>A really good open-source resource that also provides great offline functionality for you future digital nomads is <a href="http://devdocs.io">DevDocs.io</a>. You can select the different APIs you want to be immediately searchable and they cover everything from the browser, to Node, to Rails, to Elixir, and even more you never even knew about!</p>
 <p>For this workshop, it may be useful to reference the sections that will align with this workshop:</p>
 <ul>
 <li><a href="https://devdocs.io/dom/">DOM API</a></li>
@@ -190,9 +190,20 @@
 <li>However, by default NPM installs global packages in a root-restricted location, requiring SUDO to install.  This creates a <strong>huge</strong> headache.  As an alternative, <em>before</em> you install any packages, follow <a href="https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md">this guide</a> to configure your NPM to install in your home directory without requiring sudo.</li>
 </ol>
 </li>
-<li>Clone this repository <code>git clone git@github.com:sandiegojs/vanilla-browser-workshop.git</code></li>
-<li>Change directories into the workshop folder: <code>cd vanilla-browser-workshop</code> and install your local dependencies with: <code>npm install</code></li>
-<li>Install these global dependencies using the <code>-g</code> flag (ex <code>npm install &lt;package&gt; -g</code>)<ul>
+<li>
+<p>Clone the workshop repository:</p>
+<pre><code>git clone git@github.com:sandiegojs/vanilla-browser-workshop.git
+</code></pre>
+</li>
+<li>
+<p>Change directories into the workshop folder and install your local dependencies with:</p>
+<pre><code>cd vanilla-browser-workshop
+npm install
+</code></pre>
+</li>
+<li>
+<p>Install these global dependencies using the <code>-g</code> flag (ex <code>npm install &lt;package&gt; -g</code>)</p>
+<ul>
 <li>gulp</li>
 <li>mocha</li>
 </ul>
@@ -236,7 +247,8 @@ developers have already made a working API for us, so let's use that.</p>
 </table>
 
 <h2 id="getting-started">Getting started</h2>
-<p>This project uses the build tool [Gulp][gulp] to automate a bunch of stuff for you. The gulp tasks are all defined in the <code>tasks</code> directory if you're the curious type. They are used to compile the sources and styles found within the <code>app</code> directory and put the final compiled source and styles into the <code>public</code> directory. The <code>public/index.html</code> will include the final styles and scripts inside of it.</p>
+<p>This project uses the build tool <a href="http://gulpjs.com/">Gulp</a> to automate a bunch of stuff for you. The gulp tasks are all defined in the <code>tasks</code> directory if you're the curious type. They are used to compile the sources and styles found within the <code>app</code> directory and put the final compiled source and styles into the <code>public</code> directory. The <code>public/index.html</code> file will include the final styles and scripts inside of it.</p>
+<p>Everything in the <code>public/</code> directory of this application is created by Gulp. Think of this as our staging area. We should never be messing with the files in this directory directly. Instead, we should be editing and changing the origin files found in the <code>app/</code> directory and running Gulp in the terminal to bundle our project.</p>
 <p>In order to get started, this boilerplate has been setup to show us a simple form right from the start. So let's dive in and give the gulp step a try!</p>
 <p>Type the following from the root of the project:</p>
 <pre><code class="bash">$ gulp
@@ -258,7 +270,7 @@ livereload[tiny-lr] listening on 35729 ...
 folder &quot;public&quot; serving at http://localhost:3000
 </code></pre>
 
-<p>As you can see, the scripts and styles are compiled, and then the server get's started. Now that we have that running, let's jump over to the browser and visit <a href="http://localhost:3000">localhost:3000</a>.</p>
+<p>As you can see, the scripts and styles are compiled, and then the server gets started. Now that we have that running, let's jump over to the browser and visit <a href="http://localhost:3000">localhost:3000</a>.</p>
 <p><img alt="image of boilerplate running" src="https://s3.amazonaws.com/f.cl.ly/items/1R3O1Q39443m1B2d3k23/Screen%20Shot%202016-01-17%20at%204.03.41%20PM.png?v=bd9646af" /></p>
 <p>Cool! We have a very simple form with some basic styling already good to go for us.</p>
 <p><strong>If you're having issues bug one of the instructors! We're here to help you out.</strong></p>
@@ -307,5 +319,5 @@ folder &quot;public&quot; serving at http://localhost:3000
 
 <!--
 MkDocs version : 0.15.0
-Build Date UTC : 2016-01-30 04:12:44.312208
+Build Date UTC : 2016-01-30 17:45:02.664713
 -->

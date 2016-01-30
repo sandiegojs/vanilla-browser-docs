@@ -152,8 +152,8 @@
             <div class="section">
               
                 <h1 id="add-submit-event">Add submit event</h1>
-<p>Now that we've covered the basics of getting a DOM element and hooking into it's events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.</p>
-<p>Our first step in this new file is to get a reference to the form element. Create a variable named <code>form</code>, and assign the form DOM element on the page to it.</p>
+<p>Now that we've covered the basics of getting a DOM element and hooking into its events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.</p>
+<p>Our first step in the <code>app.js</code> file we created previously is to get a reference to the form element. Create a variable named <code>form</code>, and assign the form DOM element on the page to it.</p>
 <pre><code class="js">var form = document.querySelector('form')
 </code></pre>
 
@@ -169,14 +169,14 @@
 }
 </code></pre>
 
-<p>In order to hook this handler up to our form element, we will need to use the <code>addEventListener</code> method that exists on the form node. Pass in the event we want to listen for <code>submit</code> as well as the custom handler we just wrote.</p>
+<p>In order to hook this handler up to our form element, we will need to use the <code>addEventListener</code> method that exists on the form node. Pass in <code>submit</code> as the event we want to listen for and pass in the custom handler we just wrote.</p>
 <pre><code class="js">form.addEventListener('submit', submitHandler)
 </code></pre>
 
 <p>Now if you refresh the page you should be able to submit the form after filling out the two required fields, but instead of the page refreshing and losing everything you've entered the page will show you an alert and you won't lose any of the information you typed.</p>
 <p>Our event handler is now working!</p>
 <h1 id="serialize-the-form-data">Serialize the form data</h1>
-<p>Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with <a href="https://github.com/rails-api/rails-api"><code>rails-api</code></a> which will be expecting a JSON API object on the request.</p>
+<p>Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with <a href="https://github.com/rails-api/rails-api"><code>rails-api</code></a> which will be expecting a JSON object on the request.</p>
 <p>We need to take the form data and convert it to an object that looks like this</p>
 <pre><code class="json">{
   &quot;form&quot;: {
@@ -192,7 +192,7 @@
 }
 </code></pre>
 
-<p>If we were using something like jQuery we may use the <code>.serializeArray()</code> method. Let's write our own <code>serializeArray</code> method.</p>
+<p>Let's write a <code>serializeArray</code> method to take our form data and turn it into the serialized JSON data object.</p>
 <pre><code class="js">var serializeArray = function(selector) {}
 </code></pre>
 
@@ -267,7 +267,7 @@
 <p>Ok, let's try this again!</p>
 <p><img alt="build the form JSON part 2" src="https://s3.amazonaws.com/f.cl.ly/items/2N0C470x010K2k302e3Q/RRBJpcGUMt.gif?v=94639764" /></p>
 <p>Something is still off. Did you spot it?</p>
-<p>We need our <code>skills_attributes</code> key to have an array value since we have multiple skills. Right now, only the very last skill is being saved. We want to catch this special case inside of our <code>for</code> loop. If we haven't created this new <code>skills_attributes</code> array, do so and append the current skill, and if we have then just append the current skill.</p>
+<p>We need our <code>skills_attributes</code> key to have an array value since we have multiple skills. Right now, only the very last skill is being saved. We want to catch this special case inside of our <code>for</code> loop. In the <code>for</code> loop, test if the current item is <code>skills_attributes</code> item. If it is, create an array with the current skill. If we have already created the key and value pair, then just append the current skill to the existing array.</p>
 <pre><code class="js">var serializeArray = function(selector) {
   var form = document.querySelector(selector)
   var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
@@ -280,9 +280,9 @@
 
     if (item.name === 'skills_attributes') {
       if (!!data[item.name]) {
-        data[item.name].push(item.value)
+        data[item.name].push({'description': item.value})
       } else {
-        data[item.name] = [item.value]
+        data[item.name] = [{'description': item.value}]
       }
     } else {
       data[item.name] = item.value
@@ -294,7 +294,8 @@
 }
 </code></pre>
 
-<p>Head back over to the console, and you'll see our data now looks correct! Our last step is to remove the <code>console.log</code> and replace it with a return statement that returns an object with a <code>form</code> property set to our data, since this is the structure our API endpoint is expecting.</p>
+<p>Head back over to the console, and you'll see our data now looks correct! We can now replace the <code>console.log</code> with a <code>return</code> statement to pass the output back.</p>
+<p>We also want to package up the data for the backend request. The backend expects to find all of this data we're working with in a wrapper. The wrapper has one key and value pair. We'll set the key with the form's name which we pull form from it's DOM node and set the value to the data object we've been building. Place this after the <code>for</code> loop and before the <code>return</code> statement.</p>
 <pre><code class="js">var serializeArray = function(selector) {
   var form = document.querySelector(selector)
   var formInputs = form.querySelectorAll('input:not([type=submit]),textarea')
@@ -307,18 +308,19 @@
 
     if (item.name === 'skills_attributes') {
       if (!!data[item.name]) {
-        data[item.name].push(item.value)
+        data[item.name].push({'description': item.value})
       } else {
-        data[item.name] = [item.value]
+        data[item.name] = [{'description': item.value}]
       }
     } else {
       data[item.name] = item.value
     }
   }
 
-  return {
-    &quot;form&quot;: data
-  }
+  var wrapper = {};
+  wrapper[form.name] = data;
+
+  return wrapper
 }
 </code></pre>
 
@@ -376,7 +378,7 @@
 }
 </code></pre>
 
-<p>Lastly we will use <code>JSON.stringify</code> to convert our object to a JSON string and send the request with our data using the <code>send</code> function.</p>
+<p>Lastly we will use <code>JSON.stringify</code> to convert our object to a JSON string and send the request with our data using the <code>send</code> function. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify</code></a> is helper method that serializes a JavaScript object into the <a href="http://www.json.org/">JSON</a> format. It's main purpose is for packaging up data to be sent in an AJAX request. In the next section we'll make the AJAX request!</p>
 <pre><code class="js">var xhr = function(method, path, data, callback) {
   var request = new XMLHttpRequest()
   request.open(method, path, true)
@@ -537,7 +539,7 @@ dictionaryNode.appendChild(definitionNode)
 })
 </code></pre>
 
-<p>If you review the array of keys we're looping through, you'll notice we didn't include <code>skills_attributes</code> like we did when we posted the data. That's because the content of that property is more complex than the simple strings of the other properties. If we want to print them out we'll have to write some custom logic.</p>
+<p>If you review the array of keys we're looping through, you'll notice we didn't include <code>skills</code> like we did when we posted the data. That's because the content of that property is more complex than the simple strings of the other properties. If we want to print them out we'll have to write some custom logic.</p>
 <p>Create a new dictionary term node like we do in the <code>forEach</code> callback, but set the text content to "skills".</p>
 <pre><code class="js">var skillsTermNode = createElementWithTextNode('dt', 'skills')
 dictionaryNode.appendChild(skillsTermNode)
@@ -552,7 +554,7 @@ dictionaryNode.appendChild(skillsDefinitionNode)
 
 <p>Now that that's out of the way, let's loop through each skill we received, if any, and combine them into one dictionary definition. To accomplish this we'll test to see if there is any value stored in <code>skills_attributes</code>. If there is then we can loop through all the skills by using the <code>forEach</code> method to loop through each complex element in the array and append a simpler set of information to the dictionary. In our case, we'll append only the description of each skill wrapped in a <strong>LI</strong> tag.</p>
 <pre><code class="js">if (data.skills_attributes) {
-  data.skills_attributes.forEach(function (skill) {
+  data.skills_attributes_.forEach(function (skill) {
     var skillNode = createElementWithTextNode('li', skill.description)
     skillsList.appendChild(skillNode)
   })
@@ -600,7 +602,7 @@ dictionaryNode.appendChild(skillsDefinitionNode)
 }
 </code></pre>
 
-<p>We've finished creating all the functions we need to process the response from our backend. Let's add renderError &amp; renderFormData in the appropriate places in the original submitHandler. In addition, let's reset the form after we know it worked.</p>
+<p>We've finished creating all the functions we need to process the response from our backend. Let's add <code>renderError</code> &amp; <code>renderFormData</code> in the appropriate places in the original submitHandler. In addition, let's reset the form after we know it worked.</p>
 <pre><code class="js">var submitHandler = function(evt) {
   evt.preventDefault()
   var path = apiURL + '/forms'

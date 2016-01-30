@@ -148,11 +148,12 @@
               
                 <h1 id="add-and-remove-skills">Add and remove skills</h1>
 <p>Now that we have learned about the DOM and used the console inside of our browser to get the hang of event handlers, let's create a new JavaScript file and start building our app.</p>
-<p>You might remember that our build tool, Gulp, will compile any <code>.js</code> files that we put in the <code>app</code> directory and make sure they are available. Let's begin by creating a new file <code>app.js</code> inside of the app directory.</p>
+<p>You might remember that our build tool, Gulp, will compile any <code>.js</code> files that we put in the <code>app</code> directory into a single <code>index.js</code> file and Gulp outputs this file in the <code>public</code> directory.  You should leave all the files in <code>public</code> alone and let the build tool manage creating these files.</p>
+<p>There is also a script tag in the <code>index.html</code> file to load all of your scripts, our Gulp script will create a copy of the <code>index.html</code> in the public folder, which should also not be worked on directly.  You will will be updating the files in the <code>app</code> folder.  Let's begin by creating a new file <code>app.js</code> inside of the <code>app</code> directory.</p>
 <p>With that in place, we can now begin to add more functionality to our form. We have more than just a single skill to boast about, so we want to be able to add multiple skills. We may also change our mind while we're filling out the form so we will have to be able to remove a skill, also.</p>
 <h2 id="adding-a-skill">Adding a skill</h2>
 <p>You probably noticed the nice <code>+</code> button next to the <code>skills</code> input. Right now it doesn't do anything. We need to add a <code>click</code> handler in order to bring it to life.</p>
-<p>In order to do that, we need to first select the <code>.add-skill</code> button which we will attach the handler to and then we need to also have a "blueprint" of the original div containing the skill elements so that we can copy it when we add another one.</p>
+<p>In order to do that, we need to first select the <code>.add-skill</code> button which we will attach the handler to and then we need to also have a "blueprint" of the original div containing the skill elements so that we can copy it when we add another one.  Let's add this to our <code>app.js</code> file:</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
 var skillTemplate = document.querySelector('.skill')
 
@@ -163,10 +164,10 @@ addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
 
 <p>If you give this a try in your browser now, you'll see the alert pop up when you click on the plus.</p>
-<p>What does "add skill" really mean? We want to duplicate the skill blueprint we have, <code>skillTemplate</code> and create another node just like it. Then, we want to append it at the end of the list of skills.</p>
-<p>We can clone any DOM node with the <code>cloneNode</code> method. The <code>cloneNode</code> method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire <code>input-group</code> element and all of it's children nodes, we are going to pass a <code>true</code> in.</p>
-<p>Unfortunately, there is no <code>appendAfter</code> method we can use like in jQuery, but there is an <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore"><code>insertBefore</code></a> method. We can use <code>insertBefore</code> to append the new cloned node just before the submit button.</p>
-<p>The <code>insertBefore</code> method uses a handle on the parent node to attach the new node in the correct spot within the tree. We can use the <code>parentNode</code> accesor on any DOM node to get it's parent, or, since we know the parent is the form we can just directly select it again.</p>
+<p>What does "add skill" really mean? We want to duplicate the skill blueprint we have, <code>skillTemplate</code>, and create another node just like it. Then, we want to append it at the end of the list of skills.</p>
+<p>We can clone any DOM node with the <code>cloneNode</code> method. The <code>cloneNode</code> method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire <code>input-group</code> element and all of its children nodes, we are going to pass a <code>true</code> in.</p>
+<p>Unfortunately, there is no <code>appendAfter</code> method we can use, but there is an <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore"><code>insertBefore</code></a> method. We can use <code>insertBefore</code> to append the new cloned node just before the submit button.</p>
+<p>The <code>insertBefore</code> method uses a handle on the parent node to attach the new node in the correct spot within the tree. We can use the <code>parentNode</code> accessor on any DOM node to get its parent. Alternatively, since we know the parent is the form, we can just directly select it again.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
 var skillTemplate = document.querySelector('.skill').cloneNode(true)
 
@@ -181,8 +182,8 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 <p>We just grew a branch on our DOM tree 🌳! Does it look right, though?</p>
 <p><img alt="added skill" src="https://s3.amazonaws.com/f.cl.ly/items/113x3C3q1H133y3b3C1e/Screen%20Shot%202016-01-24%20at%2010.14.00%20AM.png?v=ad58e105" /></p>
-<p>After we clone a new node, we need to change the plus sign to a minus sign on the previous one. If you look at the <code>app/index.html</code> you'll see that both the plus and minus icons already exist in the DOM, except that the minus is currently <code>hidden</code> with the class <code>hidden</code>.</p>
-<p>In jQuery, you can use the <code>.last()</code> method after selecting a group of elements to get the last one. Let's write a helper method that does just that for a given selector.</p>
+<p>After we clone a new node, we need to change the plus sign to a minus sign on the previous one. If you look at the <code>app/index.html</code> file you'll see that both the plus and minus icons already exist in the DOM, except that the minus is currently hidden with the class <code>hidden</code>.</p>
+<p>It would be useful to be able to select the last element in a group. Let's write a helper method that does just that for a given selector.</p>
 <pre><code class="js">function last(selector) {
   var all = document.querySelectorAll(selector)
   var length = all.length
@@ -191,7 +192,7 @@ addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
 
 <p>Now let's update our <code>addSkillHandler</code> method to get a handle on the previous skill, update it to show the minus instead of the plus, and <em>then</em> add the new skill to the end of the list.</p>
-<p>When we have a handle on the DOM node as we will with the previous skill, we can get a list of the node's classes by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"><code>classList</code> accessor</a>. We can then use <code>.add()</code> and <code>.remove()</code> to add and remove classes from this node.</p>
+<p>When we have a handle on the DOM node as we will with the previous skill, we can get a list of the node's classes by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"><code>classList</code> accessor</a>. We can then use <code>.add()</code> and <code>.remove()</code> methods to add and remove classes from this node.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
 var skillTemplate = document.querySelector('.skill').cloneNode(true)
 
@@ -209,9 +210,9 @@ function addSkillHandler(evt) {
 addSkillButton.addEventListener('click', addSkillHandler)
 </code></pre>
 
-<p>If you head over to the browser, it should work! Sweet DOM manipulation.</p>
-<p>Did you try to click the second plus button like a smarty pants? Then you realize that it didn't work, right?</p>
-<p>Fix it by attaching the handler to the new element as well.</p>
+<p>If you head over to the browser, the first + button should work! Sweet DOM manipulation.</p>
+<p>Did you try to click the second plus button like a smarty pants? It didn't work, right?</p>
+<p>Let's fix it by attaching the handler to the new element as well.</p>
 <pre><code class="js">var addSkillButton = document.querySelector('.add-skill')
 var skillTemplate = document.querySelector('.skill').cloneNode(true)
 
@@ -233,12 +234,12 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 <p>Great, now you're ready to remove some skills!</p>
 <h2 id="removing-a-skill">Removing a skill</h2>
-<p>Much like we created an event handler for adding a skill, we will now just create one to remove a skill.</p>
+<p>Much like we created an event handler for adding a skill, we will now create one to remove a skill.</p>
 <pre><code class="js">var removeSkillHandler = function(evt) {}
 </code></pre>
 
-<p>When the minus button is clicked, you'll remember from the event section that the minus button element becomes the <code>currentTarget</code> on the event object passed in as the first argument to our handler.</p>
-<p>If we have a handle on the minus button, then we can select the <code>parentNode</code> to get the group of elements that makes up a single skill. And if we can do that, then we can just call <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove"><code>remove()</code></a> do remove the node from the DOM.</p>
+<p>When the minus button is clicked the minus button element becomes the <code>currentTarget</code> on the event object passed in as the first argument to our handler.</p>
+<p>If we have a handle on the minus button, then we can select the <code>parentNode</code> to get the group of elements that makes up a single skill. And if we can do that, then we can call <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove"><code>remove()</code></a> do remove the node from the DOM.</p>
 <pre><code class="js">var removeSkillButton = document.querySelector('.remove-skill')
 
 function removeSkillHandler(evt) {

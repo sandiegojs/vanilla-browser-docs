@@ -77,7 +77,7 @@ There are several functions we can use to get a reference to a DOM node. Overtim
 
 For now, we are going to focus on `querySelector`. This function behaves similar to jQuery in that it allows you to specify a [css selector][css-selector] that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the `document` as well as `element`. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.
 
-For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut `Command + Option + j` and `Control + Shift + j` on Windows. We can begin by selecting the input with a name attribute of `name`.
+For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut `Command + Option + j` or `Command + Option + i` and `Control + Shift + j` on Windows. We can begin by selecting the input with a name attribute of `name`.
 
 ```js
 var inputName = document.querySelector('input[name="name"]')
@@ -98,6 +98,8 @@ Whenever dealing with a DOM node it's important to understand what type of eleme
 When users interact with the web page the DOM publishes these interactions as events, for example `click`, `scroll`, `keypress`, and [more][mdn-events].
 
 After selecting an element from the DOM, we can call it's [`addEventListener`][event-listener] method which will execute a callback function we provide any time that event occurs. Lets start by listening for a `click` on the `document` and trigger an `alert` whenever that event occurs.
+
+We are going to keep working in the dev console for now, and continue to mess around. Once we get the hang of event handlers, we can start building our app. But for now, let's just keep using the dev console.
 
 ```js
 var handler = function() {

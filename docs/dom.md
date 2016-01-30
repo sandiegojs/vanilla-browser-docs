@@ -50,15 +50,15 @@ If you want to learn more about validations that are available for inputs, [MDN 
 
 # The DOM
 
-The Document Object Model(DOM) is how we are able to interact with our page via JavaScript. The DOM is a representation of what is on the page, including the elements and styles.
+The Document Object Model (DOM) is how we are able to interact with our page via JavaScript. The DOM is a representation of what is on the page, including the elements and styles.
 
 > The Document Object Model (DOM) is a programming interface for HTML, XML and SVG documents. It provides a structured representation of the document (a tree) and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Nodes can also have event handlers attached to them, and once that event is triggered the event handlers get executed. Essentially, it connects web pages to scripts or programming languages. -[MDN][mdn-dom]
 
-One of the trickest things about the DOM is that it's up to the browser vendor to implement it and therefore every implementation is a little different. This is why we get browser compatability issues.
+One of the trickiest things about the DOM is that it's up to the browser vendor to implement it and therefore every implementation is a little different. This is why we get browser compatibility issues.
 
 But as you will see there is a large API exposed by the DOM which allows us to craft powerful user experiences. An easy way to think of the DOM is a tree of nested nodes and each node is an element from our HTML document, e.g. a `div`, `p`, `button`, etc...
 
-To visualize this all you need to do is open your web inspector and look at the **Elements** tab to see this structure realized. Each one of those nodes (elements) has many properties and functions you can take advantage off.
+To visualize this all you need to do is open your web inspector and look at the **Elements** tab to see this structure realized. Each one of those nodes (elements) has many properties and functions you can take advantage of.
 
 In Chrome on OSX you can open the web inspector with the keyboard shortcut `Command + Option + j` or `Command + Option + i` and `Control + Shift + j` on Windows.
 
@@ -68,7 +68,7 @@ In Chrome on OSX you can open the web inspector with the keyboard shortcut `Comm
 
 In order to interact with the DOM within JavaScript, the first thing you will need to understand is element selection. By selecting an element (DOM node) we get a reference to that element which allows us to take actions on it.
 
-There are several functions we can use to get a reference to a DOM node. Overtime these functions have been introduced to solve different needs. As such, the browser support for them can vary. You should always research browser compatability to ensure they will work for your user base.
+There are several functions we can use to get a reference to a DOM node. Overtime these functions have been introduced to solve different needs. As such, the browser support for them can vary. You should always research browser compatibility to ensure they will work for your user base.
 
 - [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
 - [querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll)
@@ -93,13 +93,13 @@ inputName.value = 'My new value!'
 
 You should see the value you set reflected in the form's input.
 
-Whenever dealing with a DOM node it's important to understand what type of element you have and what are it's parents. That will determine the properties and functions available to you.
+Whenever dealing with a DOM node it's important to understand what type of element you have and what are its parents. That will determine the properties and functions available to you.
 
 # Event handling
 
 When users interact with the web page the DOM publishes these interactions as events, for example `click`, `scroll`, `keypress`, and [more][mdn-events].
 
-After selecting an element from the DOM, we can call it's [`addEventListener`][event-listener] method which will execute a callback function we provide any time that event occurs. Lets start by listening for a `click` on the `document` and trigger an `alert` whenever that event occurs.
+After selecting an element from the DOM, we can call its [`addEventListener`][event-listener] method which will execute a callback function we provide any time that event occurs. Lets start by listening for a `click` on the `document` and trigger an `alert` whenever the user clicks anywhere on the page.
 
 We are going to keep working in the dev console for now, and continue to mess around. Once we get the hang of event handlers, we can start building our app. But for now, let's just keep using the dev console.
 

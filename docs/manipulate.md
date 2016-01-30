@@ -28,11 +28,11 @@ If you give this a try in your browser now, you'll see the alert pop up when you
 
 What does "add skill" really mean? We want to duplicate the skill blueprint we have, `skillTemplate` and create another node just like it. Then, we want to append it at the end of the list of skills.
 
-We can clone any DOM node with the `cloneNode` method. The `cloneNode` method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire `input-group` element and all of it's children nodes, we are going to pass a `true` in.
+We can clone any DOM node with the `cloneNode` method. The `cloneNode` method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire `input-group` element and all of its children nodes, we are going to pass a `true` in.
 
 Unfortunately, there is no `appendAfter` method we can use, but there is an [`insertBefore`][insert-before] method. We can use `insertBefore` to append the new cloned node just before the submit button.
 
-The `insertBefore` method uses a handle on the parent node to attach the new node in the correct spot within the tree. We can use the `parentNode` accesor on any DOM node to get it's parent, or, since we know the parent is the form we can just directly select it again.
+The `insertBefore` method uses a handle on the parent node to attach the new node in the correct spot within the tree. We can use the `parentNode` accessor on any DOM node to get its parent, or, since we know the parent is the form we can just directly select it again.
 
 ```js
 var addSkillButton = document.querySelector('.add-skill')

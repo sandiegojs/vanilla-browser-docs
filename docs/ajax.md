@@ -1,6 +1,6 @@
 # Add submit event
 
-Now that we've covered the basics of getting a DOM element and hooking into it's events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.
+Now that we've covered the basics of getting a DOM element and hooking into its events, let's add a submit event handler to the form. Later, we'll use this handler to kick off a request to the backend.
 
 Our first step in this new file is to get a reference to the form element. Create a variable named `form`, and assign the form DOM element on the page to it.
 

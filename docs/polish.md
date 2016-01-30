@@ -284,8 +284,6 @@ var sValid = function(field) {
 
 Now when we try to submit without a state or with an invalid state we should see our custom error message like before.
 
-# Adding classes to style error message or boxes
-
 # Welcome text with cookies
 
 Cookies are a classic way to provide a unique visitor experience based on previous visits.  In our case we would like to show a generic welcome message the first time a user visits our site, but show an alternative, and more personalized message when a user returns for any additional visits from the same device.  Note that cookies are stored on the user’s device, so if they return from a new device or clear their cookies, we won’t have a cookie and will not know they are a returning visitor.  Cookies are often associated with tracking of user visits, be sure to read up on that before implementing on your own.

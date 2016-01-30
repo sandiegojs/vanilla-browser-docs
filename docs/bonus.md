@@ -6,6 +6,20 @@ The following are some sections that will provide the beginnings to some self-gu
 
 ## Test with Mocha
 
+Testing your code is important for many reasons.  Perhaps the most important reason is that testing gives you a high degree of confidence that the code you write does what you think it does.  It is also a great way to ensure that you can refactor your code, squash bugs, or expand your app's functionality without lots of manual regression testing.
+
+There are many testing frameworks you could use to write unit tests. We selected Mocha and wired it up for you. It's a very modern, feature rich, and popular testing framework (that also works well on the server side).  You can load `test/test.html` in your browser and view the status of the sample suite.  
+
+Next, head over to these links and learn about the assertion libraries, and testing  we have included:
+
+[Chai][chai] - The chain-capable BDD styles provide an expressive language and readable style, while the TDD assert style provides a more classical feel
+
+[Sinon][sinon] - Standalone test spies, stubs and mocks for JavaScript.
+
+[Sinon-Chai][sinon-chai] - Assertions for the Sinon.JS mocking framework
+
+Then try your hand at writing some tests in `test/index.spec.js` to exercise your code and ensure it is doing what you **expect**, **assert**, or think it **should** be doing.
+
 ## Heroku to Publish
 
 [Heroku][heroku] is a web hosting platform that allows developers to go from code to running apps in minutes. It has a free tier, as well as a super fast workflow. To try it out create a free account on Heroku, and then use the button below to automatically deploy this app directly from GitHub to a running Heroku instance.
@@ -39,8 +53,11 @@ If you want to expand on this example, you can try generating additional models 
 [babel]: http://babeljs.io
 [babel-es2015]: https://babeljs.io/docs/plugins/preset-es2015/
 [browserify]: http://browserify.org/
+[chai]: http://chaijs.com/guide/styles/
 [gulp]: http://gulpjs.com/
 [heroku]: http://heroku.com
 [json-api]: http://jsonapi.org/
 [rails-api]: https://github.com/rails-api/rails-api
 [sdjs-api]: http://github.com/sandiegojs/sandiegojs-vanilla-workshop
+[sinon]: http://sinonjs.org/
+[sinon-chai]: https://github.com/domenic/sinon-chai

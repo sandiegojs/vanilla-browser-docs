@@ -24,7 +24,7 @@ We really only need the "name" and "email" field to be required. In order to mak
 
 For example:
 
-`<input type='text' placeholder='Name' required>`
+    <input type='text' placeholder='Name' required>
 
 Go ahead and update the "name" and "email" inputs to include this special attribute.
 

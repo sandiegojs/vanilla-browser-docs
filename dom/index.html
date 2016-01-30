@@ -163,10 +163,10 @@
             <div class="section">
               
                 <h1 id="the-html">The HTML</h1>
-<p>We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the <code>public/index.html</code> file and take a look.</p>
-<p>You should see that the styles are included in the header from <code>public/index.css</code> and the script for our JavaScript is included at the top of the body from <code>public/index.js</code>.</p>
+<p>We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the <code>app/index.html</code> file and take a look.</p>
+<p>You should see that the styles are included in the header from <code>app/index.css</code> and the script for our JavaScript is included at the top of the body from <code>public/index.js</code>. All of our JavaScript files in <code>app/</code> are compiled by Gulp into a single file, <code>public/index.js</code></p>
 <p><strong>ProTip™:</strong> When the browser encounters a <code>&lt;script&gt;</code> tag, it is blocking - meaning the browser will immediately download and execute it. To load the <code>&lt;script&gt;</code> asynchronously and not block the browser's parsing of the document, set the attribute <code>async='true'</code> on the tag.</p>
-<p>Within the <code>public/index.html</code> you should see a basic form with labels and inputs. Familiarize yourself with the different fields.</p>
+<p>Within the <code>app/index.html</code> you should see a basic form with labels and inputs. Familiarize yourself with the different fields.</p>
 <p>Are you ready to get coding, yet?</p>
 <h1 id="html-field-validation">HTML field validation</h1>
 <p>Have you ever used a form where you didn't realize you missed a required field until after clicking the submit button, waiting for the page to send data off to the server, waiting for the page to reload, and then finally to get the perplexing red error message at the top? What a pain!</p>
@@ -183,7 +183,7 @@
 <p><img alt="required error box" src="https://s3.amazonaws.com/f.cl.ly/items/172n3w0f0h0f2d0y0i01/Screen%20Shot%202016-01-17%20at%204.43.54%20PM.png?v=b83630c4" /></p>
 <p>Neato! This is all taken care of for you by the browser out-of-the-box!</p>
 <h2 id="native-validations">Native validations</h2>
-<p>Some <code>&lt;input&gt;</code> types have intrinsic constraints, such as <code>type='email'</code>. If you look at the <code>public/index.html</code> you will see that our email field is currently setup as a <code>type='text'</code>. Go ahead and change it.</p>
+<p>Some <code>&lt;input&gt;</code> types have intrinsic constraints, such as <code>type='email'</code>. If you look at the <code>app/index.html</code> you will see that our email field is currently setup as a <code>type='text'</code>. Go ahead and change it.</p>
 <p>Once you have, we can test it out. Head over to the browser, type in a <code>Name</code> value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.</p>
 <p><img alt="email error message" src="https://s3.amazonaws.com/f.cl.ly/items/3y1l2h0R2x1Q0S1r351B/Screen%20Shot%202016-01-17%20at%204.52.45%20PM.png?v=e72c1557" /></p>
 <p>If you want to learn more about validations that are available for inputs, <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation">MDN has a great article covering the details</a>.</p>
@@ -208,7 +208,7 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">getElementsByTagName</a></li>
 </ul>
 <p>For now, we are going to focus on <code>querySelector</code>. This function behaves similar to jQuery in that it allows you to specify a <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors">css selector</a> that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the <code>document</code> as well as <code>element</code>. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.</p>
-<p>For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut <code>Command + Option + j</code> and <code>Control + Shift + j</code> on Windows. We can begin by selecting the input with a name attribute of <code>name</code>.</p>
+<p>For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut <code>Command + Option + j</code> or <code>Command + Option + i</code> and <code>Control + Shift + j</code> on Windows. We can begin by selecting the input with a name attribute of <code>name</code>.</p>
 <pre><code class="js">var inputName = document.querySelector('input[name=&quot;name&quot;]')
 </code></pre>
 
@@ -221,6 +221,7 @@
 <h1 id="event-handling">Event handling</h1>
 <p>When users interact with the web page the DOM publishes these interactions as events, for example <code>click</code>, <code>scroll</code>, <code>keypress</code>, and <a href="https://developer.mozilla.org/en-US/docs/Web/Events">more</a>.</p>
 <p>After selecting an element from the DOM, we can call it's <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener</code></a> method which will execute a callback function we provide any time that event occurs. Lets start by listening for a <code>click</code> on the <code>document</code> and trigger an <code>alert</code> whenever that event occurs.</p>
+<p>We are going to keep working in the dev console for now, and continue to mess around. Once we get the hang of event handlers, we can start building our app. But for now, let's just keep using the dev console.</p>
 <pre><code class="js">var handler = function() {
   alert('user clicked on the page')
 }

@@ -68,7 +68,7 @@ Try the new logic. Go to your form, add a name, but leave the email blank. Click
 
 ## Add `validateForm` function to handle validation logic
 
-You can use the technique above to handle each validated field, but you are still stuck with the standard formatting for the messages. To get more control, you need to turn off the automatic validation and handle the submission event yourself. 
+You can use the technique above to handle each validated field, but you are still stuck with the standard formatting for the messages. To get more control, you need to turn off the automatic validation and handle the submission event yourself.
 
 Add a line to prevent the automatic validation behavior.
 
@@ -76,9 +76,9 @@ Add a line to prevent the automatic validation behavior.
 
 ProTip: You can achieve the same thing by adding a `novalidate` attribute to the form.
 
-With the automatic validation turned off, you have more control over when the validation check is done. 
+With the automatic validation turned off, you have more control over when the validation check is done.
 
-Add a new function, `validateForm`, to handle the validation check. This function, after you implement it fully, will determine any field errors and allow the form to determine if it valid. 
+Add a new function, `validateForm`, to handle the validation check. This function, after you implement it fully, will determine any field errors and allow the form to determine if it valid.
 
 ```js
 function validateForm(form){
@@ -94,25 +94,25 @@ Back in the "Add submit event" section, you added a `submit` event handler. You 
 
 function submitHandler(evt) {
   evt.preventDefault();
-  
+
   var form = evt.target;
   validateForm(form);
-  
+
   // remaining submit handler logic goes here
 
 }
 ```
- 
-Now you need to have the form check if it is valid before submitting data to the server. The `form` element has a convenient `checkValidity` function to do just that. 
+
+Now you need to have the form check if it is valid before submitting data to the server. The `form` element has a convenient `checkValidity` function to do just that.
 
 ```js
 
 function submitHandler(evt) {
   evt.preventDefault();
-  
+
   var form = evt.target;
   validateForm(form);
-  
+
   if (form.checkValidity()) { // if no error, go ahead and submit
     // remaining submit handler logic goes here
   }
@@ -213,7 +213,7 @@ function clearError(field) {
 }
 ```
 
-ProTip: This is just one way of handling error messages. For example, you could use css to show and hide error messages or put all validation errors in a central location on the page. 
+ProTip™: This is just one way of handling error messages. For example, you could use css to show and hide error messages or put all validation errors in a central location on the page.
 
 Finish the logic by calling these function from `validateForm`. If the field is valid, call `clearError` and if not call `setError`.
 

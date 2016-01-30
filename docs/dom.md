@@ -20,13 +20,13 @@ There are a few different ways to do this, and we will elaborate on this later, 
 
 ## Required fields
 
-We really only need the `name` and `email` field to be required. In order to make these inputs required, all we have to do is add the word `required` as an attribute on the `<input>` tag.
+We really only need the "name" and "email" field to be required. In order to make these inputs required, all we have to do is add the word `required` as an attribute on the `<input>` tag.
 
 For example:
 
 `<input type='text' placeholder='Name' required>`
 
-Go ahead and update the `name` and `email` inputs to include this special attribute.
+Go ahead and update the "name" and "email" inputs to include this special attribute.
 
 *After making any changes to this project, be sure to save the file and reload your browser!*
 
@@ -42,7 +42,7 @@ Neato! This is all taken care of for you by the browser out-of-the-box!
 
 Some `<input>` types have intrinsic constraints, such as `type='email'`. If you look at the `app/index.html` you will see that our email field is currently setup as a `type='text'`. Go ahead and change it.
 
-Once you have, we can test it out. Head over to the browser, type in a `Name` value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.
+Once you have, we can test it out. Head over to the browser, type in a "Name" value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.
 
 ![email error message](https://s3.amazonaws.com/f.cl.ly/items/3y1l2h0R2x1Q0S1r351B/Screen%20Shot%202016-01-17%20at%204.52.45%20PM.png?v=e72c1557)
 

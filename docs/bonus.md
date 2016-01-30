@@ -4,11 +4,17 @@ So you've finished the workshop before everyone else, or you're looking for some
 
 The following are some sections that will provide the beginnings to some self-guided learning experiences that build on the skills we've learned in this workshop.
 
+## Adding classes for error messages
+
+When we added our JavaScript validation to the form, we just provided a simple span after the input to encapsulate our messages. This is great for getting something working, but we can do all sorts of pretty things with it to make it more user friendly.
+
+Try changing the input box styles so that they get a glowing red or green border around them when they are valid or invalid. There are some great CSS tutorials on [CSS-Tricks][css-tricks], and there just happens to be one on [glowing blue inputs][glow-input].
+
 ## Test with Mocha
 
 Testing your code is important for many reasons.  Perhaps the most important reason is that testing gives you a high degree of confidence that the code you write does what you think it does.  It is also a great way to ensure that you can refactor your code, squash bugs, or expand your app's functionality without lots of manual regression testing.
 
-There are many testing frameworks you could use to write unit tests. We selected Mocha and wired it up for you. It's a very modern, feature rich, and popular testing framework (that also works well on the server side).  You can load `test/test.html` in your browser and view the status of the sample suite.  
+There are many testing frameworks you could use to write unit tests. We selected Mocha and wired it up for you. It's a very modern, feature rich, and popular testing framework (that also works well on the server side).  You can load `test/test.html` in your browser and view the status of the sample suite.
 
 Next, head over to these links and learn about the assertion libraries, and testing  we have included:
 
@@ -46,9 +52,6 @@ The API for this project was build using [Rails-API][rail-api] and is publicly a
 
 If you want to expand on this example, you can try generating additional models and controllers in the API and adding more routes to your client-side application.
 
-## Image uploading
-
-## Push state
 
 [babel]: http://babeljs.io
 [babel-es2015]: https://babeljs.io/docs/plugins/preset-es2015/
@@ -61,3 +64,5 @@ If you want to expand on this example, you can try generating additional models 
 [sdjs-api]: http://github.com/sandiegojs/sandiegojs-vanilla-workshop
 [sinon]: http://sinonjs.org/
 [sinon-chai]: https://github.com/domenic/sinon-chai
+[css-tricks]: https://css-tricks.com
+[glow-input]: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/

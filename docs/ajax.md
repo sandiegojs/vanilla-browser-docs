@@ -183,9 +183,7 @@ var serializeArray = function(selector) {
 }
 ```
 
-Head back over to the console, and you'll see our data now looks correct! We can now replace the `console.log` with a call to `JSON.stringify` and return the output.
-
-[`JSON.stringify`][mdn-stringify] is helper method that serializes a JavaScript object into the [JSON][json] format. It's main purpose is for packaging up data to be sent in an AJAX request. In the next section we'll make the AJAX request!
+Head back over to the console, and you'll see our data now looks correct! We can now replace the `console.log` with a `return` statement to pass the output back.
 
 We also want to package up the data for the backend request. The backend expects to find all of this data we're working with in a wrapper. The wrapper has one key and value pair. We'll set the key with the form's name which we pull form from it's DOM node and set the value to the data object we've been building. Place this after the `for` loop and before the `return` statement.
 
@@ -214,7 +212,7 @@ var serializeArray = function(selector) {
   var wrapper = {};
   wrapper[form.name] = data;
 
-  return JSON.stringify(wrapper)
+  return wrapper
 }
 ```
 
@@ -285,7 +283,7 @@ var xhr = function(method, path, data, callback) {
 }
 ```
 
-Lastly we will use `JSON.stringify` to convert our object to a JSON string and send the request with our data using the `send` function.
+Lastly we will use `JSON.stringify` to convert our object to a JSON string and send the request with our data using the `send` function. [`JSON.stringify`][mdn-stringify] is helper method that serializes a JavaScript object into the [JSON][json] format. It's main purpose is for packaging up data to be sent in an AJAX request. In the next section we'll make the AJAX request!
 
 ```js
 var xhr = function(method, path, data, callback) {

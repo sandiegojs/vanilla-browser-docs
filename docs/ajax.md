@@ -37,7 +37,7 @@ Our event handler is now working!
 
 # Serialize the form data
 
-Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with [`rails-api`][rails-api] which will be expecting a JSON API object on the request.
+Before we can begin to assemble the pieces for talking to our server, we will need to make sure that we can capture the data from our form in a format that our API endpoint can digest. The API for this workshop is built with [`rails-api`][rails-api] which will be expecting a JSON object on the request.
 
 We need to take the form data and convert it to an object that looks like this
 
@@ -56,7 +56,7 @@ We need to take the form data and convert it to an object that looks like this
 }
 ```
 
-If we were using something like jQuery we may use the `.serializeArray()` method. Let's write our own `serializeArray` method.
+Let's write a `serializeArray` method to take our form data and turn it into the serialized JSON data object.
 
 ```js
 var serializeArray = function(selector) {}

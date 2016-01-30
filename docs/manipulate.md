@@ -30,7 +30,7 @@ What does "add skill" really mean? We want to duplicate the skill blueprint we h
 
 We can clone any DOM node with the `cloneNode` method. The `cloneNode` method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire `input-group` element and all of it's children nodes, we are going to pass a `true` in.
 
-Unfortunately, there is no `appendAfter` method we can use like in jQuery, but there is an [`insertBefore`][insert-before] method. We can use `insertBefore` to append the new cloned node just before the submit button.
+Unfortunately, there is no `appendAfter` method we can use, but there is an [`insertBefore`][insert-before] method. We can use `insertBefore` to append the new cloned node just before the submit button.
 
 The `insertBefore` method uses a handle on the parent node to attach the new node in the correct spot within the tree. We can use the `parentNode` accesor on any DOM node to get it's parent, or, since we know the parent is the form we can just directly select it again.
 
@@ -53,7 +53,7 @@ We just grew a branch on our DOM tree 🌳! Does it look right, though?
 
 After we clone a new node, we need to change the plus sign to a minus sign on the previous one. If you look at the `app/index.html` you'll see that both the plus and minus icons already exist in the DOM, except that the minus is currently `hidden` with the class `hidden`.
 
-In jQuery, you can use the `.last()` method after selecting a group of elements to get the last one. Let's write a helper method that does just that for a given selector.
+It would be useful to be able to select the last element in a group. Let's write a helper method that does just that for a given selector.
 
 ```js
 function last(selector) {

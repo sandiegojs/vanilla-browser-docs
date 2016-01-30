@@ -58,13 +58,15 @@ One of the trickest things about the DOM is that it's up to the browser vendor t
 
 But as you will see there is a large API exposed by the DOM which allows us to craft powerful user experiences. An easy way to think of the DOM is a tree of nested nodes and each node is an element from our HTML document, e.g. a `div`, `p`, `button`, etc...
 
-To visualize this all you need to do is open your web inspector and look at the `Elements` tab to see this structure realized. Each one of those nodes (elements) has many properties and functions you can take advantage off.
+To visualize this all you need to do is open your web inspector and look at the **Elements** tab to see this structure realized. Each one of those nodes (elements) has many properties and functions you can take advantage off.
+
+In Chrome on OSX you can open the web inspector with the keyboard shortcut `Command + Option + j` or `Command + Option + i` and `Control + Shift + j` on Windows.
 
 ![element inspector](https://s3.amazonaws.com/f.cl.ly/items/2o2Y3L1w433t2p1c2M38/kfm9fl7Prq.gif?v=8c898ff8)
 
 # DOM selection
 
-In order to interact with the DOM within JavaScript, the first thing you will need to understand is element selection. If you're familiar with a library such as [jQuery][jquery] or [Zepto][zepto] than you'll be used to doing this by way of the `$()` selector. By selecting an element (DOM node) we get a reference to that element which allows us to take actions on it.
+In order to interact with the DOM within JavaScript, the first thing you will need to understand is element selection. By selecting an element (DOM node) we get a reference to that element which allows us to take actions on it.
 
 There are several functions we can use to get a reference to a DOM node. Overtime these functions have been introduced to solve different needs. As such, the browser support for them can vary. You should always research browser compatability to ensure they will work for your user base.
 
@@ -75,7 +77,7 @@ There are several functions we can use to get a reference to a DOM node. Overtim
 - [getElementsByName](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByName)
 - [getElementsByTagName](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName)
 
-For now, we are going to focus on `querySelector`. This function behaves similar to jQuery in that it allows you to specify a [css selector][css-selector] that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the `document` as well as `element`. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.
+For now, we are going to focus on `querySelector`. This function allows you to specify a [css selector][css-selector] that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the `document` as well as `element`. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.
 
 For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut `Command + Option + j` or `Command + Option + i` and `Control + Shift + j` on Windows. We can begin by selecting the input with a name attribute of `name`.
 

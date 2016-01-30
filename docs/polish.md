@@ -285,3 +285,54 @@ That's it for validation! You may now add "HTML5 constraint validation API" to y
 # Adding classes to style error message or boxes
 
 # Welcome text with cookies
+
+Cookies are a classic way to provide a unique visitor experience based on previous visits.  In our case we would like to show a generic welcome message the first time a user visits our site, but show an alternative, and more personalized message when a user returns for any additional visits from the same device.  Note that cookies are stored on the user’s device, so if they return from a new device or clear their cookies, we won’t have a cookie and will not know they are a returning visitor.  Cookies are often associated with tracking of user visits, be sure to read up on that before implementing on your own.
+
+Here are the basics.   Cookies are stored as key value pairs as a strings.  The DOM API allows you to set cookies by assigning a value to document.cookie.  It must have a name, should have a value, and may have an expiration date for example:
+```js
+document.cookie = 'returning=true; expires=Mon, 1 Feb 2016 12:00:UTC;'
+```
+This would set a cookie with the key = 'returning' and value = 'true', as well as an expiration date.  This is when the cookie will go bye bye.
+
+Getting a cookie involves more work because you have to parse the value of document.cookie (which remember is just a plain text string with ; separators).  It could include quite a few key value pairs, so most users will roll their own GET and SET methods to deal with parsing cookies.
+
+Let’s add cookie set and get methods to help us handle our visitor’s session.
+```js
+function setCookie(cookieName, cookieValue, cookieDays) {
+  var expireTime = new Date()
+  expireTime.setTime(expireTime.getTime() + cookieDays * 24 * 60 * 60)
+  var expires = "expires=" + expireTime.toUTCString()
+  document.cookie = cookieName + "=" + cookieValue + "; " + expires
+}
+
+function getCookie(cookieName) {
+  var name = cookieName + "="
+  var cookieArray = document.cookie.split(';')
+  for(var i=0; i < cookieArray.length; i++) {
+    var cookieStr = cookieArray[i]
+    while (cookieStr.charAt(0)==' ') {
+      cookieStr = cookieStr.substring(1)
+    }
+    if (cookieStr.indexOf(name) == 0) {
+      return cookieStr.substring(name.length,cookieStr.length)
+    }
+  }
+  return "";
+}
+```
+
+Then we will add a conditional block of code that will update the welcome message when a user returns, or set a cookie if its the first visit (or if the cookies have been cleared or expired).
+
+```js
+if(getCookie('returning') === 'yes') {
+  document.querySelector('.greeting').innerHTML = "Welcome back to the program."
+} else {
+  setCookie('returning', 'yes', 2)
+}
+```
+
+Then try refreshing the page and watch it add a custom greeting.  You can clear out your cookies using the Chrome Dev tools > Resources > Cookies
+
+As a bonus try refactoring this code to cookie and display the users name in the greeting message when they return.
+
+A couple of other fun facts about cookies: You can store objects in cookies, but you will need to be sure to serialize them and they must be strings when assigned to document.cookie.  Cookie security is handled for you:  Cookies are stored with a security feature tied to the domain that was used to store the cookie.  That means that your code running in the browser can only read the cookies that were set on the same domain.  Also note, cookies are stored as strings in plain text, so any savvy user can look at the cookies on their machine (delete, or modify them) as they see fit.

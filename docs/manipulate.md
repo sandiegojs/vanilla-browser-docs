@@ -88,9 +88,9 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 If you head over to the browser, it should work! Sweet DOM manipulation.
 
-Did you try to click the second plus button like a smarty pants? Then you realize that it didn't work, right?
+Did you try to click the second plus button like a smarty pants? It didn't work, right?
 
-Fix it by attaching the handler to the new element as well.
+Let's fix it by attaching the handler to the new element as well.
 
 
 ```js

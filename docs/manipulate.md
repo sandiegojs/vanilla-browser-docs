@@ -26,7 +26,11 @@ addSkillButton.addEventListener('click', addSkillHandler)
 
 If you give this a try in your browser now, you'll see the alert pop up when you click on the plus.
 
+<<<<<<< HEAD
 What does "add skill" really mean? We want to duplicate the skill blueprint we have, `skillTemplate` and create another node just like it. Then, we want to append it at the end of the list of skills.
+=======
+What does "add skill" really mean? We want to duplicate the skill blueprint we have, `skillTemplate`, and create another Node just like it. Then, we want to append it at the end of the list of skills.
+>>>>>>> Improve grammar and clarify wording
 
 We can clone any DOM node with the `cloneNode` method. The `cloneNode` method takes an optional boolean argument to determine whether it should be a deep or shallow clone. Since we want the entire `input-group` element and all of its children nodes, we are going to pass a `true` in.
 

@@ -40,9 +40,9 @@ Neato! This is all taken care of for you by the browser out-of-the-box!
 
 ## Native validations
 
-Some `<input>` types have intrinsic constraints, such as `type='email'`. If you look at the `app/index.html` you will see that our email field is currently setup as a `type='text'`. Go ahead and change it.
+Some `<input>` types have intrinsic constraints, such as `type='email'`. If you look at the `app/index.html` you will see that our email field is currently setup as a `type='text'`. Go ahead and change this to an `email` field.
 
-Once you have, we can test it out. Head over to the browser, type in a "Name" value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.
+Once you have changed our "email" field to type `email`, you can test it out. Head over to the browser, type in a "Name" value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a message telling you that your input doesn't look like an email.
 
 ![email error message](https://s3.amazonaws.com/f.cl.ly/items/3y1l2h0R2x1Q0S1r351B/Screen%20Shot%202016-01-17%20at%204.52.45%20PM.png?v=e72c1557)
 
@@ -77,7 +77,7 @@ There are several functions we can use to get a reference to a DOM node. Overtim
 - [getElementsByName](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByName)
 - [getElementsByTagName](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName)
 
-For now, we are going to focus on `querySelector`. This function allows you to specify a [css selector][css-selector] that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the `document` as well as `element`. This means you can search for an element in the entire document or narrow your search to the sub elements of an existing element.
+For now, we are going to focus on `querySelector`. This function allows you to specify a [css selector][css-selector] that will be used to find the first matching node. One of the nice feature of this function is that it is available both on the `document` as well as `element`. This means you can search for an element in the entire document or narrow your search to the child elements of an existing element.
 
 For now, let's just open up the dev console and mess around. In Chrome OSX this can be accomplished with the keyboard shortcut `Command + Option + j` or `Command + Option + i` and `Control + Shift + j` on Windows. We can begin by selecting the input with a name attribute of `name`.
 
@@ -117,7 +117,7 @@ Now if you click on the page you should receive an alert with your message. Aler
 document.removeEventListener('click', handler)
 ```
 
-It's important to note that in order for us to be able to remove an event listener we need to name our functions so we can specify what to remove for that event.
+It's important to note that in order for us to be able to remove an event listener we need to keep a reference to our functions so we can specify which listener function to remove.
 
 Using this simple API we can trigger the complex logic we will be writing shortly.
 
@@ -141,9 +141,9 @@ document.addEventListener('click', handlerTwo)
 
 Now both of these functions will be executed whenever someone clicks the page.
 
-## Event listener parameter
+## Event listener argument
 
-When we attach callback functions to events these functions are passed as an event argument. The type of event given will change depending on the type input device which triggered it. Since we are listening for a `click` event we will receive a [`MouseEvent`][mouse-event].
+When we attach callback functions to events these functions are passed as an event argument. The type of event given will change depending on the type of input device which triggered it. Since we are listening for a `click` event we will receive a [`MouseEvent`][mouse-event].
 
 ```js
 var logEvent = function(evt) {
@@ -155,11 +155,11 @@ document.addEventListener('click', logEvent)
 
 If you inspect this event in the console you will see there are quite a few properties available to us. The ones most commonly used are `target` and `currentTarget`.
 
-`target` is the element who dispatched the event.
+`target` is the element that dispatched the event.
 
-`currentTarget` is the element who handled the event during the event capture (a.k.a bubbling) phase.
+`currentTarget` is the element that handled the event during the event capture (a.k.a bubbling) phase.
 
-Although important, we won't dive into the distinction between these two just yet. For our purposes we are going to use the `currentTarget` event to always get a reference to the element who has the event listener listening for the event.
+Although important, we won't dive into the distinction between these two just yet. We will be using the `currentTarget` property to get a reference to the element that is listened to this event.
 
 [css-selector]: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
 [event-listener]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener

@@ -1,12 +1,12 @@
 # The HTML
 
-We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the `public/index.html` file and take a look.
+We should know what kind of document we are working with before we move forward. Since the boilerplate was setup for us, we'll just need to open up the `app/index.html` file and take a look.
 
-You should see that the styles are included in the header from `public/index.css` and the script for our JavaScript is included at the top of the body from `public/index.js`.
+You should see that the styles are included in the header from `app/index.css` and the script for our JavaScript is included at the top of the body from `public/index.js`. All of our JavaScript files in `app/` are compiled by Gulp into a single file, `public/index.js`
 
 **ProTip™:** When the browser encounters a `<script>` tag, it is blocking - meaning the browser will immediately download and execute it. To load the `<script>` asynchronously and not block the browser's parsing of the document, set the attribute `async='true'` on the tag.
 
-Within the `public/index.html` you should see a basic form with labels and inputs. Familiarize yourself with the different fields.
+Within the `app/index.html` you should see a basic form with labels and inputs. Familiarize yourself with the different fields.
 
 Are you ready to get coding, yet?
 
@@ -40,7 +40,7 @@ Neato! This is all taken care of for you by the browser out-of-the-box!
 
 ## Native validations
 
-Some `<input>` types have intrinsic constraints, such as `type='email'`. If you look at the `public/index.html` you will see that our email field is currently setup as a `type='text'`. Go ahead and change it.
+Some `<input>` types have intrinsic constraints, such as `type='email'`. If you look at the `app/index.html` you will see that our email field is currently setup as a `type='text'`. Go ahead and change it.
 
 Once you have, we can test it out. Head over to the browser, type in a `Name` value (so that we don't get the required error) and type in a phoney string that doesn't look like an email address. Once you hit submit, you should see a nice message come up and tell you that your input doesn't look like an email.
 

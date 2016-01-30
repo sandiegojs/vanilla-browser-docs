@@ -49,7 +49,7 @@ We just grew a branch on our DOM tree 🌳! Does it look right, though?
 
 ![added skill](https://s3.amazonaws.com/f.cl.ly/items/113x3C3q1H133y3b3C1e/Screen%20Shot%202016-01-24%20at%2010.14.00%20AM.png?v=ad58e105)
 
-After we clone a new node, we need to change the plus sign to a minus sign on the previous one. If you look at the `public/index.html` you'll see that both the plus and minus icons already exist in the DOM, except that the minus is currently `hidden` with the class `hidden`.
+After we clone a new node, we need to change the plus sign to a minus sign on the previous one. If you look at the `app/index.html` you'll see that both the plus and minus icons already exist in the DOM, except that the minus is currently `hidden` with the class `hidden`.
 
 In jQuery, you can use the `.last()` method after selecting a group of elements to get the last one. Let's write a helper method that does just that for a given selector.
 

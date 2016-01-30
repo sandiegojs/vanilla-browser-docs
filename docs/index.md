@@ -19,7 +19,7 @@ This workshop will feature:
 
 ### The example
 
-For this workshop, we are going to build out a business card creator. There is a simple html form inside of `public/index.html` that we will build upon and add life to. We'll collect common profile information that one would normally share professionally, like contact info and skills, and then display it.
+For this workshop, we are going to build out a business card creator. There is a simple html form inside of `app/index.html` that we will build upon and add life to. We'll collect common profile information that one would normally share professionally, like contact info and skills, and then display it.
 
 ### Keep your resources handy
 
